@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raadsels</title>
+    <!--<link rel="icon" href="images/auto.png" type="image/x-icon">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="raadsel.css">
+</head>
+<body>
+    <div id="side-bar" class="side-bar">
+        <a href="index.html" class="active" id="raadsel">Auto raadsel</a> 
+        <a href="raket.html" id="raket">Raket raadsel</a> 
+        <a href="tictactoe.html" id="tictactoe">Tic tac toe</a>
+    </div>
+    <div class="hoofd-container">
+        <div class="top">
+            Te raden <span><select id="topic"><option value="auto">auto</option><option value="land">land</option></select></span><div id="teRadenMerk" class="raad-container"></div>
+            <div id="reset"><img src="images/reset.svg" alt="reset" width="60" height="60"></div>
+        </div>
+        <div id="modal-overlay" class="modal-overlay">
+            <div id="modal" class="modal">
+                <i class="fa fa-close" id="sluiten"></i>
+                <div id="overlay"></div>
+            </div>
+        </div>
+
+        <div>
+            <img id="foutePogingen" src="images/00.svg" alt="beuren">
+        </div>
+        <div class="kleine">
+            <label><input id="kleine-letter" type="checkbox">Kleine letters</label>
+        </div>
+        <div id="toetsenbord"></div>
+        <div class="timer-container">
+            <div>
+                <button id="start" class="btn">Start timer</button>
+                <button id="stop" class="btn">Stop timer</button>
+            </div>
+            <div>
+                <p>Timer instellen :</p>
+                <select id="timerAfstellen">
+                    <option>00:30:00</option>
+                    <option>01:00:00</option>
+                    <option>01:30:00</option>
+                    <option>02:00:00</option>
+                </select>
+            </div>
+            <div id="timer"></div>
+        </div>
+    </div>
+    <script type="module" src="raadsel.js"></script>
+</body>
+
+</html>

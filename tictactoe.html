@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="tictactoe.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="images/tictac.png" type="image/x-icon">
+  <title>Tic Tac Toe</title>
+  <link rel="stylesheet" href="tictactoe.css">
+</head>
+<body>
+  <div id="side-bar" class="side-bar">
+    <a href="index.html" id="raadsel">Auto raadsel</a> 
+    <a href="raket.html" id="raket">Raket raadsel</a> 
+    <a href="tictactoe.html" class="active" id="tictactoe">Tic tac toe</a>
+</div>
+<div class="hoofd-container">
+  <select id="boardSize"></select>
+  <div id="reset"><img src="images/reset.svg" alt="reset" width="60" height="60" onclick="resetGame();"></div>
+  <div id="game-board"></div>
+  <div id="message"></div>
+  <div><span id="feedback" hidden></span></div>
+</div>
+</body>
+</html>

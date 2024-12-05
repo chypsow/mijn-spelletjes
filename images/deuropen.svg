@@ -1,0 +1,17 @@
+
+<svg baseProfile="tiny" height="115" version="1.2" width="80" xmlns="http://www.w3.org/2000/svg">
+    <path d="M 0 40 A 40 40 0 0 1 80 40" fill="#ffb834" />
+    <circle cx="40" cy="30" fill="yellow" r="6" stroke="brown" stroke-width="2" />
+    <rect fill="#000000" height="75" width="80" x="0" y="40" />
+    <g stroke="yellow" stroke-width="1" fill='brown'>
+        <path d="M 0 40 A 10 50 1 0 0 10 40" />
+        <path d="M 10 40 A 10 50 1 0 0 20 40" />
+        <path d="M 20 40 A 10 50 1 0 0 30 40" />
+        <path d="M 30 40 A 10 50 1 0 0 40 40" />
+        <path d="M 40 40 A 10 50 1 0 0 50 40" />
+        <path d="M 50 40 A 10 50 1 0 0 60 40" />
+        <path d="M 60 40 A 10 50 1 0 0 70 40" />
+        <path d="M 70 40 A 10 50 1 0 0 80 40" />
+    </g>    
+    
+</svg>

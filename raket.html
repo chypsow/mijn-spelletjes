@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="nl">
+
+<head>
+    <script src="raket.js" defer></script>
+    <title>Raket</title>
+    <link rel="icon" href="images/javascript.ico" type="image/x-icon">
+    <link rel="stylesheet" href="raket.css">
+</head>
+<body>
+    <div id="side-bar" class="side-bar">
+        <a href="index.html" id="raadsel">Auto raadsel</a> 
+        <a href="raket.html" class="active" id="raket">Raket raadsel</a> 
+        <a href="tictactoe.html" id="tictactoe">Tic tac toe</a>
+    </div>
+    <div class="hoofd-container">
+        <div class="geluid">
+            <img id="son" src="images/son.svg" alt="son" width="60" height="60" hidden>
+            <img id="mute" src="images/mute.svg" alt="mute" width="60" height="60">
+        </div>
+        <button id="reset" onclick="herstartSpel();">Herstart nieuwe spel</button>
+        <div class="graad">
+            <label><input type="radio" id="easy" name="difficulty" value="Easy" checked>Easy</labal>
+            <label><input type="radio" id="difficult" name="difficulty" value="Difficult">Difficult</labal>
+        </div>
+        <div class ="container" id="deuren"></div>
+        <div id="verloren" hidden class="fout">Je hebt verloren.</div>
+        <div id="resultaat" hidden class="feedback">U had <span id="beurten"></span> beurt(en) nodig.</div>
+        <img id="foutePogingen" src="images/00.svg" alt="beuren">
+        
+        <!--<canvas id="fireworksCanvas" onclick="playerWins();"></canvas>-->
+        <audio id="soundWin"> 
+            <source src="audio/goodresult.mp3" /> 
+        </audio>
+        <audio id="soundFailure"> 
+            <source src="audio/failure.mp3" /> 
+        </audio>
+    </div>
+    
+</body>
+
+</html>

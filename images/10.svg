@@ -1,0 +1,27 @@
+<svg width="140" height="200" xmlns="http://www.w3.org/2000/svg" style="stroke:black">
+  <line x1="10" y1="190" x2="90" y2="190" stroke-width="6"/>
+  <line x1="50" y1="188" x2="50" y2="22" stroke-width="6"/>
+  <line x1="52" y1="20" x2="98" y2="20" stroke-width="6"/>
+  <line x1="100" y1="22" x2="100" y2="38" stroke-width="6"/>
+  <!-- Hoofd -->
+  <circle cx="100" cy="50" r="10" stroke-width="3" fill="none"/>
+  <!-- Lichaam -->
+  <line x1="100" y1="60" x2="100" y2="100" stroke-width="3"/>
+  <!-- Linker Arm -->
+  <line x1="100" y1="70" x2="80" y2="90" stroke-width="3"/>
+  <!-- Rechter Arm -->
+  <line x1="100" y1="70" x2="120" y2="90" stroke-width="3"/>
+  <!-- Linker Been -->
+  <line x1="100" y1="100" x2="80" y2="130" stroke-width="3"/>
+  <!-- Rechter Been -->
+  <line x1="100" y1="100" x2="120" y2="130" stroke-width="3"/>
+  <g stroke="#292929" stroke-width="2" fill="#cac034">
+      <circle cx="12" cy="190" r="3"/>
+      <circle cx="88" cy="190" r="3"/>
+      <circle cx="50" cy="190" r="3"/>
+      <circle cx="50" cy="20" r="3"/>
+      <circle cx="100" cy="20" r="3"/>
+      
+  </g>
+  
+</svg>
