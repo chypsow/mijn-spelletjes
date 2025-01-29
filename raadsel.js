@@ -31,7 +31,7 @@ let spelAfgelopen = false;
 let aftellen = false;
 let timerInterval = null;
 
-Array.from(sideBar.children).forEach((elt, index) => {
+Array.from(sideBar.children).forEach(elt => {
   elt.addEventListener('click', () => {
     sideBar.querySelector('.active').classList.remove("active");
     elt.classList.add("active");
@@ -44,7 +44,7 @@ topic.onchange = function() {
     spel = "auto";
     herstartSpel();
   } else {
-    document.querySelector("body").style.backgroundImage = `url(images/landenKaart.jpg)`;
+    document.querySelector("body").style.backgroundImage = `url(images/landenKaart.png)`;
     spel = "land";
     herstartSpel();
   }
@@ -101,8 +101,8 @@ function lettersAanpassen() {
     i++;
   }
   asc = hoofdLetter ? 65 : 97;
-  letters.forEach((letter, i) => {
-    letter.textContent = String.fromCharCode(i + asc);
+  letters.forEach((letter, index) => {
+    letter.textContent = String.fromCharCode(index + asc);
   });
 };
 
