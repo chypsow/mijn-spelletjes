@@ -200,6 +200,8 @@ function playerWon(openedDoor) {
   openedDoor.alt = "gevonden";
   /*beurten.innerText = teller;
   resultaat.hidden = false;*/
+  const msg = `U had ${teller} beurt(en) nodig.`;
+  toggleModal(true, 'green', msg, '65%');
   if (!DOM.geluidStaatAan.hidden) DOM.soundWin.play();
   //setTimeout(playerWins, 100);
   const deuren = document.querySelectorAll('#deuren img');
@@ -210,7 +212,8 @@ function playerFailed() {
   const deurMetRaket = deuren[randomIndex];
   deurMetRaket.src = "images/gevonden.svg";
   deurMetRaket.alt = "gevonden";
-  /*verloren.hidden = false;*/
+  const msg = 'Je hebt verloren.';
+  toggleModal(true, 'red', msg, '65%');
   if (!DOM.geluidStaatAan.hidden) DOM.soundFailure.play();
   deuren.forEach(deur => deur.style.pointerEvents = 'none');
 };
@@ -243,28 +246,17 @@ function toonFoutePoging() {
   if (teller === 12) spelerVerloren();
 };
 
-function toggleModal(show, kleur = "", message = "") {
-  DOM.modalOverlay.style.display = show ? "block" : "none";
-  DOM.modal.style.display = show ? "block" : "none";
-  DOM.overlay.style.backgroundColor = kleur;
-  DOM.overlay.innerHTML = message;
-};
-
-function closeModal() {
-  toggleModal(false);
-};
-
 function spelerGewonnen() {
   eindeSpel();
   const msg = `Jij hebt gewonnen. ${tabBlad === 0 ? "De automerk was " : "Het land was "} ${toBeFound}`;
-  toggleModal(true, 'green', msg);
+  toggleModal(true, 'green', msg, '50%');
   if (!DOM.geluidStaatAan.hidden) DOM.soundWin.play();
 };
 
 export function spelerVerloren() {
   eindeSpel();
   const msg = `Jij hebt verloren. ${tabBlad === 0 ? "De automerk was " : "Het land was "} ${toBeFound}`;
-  toggleModal(true, 'red', msg);
+  toggleModal(true, 'red', msg, '50%');
   if (!DOM.geluidStaatAan.hidden) DOM.soundFailure.play();
 };
 
@@ -273,6 +265,17 @@ function eindeSpel() {
   pauzeerTimer();
 };
 
+function toggleModal(show, kleur = "", message = "", positie = "") {
+  DOM.modalOverlay.style.display = show ? "block" : "none";
+  DOM.modal.style.display = show ? "block" : "none";
+  DOM.modal.style.top = positie;
+  DOM.overlay.style.backgroundColor = kleur;
+  DOM.overlay.innerHTML = message;
+};
+
+function closeModal() {
+  toggleModal(false);
+};
 function toggleGeluid() {
   DOM.geluidStaatAan.hidden = !DOM.geluidStaatAan.hidden;
   DOM.geluidStaatUit.hidden = !DOM.geluidStaatUit.hidden;
