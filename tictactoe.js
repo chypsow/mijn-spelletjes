@@ -18,6 +18,7 @@ Array.from(sideBar.children).forEach((elt, index) => {
 maakDropMenu();
 initializeBoard();
 displayMessage(`Speler ${currentPlayer}'s beurt`);
+
 function maakDropMenu() {
   let dropMenuHTML ='';
   for(let i = 0; i < 5; i++) {
@@ -41,8 +42,8 @@ function bepaalY(x) {
       3: 3,
       4: 3,
       5: 4,
-      6: 4,
-      7: 4
+      6: 5,
+      7: 6
   };
   return waarden[x];
 }
@@ -75,6 +76,7 @@ function resetGame() {
   feedback.hidden = true;
   //currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
   displayMessage(`Speler ${currentPlayer}'s beurt`);
+
 }
 
 // Behandel een klik op een cel
@@ -140,7 +142,6 @@ function checkWinner(row, col) {
 
     if (count >= winningNum) {
       highlightWinningCells(winningCells);
-      
       return true;
     }
   }

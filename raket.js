@@ -78,7 +78,7 @@ function spelerVerloren() {
   deurMetRaket.src = "images/gevonden.svg";
   deurMetRaket.alt = "gevonden";
   verloren.hidden = false;
-  if (geluidStaatAan.hidden === false) soundFailure.play();
+  if (!geluidStaatAan.hidden) soundFailure.play();
   deuren.forEach(deur => deur.style.pointerEvents = 'none');
 }
 function herstartSpel() {
