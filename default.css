@@ -54,6 +54,18 @@ body {
     cursor: pointer;
     padding: 10px;
 }
+.graad {
+    display: flex;
+    gap: 30px;
+    color: white;
+    font-weight: bold;
+    font-size: 1em;
+    margin-left: 200px;
+}
+input[type="radio"] {
+    transform: scale(2); /* 1.5 is 150% van de originele grootte */
+    margin-right: 16px; /* optioneel, om ruimte te maken voor tekst of andere elementen */
+}
 .topic p {
     display: inline;
     margin: 0;
@@ -130,12 +142,24 @@ body {
 .letter-used:hover {
     scale: 1;
 }
+
+.doors-container {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(8, 90px);
+    grid-template-rows: repeat(3, 125px);
+    gap: 10px;
+}
+.doors-container img {
+    cursor: pointer;
+}
 #foutePogingen {
     width: 350px;
 }
 .media {
     display: flex;
     gap: 20px;
+    align-items: center;
 }
 .geluid img { 
     cursor: pointer;

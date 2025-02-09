@@ -58,12 +58,12 @@ function deurOpenen(e) {
     toonFoutePoging(mijnDeur);
   }
 }
-function toonFoutePoging(mijnDeur) {
+function showMissedTry(mijnDeur) {
   teller++;
   galgje.src = `images/${String(teller).padStart(2, "0")}.svg`;
   mijnDeur.src = "images/deuropen.svg";
   mijnDeur.alt = "deur open";
-  if (teller === 12) spelerVerloren();
+  if (teller === 12) playerFailed();
 }
 function spelerGewonnen(mijnDeur) {
   mijnDeur.src = "images/gevonden.svg";

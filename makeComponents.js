@@ -1,5 +1,5 @@
 "use strict";
-import { DOM, handelLetter, asc, lettersAanpassen, gameConstructor } from './main.js';
+import { DOM, handelLetter, asc, lettersAanpassen, gameConstructor, deurOpenen } from './main.js';
 import { handelStartTimer, stopTimer, aftellen } from './timer.js';
 
 export let tabBlad = 0;
@@ -39,6 +39,16 @@ export function makeTopicRiddle() {
     DOM.topic.appendChild(toBeFound);
 }
 
+export function makeDifficultyLevel() {
+    const graad = document.createElement('div');
+    graad.classList.add('graad');
+    graad.innerHTML = `
+        <label><input type="radio" id="easy" name="difficulty" value="Easy" checked>Easy</label>
+        <label><input type="radio" id="difficult" name="difficulty" value="Difficult">Difficult</label>
+    `;
+    document.querySelector('.media').appendChild(graad);
+};
+
 export function makeKeyboard() {
     const kleineLetters = document.createElement('div');
     kleineLetters.classList.add('kleine-letters');
@@ -59,6 +69,20 @@ export function makeKeyboard() {
         toetsenbord.appendChild(letter);
     }
     DOM.leftSide.appendChild(toetsenbord);
+};
+
+export function makeDoors() {
+    const deuren = document.createElement('div');
+    deuren.setAttribute('id', 'deuren');
+    deuren.classList.add('doors-container');
+    Array.from({length : 24}).forEach(_ => {
+        const deur = document.createElement('img');
+        deur.src = "images/deurtoe.svg";
+        deur.alt = "deur toe";
+        deur.addEventListener('click', deurOpenen);
+        deuren.appendChild(deur);
+    });
+    DOM.leftSide.appendChild(deuren);
 };
 
 export function makeTimer() {

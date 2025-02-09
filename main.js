@@ -1,5 +1,5 @@
 "use strict";
-import { tabBlad, makeSidebar, makeKeyboard, makeTopicRiddle, makeTimer, makeGalgjeContainer } from "./makeComponents.js";
+import { tabBlad, makeSidebar, makeKeyboard, makeTopicRiddle, makeTimer, makeGalgjeContainer, makeDifficultyLevel, makeDoors } from "./makeComponents.js";
 import { stopTimer, pauzeerTimer, timerInterval } from "./timer.js";
 
 const autoLijst = [
@@ -74,6 +74,11 @@ export const gameConstructor = {
   },
   2: () => {
     emptyContainers();
+    makeDifficultyLevel();
+    makeDoors();
+    makeGalgjeContainer();
+    teller = 0;
+    randomIndex = [Math.floor((Math.random() * 24))];
   },
   3: () => {
     emptyContainers();
@@ -88,6 +93,9 @@ const initialize = {
 }
 
 function emptyContainers() {
+  const media = document.querySelector('.media');
+  const graad = document.querySelector('.graad');
+  if (graad !== null) media.removeChild(graad);
   DOM.topic.innerHTML = '';
   DOM.timerContainer.innerHTML = '';
   DOM.leftSide.innerHTML = '';
@@ -127,7 +135,16 @@ function initializeRiddle() {
 };
 
 function initializeRaket() {
-
+  const deuren = document.querySelectorAll('#deuren img');
+  deuren.forEach(deur => {
+    deur.src = "images/deurtoe.svg";
+    deur.alt = "deur toe";
+    deur.style.pointerEvents = 'auto';
+  });
+  teller = 0;
+  randomIndex = [Math.floor((Math.random() * deuren.length))];
+  const galgje = document.getElementById('foutePogingen');
+  galgje.src = "images/00.svg";
 };
 
 function initializeBoard() {
@@ -153,6 +170,51 @@ export function handelLetter(event) {
   }
   event.target.classList.add('letter-used');
 };
+
+export function deurOpenen(event) {
+  const openedDoor = event.target;
+  const easy = document.getElementById('easy');
+  const deuren = document.querySelectorAll('#deuren img');
+  if(!easy.checked) {
+    deuren.forEach(deur => {
+      deur.src = "images/deurtoe.svg";
+      deur.alt = "deur toe";});
+  }
+  const deurMetRaket = deuren[randomIndex];
+  if (openedDoor === deurMetRaket) {
+    playerWon(openedDoor);
+  } else {
+    showMissedTry(openedDoor);
+  }
+};
+function showMissedTry(openedDoor) {
+  teller++;
+  const galgje = document.getElementById('foutePogingen');
+  galgje.src = `images/${String(teller).padStart(2, "0")}.svg`;
+  openedDoor.src = "images/deuropen.svg";
+  openedDoor.alt = "deur open";
+  if (teller === 12) playerFailed();
+};
+function playerWon(openedDoor) {
+  openedDoor.src = "images/gevonden.svg";
+  openedDoor.alt = "gevonden";
+  /*beurten.innerText = teller;
+  resultaat.hidden = false;*/
+  if (!DOM.geluidStaatAan.hidden) DOM.soundWin.play();
+  //setTimeout(playerWins, 100);
+  const deuren = document.querySelectorAll('#deuren img');
+  deuren.forEach(deur => deur.style.pointerEvents = 'none');
+};
+function playerFailed() {
+  const deuren = document.querySelectorAll('#deuren img');
+  const deurMetRaket = deuren[randomIndex];
+  deurMetRaket.src = "images/gevonden.svg";
+  deurMetRaket.alt = "gevonden";
+  /*verloren.hidden = false;*/
+  if (!DOM.geluidStaatAan.hidden) DOM.soundFailure.play();
+  deuren.forEach(deur => deur.style.pointerEvents = 'none');
+};
+
 
 export function lettersAanpassen() {
   const kleineLetter = document.getElementById('kleine-letter');
