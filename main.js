@@ -41,17 +41,15 @@ export const DOM = {
   sluiten : document.getElementById('sluiten')
 };
 
-export let spelAfgelopen = false;
+//common
 let randomIndex = 0;
 let teller = 0;
 
 //raadsel
+export let spelAfgelopen = false;
 export let asc = 65;
 let toBeFound ='';
 let emptyArray = [];
-
-//raket
-
 
 export const gameConstructor = {
   0: () => {
@@ -79,6 +77,7 @@ export const gameConstructor = {
     makeGalgjeContainer();
     teller = 0;
     randomIndex = [Math.floor((Math.random() * 24))];
+    console.log(`raket index: ${randomIndex}`);
   },
   3: () => {
     emptyContainers();
@@ -115,7 +114,7 @@ function initializeRiddle() {
   const hoofdLetter = !kleineLetter.checked;
   const lijst = lijsten[tabBlad];
   randomIndex = Math.floor(Math.random() * lijst.length);
-  //console.log(`Random Index: ${randomIndex}, To be found: ${lijst[randomIndex]}`);
+  console.log(`Raadsel Index: ${randomIndex}, To be found: ${lijst[randomIndex]}`);
   //randomIndex = 28;
   toBeFound = hoofdLetter ? lijst[randomIndex].toUpperCase() : lijst[randomIndex].toLowerCase();
   emptyArray = [];
@@ -143,6 +142,7 @@ function initializeRaket() {
   });
   teller = 0;
   randomIndex = [Math.floor((Math.random() * deuren.length))];
+  console.log(`raket index: ${randomIndex}`);
   const galgje = document.getElementById('foutePogingen');
   galgje.src = "images/00.svg";
 };
