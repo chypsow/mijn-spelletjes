@@ -16,6 +16,7 @@ export function makeSidebar() {
         if(index === 0) hyperlink.classList.add('active');
         hyperlink.addEventListener('click', () => {
             const activeLink = DOM.sideBar.querySelector('.active');
+            if(activeLink === hyperlink) return;
             activeLink.classList.remove("active");
             activeLink.setAttribute('aria-selected', 'false');
             hyperlink.setAttribute('aria-selected', 'true');

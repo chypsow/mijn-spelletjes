@@ -201,7 +201,7 @@ function playerWon(openedDoor) {
   /*beurten.innerText = teller;
   resultaat.hidden = false;*/
   const msg = `U had ${teller} beurt(en) nodig.`;
-  toggleModal(true, 'green', msg, '65%');
+  toggleModal(true, 'green', msg, '70%');
   if (!DOM.geluidStaatAan.hidden) DOM.soundWin.play();
   //setTimeout(playerWins, 100);
   const deuren = document.querySelectorAll('#deuren img');
@@ -213,7 +213,7 @@ function playerFailed() {
   deurMetRaket.src = "images/gevonden.svg";
   deurMetRaket.alt = "gevonden";
   const msg = 'Je hebt verloren.';
-  toggleModal(true, 'red', msg, '65%');
+  toggleModal(true, 'red', msg, '70%');
   if (!DOM.geluidStaatAan.hidden) DOM.soundFailure.play();
   deuren.forEach(deur => deur.style.pointerEvents = 'none');
 };

@@ -60,7 +60,7 @@ body {
     color: white;
     font-weight: bold;
     font-size: 1em;
-    margin-left: 200px;
+    margin-left: 160px;
 }
 input[type="radio"] {
     transform: scale(2); /* 1.5 is 150% van de originele grootte */
