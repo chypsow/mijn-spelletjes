@@ -1,27 +1,8 @@
 "use strict";
-import { tabBlad, makeSidebar, makeKeyboard, makeTopicRiddle, makeTimer, makeGalgjeContainer, makeDifficultyLevel, makeDoors } from "./makeComponents.js";
-import { stopTimer, pauzeerTimer, timerInterval } from "./timer.js";
-
-const autoLijst = [
-  "Acura", "AlfaRomeo", "Audi", "Bentley", "BMW", "Bugatti", "Buick",
-  "Cadillac", "Chevrolet", "Chrysler", "Citroen", "Dacia", "Daewoo",
-  "Daihatsu", "Dodge", "Ferrari", "Fiat", "Ford", "Genesis", "GMC",
-  "Honda", "Hyundai", "Infiniti", "Isuzu", "Jaguar", "Jeep", "Kia",
-  "Koenigsegg", "Lamborghini", "Lancia", "LandRover", "Lexus", "Lincoln",
-  "Lotus", "Maserati", "Mazda", "McLaren", "Mercedes", "Mini", "Mitsubishi",
-  "Nissan", "Opel", "Pagani", "Peugeot", "Porsche", "Ram", "Renault",
-  "RollsRoyce", "Saab", "Seat", "Skoda", "Smart", "SsangYong", "Subaru",
-  "Suzuki", "Tesla", "Toyota", "Volkswagen", "Volvo"
-];
-//console.log(autoLijst.indexOf('Lamborghini'));
-const landLijst = [
-  "Belgie", "Frankrijk", "Spanje", "Duitsland", "Nederland", "Luxembourg", "Engeland",
-  "Zweden", "Dublin", "Iceland", "Turkije", "Marocco", "Tunesie", "Egypte", "Lybia", "Palestina",
-  "Algerije", "Dubai", "Portugal", "California", "Japan", "Rusland", "Iran", "Syrie",
-  "Dannemark", "Chicago", "Italia", "Polen", "Roemenie", "Zwitserland", "Oostenrijk", "NewYork",
-  "Canada", "Mexico", "Cuba", "Brazilie", "Argentina", "Croatia", "Greekenland", "Soedan", "Guinee",
-  "Tanzania", "Nigeria", "Philippijn", "China", "Amerika", "Sinegaal", "Zambia", "Namibia", "Madagaskar" 
-];
+import { initializeRiddle, makeTopicRiddle, makeKeyboard } from "./raadsel.js";
+import { initializeRaket, makeDifficultyLevel, makeDoors } from "./raket.js";
+import { initializeBoard, makeDropMenu, displayMessage, currentPlayer, makeGameboard, resetGame } from "./tictactoe.js";
+import { makeTimer } from "./timer.js";
 
 export const DOM = {
   sideBar : document.getElementById('side-bar'),
@@ -33,63 +14,79 @@ export const DOM = {
   soundWin : document.getElementById("soundWin"),
   soundFailure : document.getElementById("soundFailure"),
   timerContainer : document.getElementById('timer-container'),
-  leftSide : document.getElementById('left-side'),
-  rightSide : document.getElementById('right-side'),
+  middenSectie : document.getElementById('midden-sectie'),
   modal : document.getElementById("modal"),
   modalOverlay : document.getElementById('modal-overlay'),
   overlay : document.getElementById("overlay"),
   sluiten : document.getElementById('sluiten')
 };
 
-//common
-let randomIndex = 0;
-let teller = 0;
+export let spel = 0;
 
-//raadsel
-export let spelAfgelopen = false;
-export let asc = 65;
-let toBeFound ='';
-let emptyArray = [];
-
-export const gameConstructor = {
+const builtSelectedGame = {
   0: () => {
+    DOM.modal.style.setProperty("--translate-value", "-50%");
+    DOM.middenSectie.style.marginTop = '100px';
     emptyContainers();
     makeTopicRiddle();
     makeTimer();
     makeKeyboard();
     makeGalgjeContainer();
     initializeRiddle();
-    //console.log(`teller auto: ${teller}`);
   },
   1: () => {
+    DOM.modal.style.setProperty("--translate-value", "-50%");
+    DOM.middenSectie.style.marginTop = '100px';
     emptyContainers();
     makeTopicRiddle();
     makeTimer();
     makeKeyboard();
     makeGalgjeContainer();
     initializeRiddle();
-    //console.log(`teller land: ${teller}`);
   },
   2: () => {
+    DOM.modal.style.setProperty("--translate-value", "-50%");
+    DOM.middenSectie.style.marginTop = '100px';
     emptyContainers();
     makeDifficultyLevel();
     makeDoors();
     makeGalgjeContainer();
-    teller = 0;
-    randomIndex = [Math.floor((Math.random() * 24))];
-    console.log(`raket index: ${randomIndex}`);
+    initializeRaket();
   },
   3: () => {
+    DOM.modal.style.setProperty("--translate-value", "-25%");
+    DOM.middenSectie.style.marginTop = '20px';
     emptyContainers();
+    makeDropMenu();
+    makeGameboard();
+    initializeBoard();
+    displayMessage(`Speler ${currentPlayer}'s beurt`);
   }
 };
 
-const initialize = {
-  0: () => initializeRiddle(),
-  1: () => initializeRiddle(),
-  2: () => initializeRaket(),
-  3: () => initializeBoard()
-}
+function makeSidebar() {
+  const tabArray = ['Auto raadsel', 'Land raadsel', 'Raket vinden', 'Tic tac toe'];
+  DOM.sideBar.setAttribute('role', 'tablist');
+  tabArray.forEach((tab, index) => {
+      const hyperlink = document.createElement('a');
+      hyperlink.href = '#';
+      hyperlink.textContent = tab;
+      hyperlink.setAttribute('role', 'tab');
+      hyperlink.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
+      if(index === 0) hyperlink.classList.add('active');
+      hyperlink.addEventListener('click', () => {
+          const activeLink = DOM.sideBar.querySelector('.active');
+          if(activeLink === hyperlink) return;
+          activeLink.classList.remove("active");
+          activeLink.setAttribute('aria-selected', 'false');
+          hyperlink.setAttribute('aria-selected', 'true');
+          hyperlink.classList.add("active");
+          spel = index;
+          builtSelectedGame[spel]();
+      });
+      DOM.sideBar.appendChild(hyperlink);
+  });
+};
 
 function emptyContainers() {
   const media = document.querySelector('.media');
@@ -97,175 +94,21 @@ function emptyContainers() {
   if (graad !== null) media.removeChild(graad);
   DOM.topic.innerHTML = '';
   DOM.timerContainer.innerHTML = '';
-  DOM.leftSide.innerHTML = '';
-  DOM.rightSide.innerHTML = '';
+  DOM.middenSectie.innerHTML = '';
 };
 
-function initializeRiddle() {
-  if(spelAfgelopen) spelAfgelopen = false;
-  if(timerInterval !== null) stopTimer();
-  if(teller !== 0) teller = 0;
-
-  const lijsten = {
-    0: autoLijst,
-    1: landLijst
-  };
-  const kleineLetter = document.getElementById('kleine-letter');
-  const hoofdLetter = !kleineLetter.checked;
-  const lijst = lijsten[tabBlad];
-  randomIndex = Math.floor(Math.random() * lijst.length);
-  console.log(`Raadsel Index: ${randomIndex}, To be found: ${lijst[randomIndex]}`);
-  //randomIndex = 28;
-  toBeFound = hoofdLetter ? lijst[randomIndex].toUpperCase() : lijst[randomIndex].toLowerCase();
-  emptyArray = [];
-  const teRadenObject = document.getElementById('teRadenObject');
-  teRadenObject.innerHTML = '';
-  for (let i = 0; i < toBeFound.length; i++) {
-    const letter = document.createElement('div');
-    letter.classList.add('blok');
-    teRadenObject.appendChild(letter);
-  }
-  const galgje = document.getElementById('foutePogingen');
-  galgje.src = `images/00.svg`;
-  const letters = document.querySelectorAll('.letter');
-  Array.from(letters).forEach(letter => {
-    letter.classList.remove("letter-used");
-  });
-};
-
-function initializeRaket() {
-  const deuren = document.querySelectorAll('#deuren img');
-  deuren.forEach(deur => {
-    deur.src = "images/deurtoe.svg";
-    deur.alt = "deur toe";
-    deur.style.pointerEvents = 'auto';
-  });
-  teller = 0;
-  randomIndex = [Math.floor((Math.random() * deuren.length))];
-  console.log(`raket index: ${randomIndex}`);
-  const galgje = document.getElementById('foutePogingen');
+function makeGalgjeContainer() {
+  const rightSide = document.createElement('div');
+  rightSide.id = 'right-side';
+  const galgje = document.createElement('img');
+  galgje.setAttribute('id', 'foutePogingen');
   galgje.src = "images/00.svg";
+  galgje.alt = "beuren";
+  rightSide.appendChild(galgje);
+  DOM.middenSectie.appendChild(rightSide);
 };
 
-function initializeBoard() {
-
-};
-
-export function handelLetter(event) {
-  if(spelAfgelopen || event.target.classList.contains('letter-used')) return;
-  const myLetter = event.target.textContent;
-  const teRadenObject = document.getElementById('teRadenObject');
-  if (toBeFound.includes(myLetter)) {
-    toBeFound.split("").forEach((char, i) => {
-      if (char === myLetter) {
-        emptyArray[i] = myLetter;
-        teRadenObject.children[i].textContent = myLetter;
-      }
-    });
-    if (emptyArray.join("") === toBeFound) {
-      spelerGewonnen();
-    }
-  } else {
-    toonFoutePoging();
-  }
-  event.target.classList.add('letter-used');
-};
-
-export function deurOpenen(event) {
-  const openedDoor = event.target;
-  const easy = document.getElementById('easy');
-  const deuren = document.querySelectorAll('#deuren img');
-  if(!easy.checked) {
-    deuren.forEach(deur => {
-      deur.src = "images/deurtoe.svg";
-      deur.alt = "deur toe";});
-  }
-  const deurMetRaket = deuren[randomIndex];
-  if (openedDoor === deurMetRaket) {
-    playerWon(openedDoor);
-  } else {
-    showMissedTry(openedDoor);
-  }
-};
-function showMissedTry(openedDoor) {
-  teller++;
-  const galgje = document.getElementById('foutePogingen');
-  galgje.src = `images/${String(teller).padStart(2, "0")}.svg`;
-  openedDoor.src = "images/deuropen.svg";
-  openedDoor.alt = "deur open";
-  if (teller === 12) playerFailed();
-};
-function playerWon(openedDoor) {
-  openedDoor.src = "images/gevonden.svg";
-  openedDoor.alt = "gevonden";
-  /*beurten.innerText = teller;
-  resultaat.hidden = false;*/
-  const msg = `U had ${teller} beurt(en) nodig.`;
-  toggleModal(true, 'green', msg, '70%');
-  if (!DOM.geluidStaatAan.hidden) DOM.soundWin.play();
-  //setTimeout(playerWins, 100);
-  const deuren = document.querySelectorAll('#deuren img');
-  deuren.forEach(deur => deur.style.pointerEvents = 'none');
-};
-function playerFailed() {
-  const deuren = document.querySelectorAll('#deuren img');
-  const deurMetRaket = deuren[randomIndex];
-  deurMetRaket.src = "images/gevonden.svg";
-  deurMetRaket.alt = "gevonden";
-  const msg = 'Je hebt verloren.';
-  toggleModal(true, 'red', msg, '70%');
-  if (!DOM.geluidStaatAan.hidden) DOM.soundFailure.play();
-  deuren.forEach(deur => deur.style.pointerEvents = 'none');
-};
-
-
-export function lettersAanpassen() {
-  const kleineLetter = document.getElementById('kleine-letter');
-  const hoofdLetter = !kleineLetter.checked;
-  const caseFunc = hoofdLetter ? 'toUpperCase' : 'toLowerCase';
-  toBeFound = toBeFound[caseFunc]();
-  emptyArray = emptyArray.map(elt => elt[caseFunc]());
-  let i = 0;
-  const teRadenObject = document.getElementById('teRadenObject');
-  for(const letter of teRadenObject.children) {
-    letter.textContent = emptyArray[i];
-    i++;
-  }
-  asc = hoofdLetter ? 65 : 97;
-  const toetsenbord = document.getElementById('toetsenbord');
-  const letters = toetsenbord.querySelectorAll('.letter');
-  Array.from(letters).forEach((letter, index) => {
-    letter.textContent = String.fromCharCode(index + asc);
-  });
-};
-
-function toonFoutePoging() {
-  teller++;
-  const galgje = document.getElementById('foutePogingen');
-  galgje.src = `images/${String(teller).padStart(2, "0")}.svg`;
-  if (teller === 12) spelerVerloren();
-};
-
-function spelerGewonnen() {
-  eindeSpel();
-  const msg = `Jij hebt gewonnen. ${tabBlad === 0 ? "De automerk was " : "Het land was "} ${toBeFound}`;
-  toggleModal(true, 'green', msg, '50%');
-  if (!DOM.geluidStaatAan.hidden) DOM.soundWin.play();
-};
-
-export function spelerVerloren() {
-  eindeSpel();
-  const msg = `Jij hebt verloren. ${tabBlad === 0 ? "De automerk was " : "Het land was "} ${toBeFound}`;
-  toggleModal(true, 'red', msg, '50%');
-  if (!DOM.geluidStaatAan.hidden) DOM.soundFailure.play();
-};
-
-function eindeSpel() {
-  spelAfgelopen = true;
-  pauzeerTimer();
-};
-
-function toggleModal(show, kleur = "", message = "", positie = "") {
+export function toggleModal(show, kleur = "", message = "", positie = "") {
   DOM.modalOverlay.style.display = show ? "block" : "none";
   DOM.modal.style.display = show ? "block" : "none";
   DOM.modal.style.top = positie;
@@ -276,19 +119,28 @@ function toggleModal(show, kleur = "", message = "", positie = "") {
 function closeModal() {
   toggleModal(false);
 };
+
 function toggleGeluid() {
   DOM.geluidStaatAan.hidden = !DOM.geluidStaatAan.hidden;
   DOM.geluidStaatUit.hidden = !DOM.geluidStaatUit.hidden;
 };
 
+const herstartSpel = {
+  0: () => initializeRiddle(),
+  1: () => initializeRiddle(),
+  2: () => initializeRaket(),
+  3: () => resetGame()
+};
+
 DOM.geluidStaat.forEach(geluid => geluid.addEventListener('click', toggleGeluid));
 DOM.sluiten.addEventListener('click', closeModal);
 DOM.reset.addEventListener('click', () => {
-  initialize[tabBlad]();
+  herstartSpel[spel]();
 });
 
 document.addEventListener('DOMContentLoaded', () => {
   makeSidebar();
-  gameConstructor[tabBlad]();
+  builtSelectedGame[spel]();
 })
+
 

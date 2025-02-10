@@ -7,7 +7,7 @@
     color: white;
   }*/
   
-.hoofd-container {
+/*.hoofd-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,7 +15,7 @@
   width: 85%;
   padding: 20px;
   box-sizing: border-box;
-}
+}*/
 /*  .links a {
     position: absolute;
     top: 50px;
@@ -28,62 +28,56 @@
     font-size: 20px;
 
 }*/
-select {
-  position: absolute;
-  top: 60px;
-  font-size: 1.3em;
+#topic select {
+  font-size: 0.9em;
   font-weight: bold;
   padding: 0.3em 0.8em;
   background: rgb(241, 241, 241);
   color: rgb(143, 9, 170);
   border-radius: 5px;
+  transform: translateX(-90px);
 }
-  #game-board {
-    margin-top: 150px;
-    display: grid;
-    /*grid-template-columns: repeat(4, 100px);
-    grid-template-rows: repeat(4, 100px);*/
-    gap: 0px;
-    
-  }
+.game-board {
+  display: grid;
+  gap: 0px;
+}
+.cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 5em;
+  color: #7f2f9e;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  text-shadow: 0 0 10px rgba(250, 250, 250, 0.63);
+  background: radial-gradient(circle, #252785 10% ,#030520 90%);
+  transition: background-color 0.3s;
+}
+.cell.winning {
+  background: #9c9c9c;
+  /*text-decoration: line-through;*/
+}
   
-  .cell {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 6em;
-    color: #7f2f9e;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    text-shadow: 0 0 10px rgba(250, 250, 250, 0.63);
-    background: radial-gradient(circle, #252785 10% ,#030520 90%);
-    transition: background-color 0.3s;
-  }
-  .cell.winning {
-    background: #9c9c9c;
-    /*text-decoration: line-through;*/
-  }
+#feedback {
+  /*position: absolute;*/
+  font-size: 2em;
+  font-weight: bold;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  transform: translate(-50%, -50%) scale(0); /* Start klein, gecentreerd */
+  animation: zoom 0.4s forwards; /* Gebruik forwards om animatie op het einde te bewaren */
+  margin-top: 10px;
+  padding: 0.4em 1.9em;
+  border-radius: 5px;
+  border: 2px solid #ffffff;
+  background: rgba(209, 209, 209, 0.445);
+  text-shadow: 0 0 10px rgba(250, 250, 250, 0.63);
+  color: #ffffff;
   
-  #feedback {
-    /*position: absolute;*/
-    font-size: 2em;
-    font-weight: bold;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    transform: translate(-50%, -50%) scale(0); /* Start klein, gecentreerd */
-    animation: zoom 0.4s forwards; /* Gebruik forwards om animatie op het einde te bewaren */
-    margin-top: 10px;
-    padding: 0.4em 1.9em;
-    border-radius: 5px;
-    border: 2px solid #ffffff;
-    background: rgba(209, 209, 209, 0.445);
-    text-shadow: 0 0 10px rgba(250, 250, 250, 0.63);
-    color: #ffffff;
-    
-    letter-spacing: 0.1em;
-    
-    text-align: center;
-    z-index: 2;
+  letter-spacing: 0.1em;
+  
+  text-align: center;
+  z-index: 2;
 }
 @keyframes zoom {
     0% {
@@ -96,39 +90,18 @@ select {
         transform: translate(-50%, -50%) scale(1);
     }
 }
-  img[alt="reset"] {
-    position: absolute;
-    top: 50px;
-    right: 25%;
-    /*border-radius: 25px;*/
-    cursor: pointer;
+.bericht {
+  margin-top: 20px;
+  font-size: 1.2em;
+  text-align: center;
 }
-  img[alt="mute"] {
-    position: absolute;
-    top: 30px;
-    left: 25%;
-    /*border-radius: 25px;*/
-    cursor: pointer;
+#win-line {
+  position: absolute;
+  width: 4px;
+  height: 0;
+  background-color: rgb(255, 255, 255);
+  transform-origin: top left;
+  display: none; /* Begin verborgen */
+  z-index: 10;
 }
-img[alt="son"] {
-    position: absolute;
-    top: 30px;
-    left: 25%;
-    /*border-radius: 25px;*/
-    cursor: pointer;
-}
-  #message {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-size: 1.2em;
-  }
-  #win-line {
-    position: absolute;
-    width: 4px;
-    height: 0;
-    background-color: rgb(255, 255, 255);
-    transform-origin: top left;
-    display: none; /* Begin verborgen */
-    z-index: 10;
-  }
   

@@ -1,0 +1,73 @@
+.topic {
+    margin: 0 20px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.topic p {
+    display: inline;
+    margin: 0;
+    font-size: 25px;
+    padding: 10px;
+    border-radius: 3px;
+    /*background-color: rgba(3, 3, 3, 0.61);*/
+    color: rgb(255, 255, 255);
+}
+.raad-container {
+    font-family: Arial;
+    display: inline-flex;
+    gap: 5px;
+    background: rgba(29, 29, 29, 0);
+    border-radius: 3px;
+}
+.blok {
+    font-size: 33px;
+    font-weight: bold;
+    width: 36px;
+    height: 50px;
+    line-height: 50px;
+    background: #313131;
+    border: 1px solid rgba(148, 148, 148, 0.575);
+    text-align: center;
+}
+.kleine-letters input {
+    display: inline;
+    margin-right: 1em;
+    scale: 1.5;
+}
+.kleine-letters {
+    margin-bottom: 15px;   
+}
+.toetsenbord {
+    padding: 1em;
+    border-radius: 5px;
+    background: #202020e0;
+    display: grid;
+    grid-template-columns: repeat(13, 50px);
+    grid-template-rows: repeat(2, 50px);
+    gap: 10px;
+}
+.letter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    text-shadow: 0 0 10px rgba(250, 250, 250, 0.63);
+    background: radial-gradient(circle, #282841 10% ,#171718 90%);
+    transition: all 0.1s ease-in-out;
+}
+.letter:hover {
+    scale: 1.3;
+}
+.letter-used {
+    color: #2c2c2c;
+}
+.letter-used:hover {
+    scale: 1;
+}

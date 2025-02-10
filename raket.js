@@ -1,97 +1,93 @@
 "use strict";
-const easy = document.getElementById("easy");
-const difficult =document.getElementById("difficult");
-const beurten = document.getElementById("beurten");
-const resultaat = document.getElementById("resultaat");
-const verloren = document.getElementById("verloren");
-const galgje = document.getElementById("foutePogingen");
-const soundWin = document.getElementById("soundWin");
-const soundFailure = document.getElementById("soundFailure");
-const geluidStaat = document.querySelectorAll(".geluid img");
-const geluidStaatAan = document.getElementById("son");
-const geluidStaatUit = document.getElementById("mute");
-const sideBar = document.getElementById('side-bar');
+import { DOM, toggleModal } from "./main.js";
 
-geluidStaat.forEach(geluid => geluid.addEventListener('click', toggleGeluid));
-function toggleGeluid() {
-  geluidStaatAan.hidden = !geluidStaatAan.hidden;
-  geluidStaatUit.hidden = !geluidStaatUit.hidden;
-}
+let raketTeller = 0;
+let randomRaket = 0;
 
-Array.from(sideBar.children).forEach((elt, index) => {
-  elt.addEventListener('click', () => {
-    sideBar.querySelector('.active').classList.remove("active");
-    elt.classList.add("active");
-  });
-});
-
-let deuren = [];
-maakDeuren();
-function maakDeuren() {
-  for (let index = 0; index < 24; index++) {
-      const deur = document.createElement("img");
-      deur.src = "images/deurtoe.svg";
-      deur.alt = "deur toe";
-      //const hyperlink = document.createElement("a");
-      //hyperlink.href = "#";
-      //hyperlink.appendChild(myImg);
-      document.getElementById("deuren").appendChild(deur);
-  }
-  deuren = document.querySelectorAll("#deuren img");
-  deuren.forEach(deur => deur.addEventListener('click', deurOpenen));
-}
-
-let raketIndex = Math.floor((Math.random() * deuren.length));
-let deurMetRaket = deuren[raketIndex];
-let teller = 0;
-
-function deurOpenen(e) {
-  const mijnDeur = e.target;
-  if(!easy.checked) {
-    deuren.forEach(deur => {
-      deur.src = "images/deurtoe.svg";
-      deur.alt = "deur toe";});
-  }
-  if (mijnDeur === deurMetRaket) {
-    spelerGewonnen(mijnDeur);
-  } else {
-    toonFoutePoging(mijnDeur);
-  }
-}
-function showMissedTry(mijnDeur) {
-  teller++;
-  galgje.src = `images/${String(teller).padStart(2, "0")}.svg`;
-  mijnDeur.src = "images/deuropen.svg";
-  mijnDeur.alt = "deur open";
-  if (teller === 12) playerFailed();
-}
-function spelerGewonnen(mijnDeur) {
-  mijnDeur.src = "images/gevonden.svg";
-  mijnDeur.alt = "gevonden";
-  beurten.innerText = teller;
-  resultaat.hidden = false;
-  if (!geluidStaatAan.hidden) soundWin.play();
-  //setTimeout(playerWins, 100);
-  deuren.forEach(deur => deur.style.pointerEvents = 'none');
-}
-function spelerVerloren() {
-  deurMetRaket.src = "images/gevonden.svg";
-  deurMetRaket.alt = "gevonden";
-  verloren.hidden = false;
-  if (!geluidStaatAan.hidden) soundFailure.play();
-  deuren.forEach(deur => deur.style.pointerEvents = 'none');
-}
-function herstartSpel() {
-    resultaat.hidden = true;
-    verloren.hidden = true;
+export function initializeRaket() {
+    const deuren = document.querySelectorAll('#deuren img');
     deuren.forEach(deur => {
         deur.src = "images/deurtoe.svg";
         deur.alt = "deur toe";
         deur.style.pointerEvents = 'auto';
     });
-    teller = 0;
-    deurMetRaket = deuren[Math.floor((Math.random() * deuren.length))];
+    raketTeller = 0;
+    randomRaket = Math.floor((Math.random() * deuren.length));
+    console.log(`raket index: ${randomRaket}`);
+    const galgje = document.getElementById('foutePogingen');
     galgje.src = "images/00.svg";
-}
+};
 
+export function makeDifficultyLevel() {
+    const graad = document.createElement('div');
+    graad.classList.add('graad');
+    graad.innerHTML = `
+        <label><input type="radio" id="easy" name="difficulty" value="Easy" checked>Easy</label>
+        <label><input type="radio" id="difficult" name="difficulty" value="Difficult">Difficult</label>
+    `;
+    document.querySelector('.media').appendChild(graad);
+};
 
+export function makeDoors() {
+    const leftSide = document.createElement('div');
+    leftSide.id = 'left-side';
+    const deuren = document.createElement('div');
+    deuren.setAttribute('id', 'deuren');
+    deuren.classList.add('doors-container');
+    Array.from({length : 24}).forEach(_ => {
+        const deur = document.createElement('img');
+        deur.src = "images/deurtoe.svg";
+        deur.alt = "deur toe";
+        deur.addEventListener('click', deurOpenen);
+        deuren.appendChild(deur);
+    });
+    leftSide.appendChild(deuren);
+    DOM.middenSectie.appendChild(leftSide);
+};
+
+function deurOpenen(event) {
+  const openedDoor = event.target;
+  const easy = document.getElementById('easy');
+  const deuren = document.querySelectorAll('#deuren img');
+  if(!easy.checked) {
+    deuren.forEach(deur => {
+      deur.src = "images/deurtoe.svg";
+      deur.alt = "deur toe";});
+  }
+  const deurMetRaket = deuren[randomRaket];
+  if (openedDoor === deurMetRaket) {
+    playerWon(openedDoor);
+  } else {
+    showMissedTry(openedDoor);
+  }
+};
+
+function showMissedTry(openedDoor) {
+  raketTeller++;
+  const galgje = document.getElementById('foutePogingen');
+  galgje.src = `images/${String(raketTeller).padStart(2, "0")}.svg`;
+  openedDoor.src = "images/deuropen.svg";
+  openedDoor.alt = "deur open";
+  if (raketTeller === 12) playerLost();
+};
+
+function playerWon(openedDoor) {
+  openedDoor.src = "images/gevonden.svg";
+  openedDoor.alt = "gevonden";
+  const msg = `U had ${raketTeller} beurt(en) nodig.`;
+  toggleModal(true, 'green', msg, '70%');
+  if (!DOM.geluidStaatAan.hidden) DOM.soundWin.play();
+  const deuren = document.querySelectorAll('#deuren img');
+  deuren.forEach(deur => deur.style.pointerEvents = 'none');
+};
+
+function playerLost() {
+  const deuren = document.querySelectorAll('#deuren img');
+  const deurMetRaket = deuren[randomRaket];
+  deurMetRaket.src = "images/gevonden.svg";
+  deurMetRaket.alt = "gevonden";
+  const msg = 'Je hebt verloren.';
+  toggleModal(true, 'red', msg, '70%');
+  if (!DOM.geluidStaatAan.hidden) DOM.soundFailure.play();
+  deuren.forEach(deur => deur.style.pointerEvents = 'none');
+};

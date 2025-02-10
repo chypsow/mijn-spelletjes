@@ -1,89 +1,27 @@
-/*body {
-    margin: 0;
+.graad {
     display: flex;
-    font-family: monospace;
-    background: linear-gradient(150deg, #2b2b49 10% ,#569bc9 30%, #194383 80%  );
-    background-attachment: fixed;
-    background-size: cover;
-    font-size: 2em;
-}*/
-canvas {
-    height: 5em;
-}
-
-.hoofd-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    width: 85%;
-    padding: 20px;
-    box-sizing: border-box;
-}
-.container {
-    margin-top: 150px;
-    display: grid;
-    grid-template-columns: repeat(8, 90px);
-    grid-template-rows: repeat(3, 125px);
-    gap: 10px;
-}
-.container img {
-    cursor: pointer;
-}
-#foutePogingen {
-    background-color: rgba(221, 221, 221, 0.178);
-    /*opacity: 0.9;*/
-    border-radius: 10px;
-    position: absolute;
-    left: 50px;
-    top: 150px;
-    width: 375px;
-}
-#reset {
-    position: absolute;
-    top: 20px;
-    left: 560px;
-    padding: 0.4em 1em;
-    font-size: 0.7em;
-    background: #2b2b49;
-    border-radius: 5px;
-    color: #ffb834;
-    cursor: pointer;
-}
-#reset:hover {
-    border: 2px solid #ffb834;
+    gap: 30px;
+    color: white;
+    font-weight: bold;
+    font-size: 1em;
+    margin-left: 160px;
 }
 input[type="radio"] {
     transform: scale(2); /* 1.5 is 150% van de originele grootte */
     margin-right: 16px; /* optioneel, om ruimte te maken voor tekst of andere elementen */
 }
-.graad label {
-    margin: 2em;
+.doors-container {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(8, 90px);
+    grid-template-rows: repeat(3, 125px);
+    gap: 10px;
 }
-.graad {
-    position: absolute;
-    top: 25px;
-    left: 890px;
-    color: white;
-    font-weight: bold;
-    font-size: 1em;
-}
-
-
-img[alt="mute"] {
-    position: absolute;
-    top: 10px;
-    left: 440px;
-    border-radius: 25px;
+.doors-container img {
     cursor: pointer;
 }
-img[alt="son"] {
-    position: absolute;
-    top: 10px;
-    left: 440px;
-    border-radius: 25px;
-    cursor: pointer;
-}
+
+/*
 .feedback, .fout {
     color: rgb(255, 255, 255);
     border-radius: 5px;
@@ -115,4 +53,4 @@ img[alt="son"] {
 .feedback:empty, .fout:empty {
     display: none;
 }
-
+*/

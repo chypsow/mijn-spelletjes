@@ -1,41 +1,33 @@
 "use strict";
-const feedback = document.getElementById('feedback');
-const boardSize = document.getElementById("boardSize");
+import { DOM, toggleModal } from "./main.js";
+
 let BOARD_SIZE = 0;
 let winningNum = 0;
+
 let board = [];
-let currentPlayer = "X";
+let winningCells = [];
+export let currentPlayer = "X";
 let gameWon = false;
 
-const sideBar = document.getElementById('side-bar');
-Array.from(sideBar.children).forEach((elt, index) => {
-  elt.addEventListener('click', () => {
-    sideBar.querySelector('.active').classList.remove("active");
-    elt.classList.add("active");
-  });
-});
-
-maakDropMenu();
-initializeBoard();
-displayMessage(`Speler ${currentPlayer}'s beurt`);
-
-function maakDropMenu() {
+export function makeDropMenu() {
+  const boardSize = document.createElement('select');
   let dropMenuHTML ='';
   for(let i = 0; i < 5; i++) {
     dropMenuHTML += `<option value='${i+3}'>${i+3} op een rij Tic Tac Toe</option>`;
   }
   boardSize.innerHTML = dropMenuHTML;
+  boardSize.addEventListener('change', () => {
+    BOARD_SIZE = parseInt(boardSize.value);
+    winningNum = bepaalY(BOARD_SIZE);
+    board = Array.from(Array(BOARD_SIZE), () => Array(BOARD_SIZE).fill(""));
+    resetGame();
+  });
+  const topic = document.getElementById('topic');
+  topic.appendChild(boardSize);
   BOARD_SIZE = 3;
   winningNum = 3;
   board = Array.from(Array(3), () => Array(3).fill(""));
-}
-
-boardSize.onchange = () => {
-  BOARD_SIZE = parseInt(boardSize.value);
-  winningNum = bepaalY(BOARD_SIZE);
-  board = Array.from(Array(BOARD_SIZE), () => Array(BOARD_SIZE).fill(""));
-  resetGame();
-}
+};
 
 function bepaalY(x) {
   const waarden = {
@@ -46,10 +38,26 @@ function bepaalY(x) {
       7: 6
   };
   return waarden[x];
+};
+
+export function makeGameboard() {
+  const gameContainer = document.createElement('div');
+  gameContainer.classList.add('game-container');
+
+  const gameBoard = document.createElement('div');
+  gameBoard.setAttribute('id', 'game-board');
+  gameBoard.classList.add('game-board');
+  gameContainer.appendChild(gameBoard);
+
+  const message = document.createElement('div');
+  message.setAttribute('id', 'message');
+  message.classList.add('bericht');
+  gameContainer.appendChild(message);
+
+  DOM.middenSectie.appendChild(gameContainer);
 }
 
-// Initialiseer het spelbord
-function initializeBoard() {
+export function initializeBoard() {
   const gameBoard = document.getElementById("game-board");
   gameBoard.innerHTML = "";
   gameBoard.style.gridTemplateColumns = `repeat(${BOARD_SIZE}, 100px)`;
@@ -64,22 +72,20 @@ function initializeBoard() {
       gameBoard.appendChild(cell);
     }
   }
-}
+};
 
-// Reset het spel
-function resetGame() {
+export function resetGame() {
   board = Array.from(Array(BOARD_SIZE), () => Array(BOARD_SIZE).fill(""));
   currentPlayer = "X";
   gameWon = false;
   initializeBoard();
   //document.getElementById("win-line").style.display = "none"; // Verberg de lijn
-  feedback.hidden = true;
+  //feedback.hidden = true;
   //currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
   displayMessage(`Speler ${currentPlayer}'s beurt`);
 
-}
+};
 
-// Behandel een klik op een cel
 function handleCellClick(row, col) {
   if (board[row][col] === "" && !gameWon) {
     board[row][col] = currentPlayer;
@@ -87,15 +93,17 @@ function handleCellClick(row, col) {
     
     if (checkWinner(row, col)) {
       displayMessage('');
-      feedback.innerText = (`${currentPlayer} heeft gewonnen!`);
-      feedback.hidden = false;
+      const msg = `${currentPlayer} heeft gewonnen!`;
+      toggleModal(true, '#303030', msg, '60%');
+      //feedback.innerText = (`${currentPlayer} heeft gewonnen!`);
+      //feedback.hidden = false;
       //showWinningLine();  // Toon de winnende lijn
       //highlightWinningCells();
       gameWon = true;
     } else if (isDraw()) {
-      feedback.innerText = "Niemand heeft gewonnen!";
-      feedback.style.color = '';
-      feedback.hidden = false;
+      //feedback.innerText = "Niemand heeft gewonnen!";
+      //feedback.style.color = '';
+      //feedback.hidden = false;
       displayMessage("Gelijkspel!");
       gameWon = true;
     } else {
@@ -103,7 +111,7 @@ function handleCellClick(row, col) {
       displayMessage(`Speler ${currentPlayer}'s beurt`);
     }
   }
-}
+};
 
 // Update de weergave van het bord
 function updateBoard(row, col) {
@@ -117,13 +125,9 @@ function updateBoard(row, col) {
 //}
 
 // Toon berichten aan de speler
-function displayMessage(msg) {
+export function displayMessage(msg) {
   document.getElementById("message").textContent = msg;
-}
-
-
-// Controleer op een winnaar
-let winningCells = [];
+};
 
 function checkWinner(row, col) {
   const directions = [
@@ -161,19 +165,20 @@ function countDirection(row, col, rowDir, colDir, winningCells) {
     c += colDir;
   }
   return count;
-}
+};
+
 function highlightWinningCells(winningCells) {
     for (let [row, col] of winningCells) {
       const cell = document.querySelector(`.cell[data-row='${row}'][data-col='${col}']`);
       cell.classList.add("winning");
     }
-    feedback.style.color = document.querySelector(`.cell[data-row='${winningCells[0][0]}'][data-col='${winningCells[0][1]}']`).style.color;
+    //feedback.style.color = document.querySelector(`.cell[data-row='${winningCells[0][0]}'][data-col='${winningCells[0][1]}']`).style.color;
   }
 
 // Controleer op een gelijkspel
 function isDraw() {
   return board.flat().every(cell => cell !== "");
-}
+};
 
 
 

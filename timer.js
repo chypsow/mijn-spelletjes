@@ -1,8 +1,57 @@
 "use strict";
-import { spelAfgelopen, spelerVerloren } from './main.js';
+import { DOM } from './main.js';
+import { spelAfgelopen, spelerVerloren } from './raadsel.js';
 
 export let aftellen = false;
 export let timerInterval = null;
+
+export function makeTimer() {
+    const btnContainer = document.createElement('div');
+    btnContainer.classList.add('btn-container');
+    const startBtn = document.createElement('button');
+    startBtn.setAttribute('id', 'start');
+    startBtn.classList.add('btn');
+    startBtn.textContent = 'Start timer';
+    startBtn.addEventListener('click', handelStartTimer);
+    btnContainer.appendChild(startBtn);
+    const stopBtn = document.createElement('button');
+    stopBtn.setAttribute('id', 'stop');
+    stopBtn.classList.add('btn');
+    stopBtn.textContent = 'Stop timer';
+    stopBtn.addEventListener('click', stopTimer);
+    btnContainer.appendChild(stopBtn);
+    DOM.timerContainer.appendChild(btnContainer);
+
+    const afstellen = document.createElement('div');
+    afstellen.classList.add('afstellen');
+    const instellen = document.createElement('p');
+    instellen.textContent = 'Timer instellen:';
+    afstellen.appendChild(instellen);
+    const timerAfstellen = document.createElement('select');
+    timerAfstellen.setAttribute('id', 'timerAfstellen');
+    const timeArray = ['00:30:00', '01:00:00', '01:30:00'];
+    timeArray.forEach(time => {
+        const option = document.createElement('option');
+        option.textContent = time;
+        timerAfstellen.appendChild(option);
+    });
+    afstellen.appendChild(timerAfstellen);
+    DOM.timerContainer.appendChild(afstellen);
+
+    const timerElt = document.createElement('div');
+    timerElt.setAttribute('id', 'timer');
+    timerElt.classList.add('timer-element');
+    timerElt.textContent = "00:30:00";
+    DOM.timerContainer.appendChild(timerElt);
+
+    timerAfstellen.addEventListener('change', () => {
+        if(!aftellen) {
+            timerElt.textContent = timerAfstellen.value;
+            startBtn.textContent = "Start timer";
+        }
+    });
+};
+
 
 export function handelStartTimer() {
     aftellen ? pauzeerTimer() : startTimer();
