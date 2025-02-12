@@ -49,7 +49,7 @@ const builtSelectedGame = {
     initializeRiddle();
   },
   2: () => {
-    setBackgroundImage('images/tictactoe.jpg');
+    setBackgroundImage('images/blue-background.jpg');
     //DOM.modal.style.setProperty("--translate-value", "-75%");
     DOM.middenSectie.style.marginTop = '100px';
     DOM.middenSectie.style.justifyContent = 'space-between';
@@ -60,7 +60,7 @@ const builtSelectedGame = {
     initializeRaket();
   },
   3: () => {
-    setBackgroundImage('images/blue-background.jpg');
+    setBackgroundImage('images/tictactoe.jpg');
     //DOM.modal.style.setProperty("--translate-value", "-25%");
     DOM.middenSectie.style.marginTop = '20px';
     DOM.middenSectie.style.justifyContent = 'center';
@@ -137,10 +137,10 @@ function makeGalgjeContainer() {
 function positioneerOverlay(triggerElement, overlayElement) {
   const rect = triggerElement.getBoundingClientRect();
   const top = `${rect.bottom}px`; // Plaats de overlay direct onder het element
-  const leftPx = rect.left + rect.width / 2; // Centreer
-  const left = `${Math.round(leftPx/window.innerWidth*100)}%`;
-  console.log(`element.left: ${rect.left}px, element.width: ${rect.width}, modal.width: ${overlayElement.offsetWidth}`);
-  console.log(`modal.left: ${left}%`);
+  const left = `${rect.left + rect.width / 2}px`; // Centreer
+  //const left = Math.round(leftPx/window.innerWidth*100)}%`;
+  //console.log(`element.left: ${rect.left}px, element.width: ${rect.width}, modal.width: ${overlayElement.offsetWidth}`);
+  //console.log(`modal.left: ${left}px`);
   //const left = `${Math.round(leftPx/window.innerWidth*100)}%`;
   return [top, left]; // Zorg dat het als array wordt teruggegeven
 };
@@ -151,7 +151,7 @@ export function toggleModal(show, kleur = "", message = "", triggerElement, over
     [top, left] = positioneerOverlay(triggerElement, overlayElement);
     DOM.modal.style.top = top;
     DOM.modal.style.left = left;
-    console.log(`left: ${left}%`);
+    console.log(`left: ${left}px`);
     DOM.overlay.style.backgroundColor = kleur;
     DOM.overlay.innerHTML = message;
   }

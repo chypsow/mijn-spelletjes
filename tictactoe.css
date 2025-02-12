@@ -7,6 +7,12 @@
   border-radius: 5px;
   transform: translateX(-90px);
 }
+.game-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
 .game-board {
   display: grid;
   gap: 0px;
@@ -61,15 +67,16 @@
     }
 }
 .bericht {
-  margin-top: 20px;
+  width: fit-content;
   font-size: 1.2em;
+  font-weight: bold;
   text-align: center;
   padding: 0.4em 1.9em;
   border-radius: 5px;
   /*border: 2px solid #ffffff;*/
-  background: rgb(48, 48, 48);
-  text-shadow: 0 0 10px rgba(250, 250, 250, 0.63);
-  color: #ffffff;
+  background: rgba(197, 197, 197, 0.74);
+  /*text-shadow: 0 0 10px rgba(250, 250, 250, 0.63);*/
+  color: #1a1a1a;
 }
 .bericht:empty{
   /*border: none;*/
