@@ -1,6 +1,7 @@
 "use strict";
 import { DOM, spel, toggleModal } from './main.js';
 import { stopTimer, pauzeerTimer, timerInterval } from './timer.js';
+import { landen } from './dataLanden.js';
 
 export let spelAfgelopen = false;
 let raadselTeller = 0;
@@ -21,18 +22,16 @@ const autoLijst = [
     "Suzuki", "Tesla", "Toyota", "Volkswagen", "Volvo"
 ];
 
-let landLijst = [];
-async function retrieveCountries() {
-    Response = await fetch('dataLanden.json');
-    if(Response.ok) {
-        const data = await response.json();
-        data.forEach(land => {
-            landLijst.push(land.naam);
-        });
-    }
+const landLijst = () => retrieveCountries();
+function retrieveCountries() {
+    let countries = [];
+    landen.forEach(land =>{
+        countries.push(land.naam);
+    });
+    return countries;    
 };
-retrieveCountries();
-console.log(landLijst);
+
+//console.log(landLijst);
 /*const landLijst = [
     "Belgie", "Frankrijk", "Spanje", "Duitsland", "Nederland", "Luxembourg", "Engeland",
     "Zweden", "Dublin", "Iceland", "Turkije", "Marocco", "Tunesie", "Egypte", "Lybia", "Palestina",
@@ -49,7 +48,7 @@ export function initializeRiddle() {
 
     const lijsten = {
         0: autoLijst,
-        1: landLijst
+        1: landLijst()
     };
     const kleineLetter = document.getElementById('kleine-letter');
     const hoofdLetter = !kleineLetter.checked;
