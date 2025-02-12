@@ -71,3 +71,28 @@
 .letter-used:hover {
     scale: 1;
 }
+.hint-container {
+    margin-top: 30px;
+    display: flex;
+    font-size: 30px;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background-color: rgba(3, 3, 3, 0.61);
+    border-radius: 3px;
+    padding: 0 20px;
+}
+/*.hint-container .topic-text {
+    padding: 10px;
+    border-radius: 3px;
+    background-color: rgba(3, 3, 3, 0.61);
+    color: rgb(255, 255, 255);
+}*/
+.hint {
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 50%;
+    background: #007c80;
+    color: #ffffff;
+
+}

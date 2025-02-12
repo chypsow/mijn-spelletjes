@@ -1,5 +1,5 @@
 "use strict";
-import { initializeRiddle, makeTopicRiddle, makeKeyboard } from "./raadsel.js";
+import { initializeRiddle, makeTopicRiddle, makeKeyboard, makeHints } from "./raadsel.js";
 import { initializeRaket, resetRaket, makeDifficultyLevel, makeDoors } from "./raket.js";
 import { initializeBoard, makeDropMenu, displayMessage, currentPlayer, makeGameboard, resetGame } from "./tictactoe.js";
 import { makeTimer } from "./timer.js";
@@ -45,6 +45,7 @@ const builtSelectedGame = {
     makeTopicRiddle();
     makeTimer();
     makeKeyboard();
+    makeHints();
     makeGalgjeContainer();
     initializeRiddle();
   },

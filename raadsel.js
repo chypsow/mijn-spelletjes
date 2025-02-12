@@ -1,7 +1,7 @@
 "use strict";
 import { DOM, spel, toggleModal } from './main.js';
 import { stopTimer, pauzeerTimer, timerInterval } from './timer.js';
-import { landen } from './dataLanden.js';
+import { landen, autoLijst } from './data.js';
 
 export let spelAfgelopen = false;
 let raadselTeller = 0;
@@ -10,25 +10,17 @@ let asc = 65;
 let toBeFound ='';
 let emptyArray = [];
 
-const autoLijst = [
-    "Acura", "AlfaRomeo", "Audi", "Bentley", "BMW", "Bugatti", "Buick",
-    "Cadillac", "Chevrolet", "Chrysler", "Citroen", "Dacia", "Daewoo",
-    "Daihatsu", "Dodge", "Ferrari", "Fiat", "Ford", "Genesis", "GMC",
-    "Honda", "Hyundai", "Infiniti", "Isuzu", "Jaguar", "Jeep", "Kia",
-    "Koenigsegg", "Lamborghini", "Lancia", "LandRover", "Lexus", "Lincoln",
-    "Lotus", "Maserati", "Mazda", "McLaren", "Mercedes", "Mini", "Mitsubishi",
-    "Nissan", "Opel", "Pagani", "Peugeot", "Porsche", "Ram", "Renault",
-    "RollsRoyce", "Saab", "Seat", "Skoda", "Smart", "SsangYong", "Subaru",
-    "Suzuki", "Tesla", "Toyota", "Volkswagen", "Volvo"
-];
+
 
 const landLijst = () => retrieveCountries();
 function retrieveCountries() {
     let countries = [];
+    let lengte = [];
     landen.forEach(land =>{
         countries.push(land.naam);
+        lengte.push(land.naam.length);
     });
-    return countries;    
+    return countries;   
 };
 
 //console.log(landLijst);
@@ -55,7 +47,7 @@ export function initializeRiddle() {
     const lijst = lijsten[spel];
     randomRaadsel = Math.floor((Math.random() * lijst.length));
     console.log(`Raadsel Index: ${randomRaadsel}, To be found: ${lijst[randomRaadsel]}`);
-    //randomIndex = 28;
+    //randomRaadsel = 25;
     toBeFound = hoofdLetter ? lijst[randomRaadsel].toUpperCase() : lijst[randomRaadsel].toLowerCase();
     emptyArray = [];
     const teRadenObject = document.getElementById('teRadenObject');
@@ -177,6 +169,48 @@ export function makeKeyboard() {
     leftSide.appendChild(toetsenbord);
     DOM.middenSectie.appendChild(leftSide);
 };
+
+export function makeHints() {
+    const hintContainer = document.createElement('div');
+    hintContainer.classList.add('hint-container');
+    const topicTxt = document.createElement('p');
+    topicTxt.classList.add('topic-text');
+    topicTxt.textContent = 'Hints:';
+    hintContainer.appendChild(topicTxt);
+    const array = [1,2,3];
+    array.forEach(hint => {
+        const hintDiv = document.createElement('div');
+        hintDiv.classList.add('hint');
+        hintDiv.textContent = hint;
+        hintDiv.addEventListener('click', () => {
+            toonHint(hint);
+        });
+        hintContainer.appendChild(hintDiv);
+    });
+    DOM.middenSectie.appendChild(hintContainer);
+};
+
+const getLandInfo = () => {
+    const lijst = landLijst();
+    const teRadenLand = lijst[randomRaadsel];
+
+    const land = landen.find(country => country.naam === teRadenLand);
+    if (!land) return [null, null, null];
+
+    return [land.continent, `${land.oppervlakte} km²`, land.taal];
+};
+
+function toonHint(hint) {
+    const hintText = {
+        1: 'Het continent van het land is:',
+        2: 'De oppervlakte van het land is:',
+        3: 'De officiële taal(en) van het land is(zijn):'
+    };
+    const [cont, opp, taal] = getLandInfo();
+    const msg = `${hintText[hint]} ${[cont, opp, taal][hint - 1]}`;
+    const toetsenbord = document.getElementById('toetsenbord');
+    toggleModal(true, '#007c80', msg, toetsenbord, DOM.modal);
+}
 
 
 

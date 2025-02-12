@@ -1,11 +1,22 @@
 'use strict';
+export const autoLijst = [
+  "Acura", "AlfaRomeo", "Audi", "Bentley", "BMW", "Bugatti", "Buick",
+  "Cadillac", "Chevrolet", "Chrysler", "Citroen", "Dacia", "Daewoo",
+  "Daihatsu", "Dodge", "Ferrari", "Fiat", "Ford", "Genesis", "GMC",
+  "Honda", "Hyundai", "Infiniti", "Isuzu", "Jaguar", "Jeep", "Kia",
+  "Koenigsegg", "Lamborghini", "Lancia", "LandRover", "Lexus", "Lincoln",
+  "Lotus", "Maserati", "Mazda", "McLaren", "Mercedes", "Mini", "Mitsubishi",
+  "Nissan", "Opel", "Pagani", "Peugeot", "Porsche", "Ram", "Renault",
+  "RollsRoyce", "Saab", "Seat", "Skoda", "Smart", "SsangYong", "Subaru",
+  "Suzuki", "Tesla", "Toyota", "Volkswagen", "Volvo"
+];
 export const landen = [
   {"naam": "Nederland", "continent": "Europa", "oppervlakte": 41543, "taal": "Nederlands"},
   {"naam": "Duitsland", "continent": "Europa", "oppervlakte": 357022, "taal": "Duits"},
   {"naam": "Frankrijk", "continent": "Europa", "oppervlakte": 551695, "taal": "Frans"},
   {"naam": "Spanje", "continent": "Europa", "oppervlakte": 505990, "taal": "Spaans"},
   {"naam": "Italie", "continent": "Europa", "oppervlakte": 301340, "taal": "Italiaans"},
-  {"naam": "Verenigd Koninkrijk", "continent": "Europa", "oppervlakte": 243610, "taal": "Engels"},
+  {"naam": "VerenigdKoninkrijk", "continent": "Europa", "oppervlakte": 243610, "taal": "Engels"},
   {"naam": "Belgie", "continent": "Europa", "oppervlakte": 30689, "taal": "Nederlands, Frans, Duits"},
   {"naam": "Rusland", "continent": "Azië", "oppervlakte": 17098242, "taal": "Russisch"},
   {"naam": "China", "continent": "Azië", "oppervlakte": 9596961, "taal": "Mandarijn"},
@@ -25,7 +36,7 @@ export const landen = [
   {"naam": "Colombia", "continent": "Zuid-Amerika", "oppervlakte": 1141748, "taal": "Spaans"},
   {"naam": "Peru", "continent": "Zuid-Amerika", "oppervlakte": 1285216, "taal": "Spaans"},
   {"naam": "Chili", "continent": "Zuid-Amerika", "oppervlakte": 756102, "taal": "Spaans"},
-  {"naam": "USA", "continent": "Noord-Amerika", "oppervlakte": 9833517, "taal": "Engels"},
+  {"naam": "VerenigdeStaten", "continent": "Noord-Amerika", "oppervlakte": 9833517, "taal": "Engels"},
   {"naam": "Canada", "continent": "Noord-Amerika", "oppervlakte": 9984670, "taal": "Engels, Frans"},
   {"naam": "Mexico", "continent": "Noord-Amerika", "oppervlakte": 1964375, "taal": "Spaans"},
   {"naam": "Cuba", "continent": "Noord-Amerika", "oppervlakte": 109884, "taal": "Spaans"},
