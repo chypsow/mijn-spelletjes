@@ -5,17 +5,21 @@ let raketTeller = 0;
 let randomRaket = 0;
 
 export function initializeRaket() {
+    raketTeller = 0;
+    randomRaket = Math.floor((Math.random() * 24));
+    console.log(`raket index: ${randomRaket}`);
+    const galgje = document.getElementById('foutePogingen');
+    galgje.src = "images/galgjeSvg/00.svg";
+};
+
+export function resetRaket() {
     const deuren = document.querySelectorAll('#deuren img');
     deuren.forEach(deur => {
         deur.src = "images/deurtoe.svg";
         deur.alt = "deur toe";
         deur.style.pointerEvents = 'auto';
     });
-    raketTeller = 0;
-    randomRaket = Math.floor((Math.random() * deuren.length));
-    console.log(`raket index: ${randomRaket}`);
-    const galgje = document.getElementById('foutePogingen');
-    galgje.src = "images/00.svg";
+    initializeRaket();
 };
 
 export function makeDifficultyLevel() {
@@ -65,7 +69,7 @@ function deurOpenen(event) {
 function showMissedTry(openedDoor) {
   raketTeller++;
   const galgje = document.getElementById('foutePogingen');
-  galgje.src = `images/${String(raketTeller).padStart(2, "0")}.svg`;
+  galgje.src = `images/galgjeSvg/${String(raketTeller).padStart(2, "0")}.svg`;
   openedDoor.src = "images/deuropen.svg";
   openedDoor.alt = "deur open";
   if (raketTeller === 12) playerLost();
@@ -75,7 +79,8 @@ function playerWon(openedDoor) {
   openedDoor.src = "images/gevonden.svg";
   openedDoor.alt = "gevonden";
   const msg = `U had ${raketTeller} beurt(en) nodig.`;
-  toggleModal(true, 'green', msg, '70%');
+  const doors = document.getElementById('deuren');
+  toggleModal(true, 'green', msg, doors, DOM.modal);
   if (!DOM.geluidStaatAan.hidden) DOM.soundWin.play();
   const deuren = document.querySelectorAll('#deuren img');
   deuren.forEach(deur => deur.style.pointerEvents = 'none');
@@ -87,7 +92,8 @@ function playerLost() {
   deurMetRaket.src = "images/gevonden.svg";
   deurMetRaket.alt = "gevonden";
   const msg = 'Je hebt verloren.';
-  toggleModal(true, 'red', msg, '70%');
+  const doors = document.getElementById('deuren');
+  toggleModal(true, 'red', msg, doors, DOM.modal);
   if (!DOM.geluidStaatAan.hidden) DOM.soundFailure.play();
   deuren.forEach(deur => deur.style.pointerEvents = 'none');
 };

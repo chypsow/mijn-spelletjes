@@ -94,7 +94,8 @@ function handleCellClick(row, col) {
     if (checkWinner(row, col)) {
       displayMessage('');
       const msg = `${currentPlayer} heeft gewonnen!`;
-      toggleModal(true, '#303030', msg, '60%');
+      const gameBoard = document.getElementById("game-board"); 
+      toggleModal(true, '#303030', msg, gameBoard, DOM.modal);
       //feedback.innerText = (`${currentPlayer} heeft gewonnen!`);
       //feedback.hidden = false;
       //showWinningLine();  // Toon de winnende lijn

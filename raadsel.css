@@ -4,13 +4,13 @@
     gap: 20px;
     align-items: center;
 }
-.topic p {
+.topic .topic-text {
     display: inline;
     margin: 0;
     font-size: 25px;
     padding: 10px;
     border-radius: 3px;
-    /*background-color: rgba(3, 3, 3, 0.61);*/
+    background-color: rgba(3, 3, 3, 0.61);
     color: rgb(255, 255, 255);
 }
 .raad-container {

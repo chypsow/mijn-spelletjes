@@ -55,7 +55,7 @@ export function initializeRiddle() {
         teRadenObject.appendChild(letter);
     }
     const galgje = document.getElementById('foutePogingen');
-    galgje.src = `images/00.svg`;
+    galgje.src = `images/galgjeSvg/00.svg`;
     const letters = document.querySelectorAll('.letter');
     Array.from(letters).forEach(letter => {
         letter.classList.remove("letter-used");
@@ -104,21 +104,23 @@ function lettersAanpassen() {
 function toonFoutePoging() {
     raadselTeller++;
     const galgje = document.getElementById('foutePogingen');
-    galgje.src = `images/${String(raadselTeller).padStart(2, "0")}.svg`;
+    galgje.src = `images/galgjeSvg/${String(raadselTeller).padStart(2, "0")}.svg`;
     if (raadselTeller === 12) spelerVerloren();
 };
 
 function spelerGewonnen() {
     eindeSpel();
     const msg = `Jij hebt gewonnen. ${spel === 0 ? "De automerk was " : "Het land was "} ${toBeFound}`;
-    toggleModal(true, 'green', msg, '50%');
+    const toetsenbord = document.getElementById('toetsenbord');
+    toggleModal(true, 'green', msg, toetsenbord, DOM.modal);
     if (!DOM.geluidStaatAan.hidden) DOM.soundWin.play();
 };
   
 export function spelerVerloren() {
     eindeSpel();
     const msg = `Jij hebt verloren. ${spel === 0 ? "De automerk was " : "Het land was "} ${toBeFound}`;
-    toggleModal(true, 'red', msg, '50%');
+    const toetsenbord = document.getElementById('toetsenbord');
+    toggleModal(true, 'red', msg, toetsenbord, DOM.modal);
     if (!DOM.geluidStaatAan.hidden) DOM.soundFailure.play();
 };
 
@@ -130,6 +132,7 @@ function eindeSpel() {
 export function makeTopicRiddle() {
     DOM.topic.classList.add('topic');
     const topicTxt = document.createElement('p');
+    topicTxt.classList.add('topic-text');
     const raadsels = ['automerk', 'land'];
     topicTxt.textContent = `Te raden ${raadsels[spel]}:`;
     topic.appendChild(topicTxt);
@@ -137,7 +140,7 @@ export function makeTopicRiddle() {
     toBeFound.setAttribute('id', 'teRadenObject');
     toBeFound.classList.add('raad-container');
     DOM.topic.appendChild(toBeFound);
-}
+};
 
 export function makeKeyboard() {
     const leftSide = document.createElement('div');
