@@ -21,14 +21,26 @@ const autoLijst = [
     "Suzuki", "Tesla", "Toyota", "Volkswagen", "Volvo"
 ];
 
-const landLijst = [
+let landLijst = [];
+async function retrieveCountries() {
+    Response = await fetch('dataLanden.json');
+    if(Response.ok) {
+        const data = await response.json();
+        data.forEach(land => {
+            landLijst.push(land.naam);
+        });
+    }
+};
+retrieveCountries();
+console.log(landLijst);
+/*const landLijst = [
     "Belgie", "Frankrijk", "Spanje", "Duitsland", "Nederland", "Luxembourg", "Engeland",
     "Zweden", "Dublin", "Iceland", "Turkije", "Marocco", "Tunesie", "Egypte", "Lybia", "Palestina",
     "Algerije", "Dubai", "Portugal", "California", "Japan", "Rusland", "Iran", "Syrie",
     "Dannemark", "Chicago", "Italia", "Polen", "Roemenie", "Zwitserland", "Oostenrijk", "NewYork",
     "Canada", "Mexico", "Cuba", "Brazilie", "Argentina", "Croatia", "Greekenland", "Soedan", "Guinee",
     "Tanzania", "Nigeria", "Philippijn", "China", "Amerika", "Sinegaal", "Zambia", "Namibia", "Madagaskar" 
-];
+];*/
 
 export function initializeRiddle() {
     if(spelAfgelopen) spelAfgelopen = false;

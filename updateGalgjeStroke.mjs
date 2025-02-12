@@ -21,7 +21,7 @@ fs.readdir(folderPath, (err, files) => {
                     return;
                 }
 
-                const updatedData = data.replace(/style="stroke:black"/g, 'style="stroke:#dfdfdf"');
+                const updatedData = data.replace(/style="stroke:#dfdfdf"/g, 'style="stroke:black"');
 
                 fs.writeFile(filePath, updatedData, "utf8", err => {
                     if (err) {

@@ -151,7 +151,7 @@ export function toggleModal(show, kleur = "", message = "", triggerElement, over
     [top, left] = positioneerOverlay(triggerElement, overlayElement);
     DOM.modal.style.top = top;
     DOM.modal.style.left = left;
-    console.log(`left: ${left}px`);
+    //console.log(`left: ${left}px`);
     DOM.overlay.style.backgroundColor = kleur;
     DOM.overlay.innerHTML = message;
   }

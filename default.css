@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     /*padding-top: 1em;*/
-    font-family: Arial;
+    /*font-family: Arial;*/
     font-size: 1.5em;
     color: rgb(255, 255, 255);
     /*background: linear-gradient(150deg, #0b0a4b 20% ,#7f2f9e 40%, #048c96 90%);*/
@@ -51,7 +51,7 @@ body {
 .midden-sectie {
     margin: 100px 100px 0;
     display: flex;
-    justify-content: center;
+    /*justify-content: center;*/
 }
 #foutePogingen {
     width: 350px;
@@ -72,7 +72,7 @@ body {
     top: 20px;
     right: 20px;
     color: #fffffffa;
-    font-size: 30px;
+    font-size: 40px;
     font-weight: normal;
     transition: 0.3s;
 }

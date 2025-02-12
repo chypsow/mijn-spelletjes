@@ -83,7 +83,6 @@ export function resetGame() {
   //feedback.hidden = true;
   //currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
   displayMessage(`Speler ${currentPlayer}'s beurt`);
-
 };
 
 function handleCellClick(row, col) {
