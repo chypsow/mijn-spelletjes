@@ -100,16 +100,9 @@ function handleCellClick(row, col) {
       displayMessage('');
       const msg = `${currentPlayer} heeft gewonnen!`;
       const gameBoard = document.getElementById("game-board"); 
-      toggleModal(true, '#007c80', msg, gameBoard, DOM.modal);
-      //feedback.innerText = (`${currentPlayer} heeft gewonnen!`);
-      //feedback.hidden = false;
-      //showWinningLine();  // Toon de winnende lijn
-      //highlightWinningCells();
+      toggleModal(true, '#007c80', msg, gameBoard);
       gameWon = true;
     } else if (isDraw()) {
-      //feedback.innerText = "Niemand heeft gewonnen!";
-      //feedback.style.color = '';
-      //feedback.hidden = false;
       displayMessage("Gelijkspel!");
       gameWon = true;
     } else {
@@ -119,18 +112,12 @@ function handleCellClick(row, col) {
   }
 };
 
-// Update de weergave van het bord
 function updateBoard(row, col) {
-  //for (let row = 0; row < BOARD_SIZE; row++) {
-    //for (let col = 0; col < BOARD_SIZE; col++) {
-      const cell = document.querySelector(`.cell[data-row='${row}'][data-col='${col}']`);
-      cell.textContent = board[row][col];
-      currentPlayer === 'X' ? cell.style.color = '#7f2f9e' : cell.style.color ='#221fe4';
-    }
-  //}
-//}
-
-// Toon berichten aan de speler
+  const cell = document.querySelector(`.cell[data-row='${row}'][data-col='${col}']`);
+  cell.textContent = board[row][col];
+  currentPlayer === 'X' ? cell.style.color = '#7f2f9e' : cell.style.color ='#221fe4';
+};
+ 
 export function displayMessage(msg) {
   document.getElementById("message").textContent = msg;
 };
@@ -174,24 +161,15 @@ function countDirection(row, col, rowDir, colDir, winningCells) {
 };
 
 function highlightWinningCells(winningCells) {
-    for (let [row, col] of winningCells) {
-      const cell = document.querySelector(`.cell[data-row='${row}'][data-col='${col}']`);
-      cell.classList.add("winning");
-    }
-    //feedback.style.color = document.querySelector(`.cell[data-row='${winningCells[0][0]}'][data-col='${winningCells[0][1]}']`).style.color;
+  for (let [row, col] of winningCells) {
+    const cell = document.querySelector(`.cell[data-row='${row}'][data-col='${col}']`);
+    cell.classList.add("winning");
   }
+};
 
-// Controleer op een gelijkspel
 function isDraw() {
   return board.flat().every(cell => cell !== "");
 };
-
-
-
-
-
-
-
 
 
 // Toon een lijn over de winnende cellen

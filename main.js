@@ -28,6 +28,7 @@ const builtSelectedGame = {
     setBackgroundImage('images/auto.jpg');
     DOM.middenSectie.style.marginTop = '100px';
     DOM.middenSectie.style.justifyContent = 'space-between';
+    DOM.middenSectie.style.gap = '50px';
     makeGalgjeContainer();
     initializeRiddle();
   },
@@ -35,6 +36,7 @@ const builtSelectedGame = {
     setBackgroundImage('images/landenKaart.jpg');
     DOM.middenSectie.style.marginTop = '100px';
     DOM.middenSectie.style.justifyContent = 'space-between';
+    DOM.middenSectie.style.gap = '20px';
     makeGalgjeContainer();
     initializeRiddle();
   },
@@ -42,6 +44,7 @@ const builtSelectedGame = {
     setBackgroundImage('images/blue-background.jpg');
     DOM.middenSectie.style.marginTop = '100px';
     DOM.middenSectie.style.justifyContent = '';
+    DOM.middenSectie.style.gap = '100px';
     makeGalgjeContainer();
     initializeRaket();
   },
@@ -49,6 +52,7 @@ const builtSelectedGame = {
     setBackgroundImage('images/tictactoe.jpg');
     DOM.middenSectie.style.marginTop = '20px';
     DOM.middenSectie.style.justifyContent = 'center';
+    DOM.middenSectie.style.gap = '20px';
     initializeGame();
   }
 };
@@ -128,13 +132,9 @@ function resetGalgje() {
 
 function positioneerOverlay(triggerElement) {
   const rect = triggerElement.getBoundingClientRect();
-  const top = `${rect.bottom}px`; // Plaats de overlay direct onder het element
-  const left = `${rect.left + rect.width / 2}px`; // Centreer
-  //const left = Math.round(leftPx/window.innerWidth*100)}%`;
-  //console.log(`element.left: ${rect.left}px, element.width: ${rect.width}, modal.width: ${overlayElement.offsetWidth}`);
-  //console.log(`modal.left: ${left}px`);
-  //const left = `${Math.round(leftPx/window.innerWidth*100)}%`;
-  return [top, left]; // Zorg dat het als array wordt teruggegeven
+  const top = `${rect.bottom}px`;
+  const left = `${rect.left + rect.width / 2}px`;
+  return [top, left];
 };
 
 export function toggleModal(show, kleur = "", message = "", triggerElement) {
@@ -184,14 +184,6 @@ DOM.reset.addEventListener('click', () => {
   herstartSpel[spel]();
 });
 
-/*window.addEventListener("resize", function () {
-  if(DOM.modal.style.display === 'none') return;
-  let schaal = 1 / window.devicePixelRatio;
-  //console.log(`schaal: ${schaal}`);
-  //let schaal = window.innerWidth / screen.width; // Berekent de zoomfactor
-  //element.style.left = `${schaal}px`; // Past grootte aan
-});*/
-
 document.addEventListener('click', (event) => {
   if(DOM.modalOverlay.contains(event.target) && !DOM.modal.contains(event.target)) {
     toggleModal(false);
@@ -201,6 +193,6 @@ document.addEventListener('click', (event) => {
 document.addEventListener('DOMContentLoaded', () => {
   makeSidebar();
   builtSelectedGame[spel]();
-})
+});
 
 

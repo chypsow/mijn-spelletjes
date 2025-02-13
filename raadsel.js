@@ -23,16 +23,6 @@ function retrieveCountries() {
     return countries;   
 };
 
-//console.log(landLijst);
-/*const landLijst = [
-    "Belgie", "Frankrijk", "Spanje", "Duitsland", "Nederland", "Luxembourg", "Engeland",
-    "Zweden", "Dublin", "Iceland", "Turkije", "Marocco", "Tunesie", "Egypte", "Lybia", "Palestina",
-    "Algerije", "Dubai", "Portugal", "California", "Japan", "Rusland", "Iran", "Syrie",
-    "Dannemark", "Chicago", "Italia", "Polen", "Roemenie", "Zwitserland", "Oostenrijk", "NewYork",
-    "Canada", "Mexico", "Cuba", "Brazilie", "Argentina", "Croatia", "Greekenland", "Soedan", "Guinee",
-    "Tanzania", "Nigeria", "Philippijn", "China", "Amerika", "Sinegaal", "Zambia", "Namibia", "Madagaskar" 
-];*/
-
 export function initializeRiddle() {
     const lijsten = {
         0: autoLijst,
@@ -123,7 +113,7 @@ function spelerGewonnen() {
     eindeSpel();
     const msg = `Jij hebt gewonnen. ${spel === 0 ? "De automerk was " : "Het land was "} ${toBeFound}`;
     const toetsenbord = document.getElementById('toetsenbord');
-    toggleModal(true, 'green', msg, toetsenbord, DOM.modal);
+    toggleModal(true, 'green', msg, toetsenbord);
     if (!DOM.geluidStaatAan.hidden) DOM.soundWin.play();
 };
   
@@ -131,7 +121,7 @@ export function spelerVerloren() {
     eindeSpel();
     const msg = `Jij hebt verloren. ${spel === 0 ? "De automerk was " : "Het land was "} ${toBeFound}`;
     const toetsenbord = document.getElementById('toetsenbord');
-    toggleModal(true, 'red', msg, toetsenbord, DOM.modal);
+    toggleModal(true, 'red', msg, toetsenbord);
     if (!DOM.geluidStaatAan.hidden) DOM.soundFailure.play();
 };
 
@@ -217,7 +207,7 @@ function toonHint(hint) {
     const [cont, opp, taal] = getLandInfo();
     const msg = `${hintText[hint]} ${[cont, opp, taal][hint - 1]}`;
     const toetsenbord = document.getElementById('toetsenbord');
-    toggleModal(true, '#007c80', msg, toetsenbord, DOM.modal);
+    toggleModal(true, '#007c80', msg, toetsenbord);
 };
 
 

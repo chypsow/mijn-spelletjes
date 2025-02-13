@@ -45,4 +45,13 @@ export const landen = [
   {"naam": "NieuwGuinea", "continent": "Oceanië", "oppervlakte": 462840, "taal": "Engels, Tok Pisin, Hiri Motu"}
 ];
 
+//console.log(landLijst);
+/*const landLijst = [
+    "Belgie", "Frankrijk", "Spanje", "Duitsland", "Nederland", "Luxembourg", "Engeland",
+    "Zweden", "Dublin", "Iceland", "Turkije", "Marocco", "Tunesie", "Egypte", "Lybia", "Palestina",
+    "Algerije", "Dubai", "Portugal", "California", "Japan", "Rusland", "Iran", "Syrie",
+    "Dannemark", "Chicago", "Italia", "Polen", "Roemenie", "Zwitserland", "Oostenrijk", "NewYork",
+    "Canada", "Mexico", "Cuba", "Brazilie", "Argentina", "Croatia", "Greekenland", "Soedan", "Guinee",
+    "Tanzania", "Nigeria", "Philippijn", "China", "Amerika", "Sinegaal", "Zambia", "Namibia", "Madagaskar" 
+];*/
   
