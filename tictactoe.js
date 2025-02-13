@@ -6,10 +6,44 @@ let winningNum = 0;
 
 let board = [];
 let winningCells = [];
-export let currentPlayer = "X";
+let currentPlayer = "X";
 let gameWon = false;
 
-export function makeDropMenu() {
+export function initializeGame() {
+  makeDropMenu();
+  makeGameboard();
+  currentPlayer = "X";
+  gameWon = false;
+  resetBoard();
+  displayMessage(`Speler ${currentPlayer}'s beurt`);
+};
+
+export function resetGame() {
+  board = Array.from(Array(BOARD_SIZE), () => Array(BOARD_SIZE).fill(""));
+  currentPlayer = "X";
+  gameWon = false;
+  resetBoard();
+  displayMessage(`Speler ${currentPlayer}'s beurt`);
+};
+
+function resetBoard() {
+  const gameBoard = document.getElementById("game-board");
+  gameBoard.innerHTML = "";
+  gameBoard.style.gridTemplateColumns = `repeat(${BOARD_SIZE}, 100px)`;
+  gameBoard.style.gridTemplateRows = `repeat(${BOARD_SIZE}, 100px)`;
+  for (let row = 0; row < BOARD_SIZE; row++) {
+    for (let col = 0; col < BOARD_SIZE; col++) {
+      const cell = document.createElement("div");
+      cell.classList.add("cell");
+      cell.dataset.row = row;
+      cell.dataset.col = col;
+      cell.addEventListener("click", () => handleCellClick(row, col));
+      gameBoard.appendChild(cell);
+    }
+  }
+};
+
+function makeDropMenu() {
   const boardSize = document.createElement('select');
   let dropMenuHTML ='';
   for(let i = 0; i < 5; i++) {
@@ -40,7 +74,7 @@ function bepaalY(x) {
   return waarden[x];
 };
 
-export function makeGameboard() {
+function makeGameboard() {
   const gameContainer = document.createElement('div');
   gameContainer.classList.add('game-container');
 
@@ -55,34 +89,6 @@ export function makeGameboard() {
   gameContainer.appendChild(message);
 
   DOM.middenSectie.appendChild(gameContainer);
-}
-
-export function initializeBoard() {
-  const gameBoard = document.getElementById("game-board");
-  gameBoard.innerHTML = "";
-  gameBoard.style.gridTemplateColumns = `repeat(${BOARD_SIZE}, 100px)`;
-  gameBoard.style.gridTemplateRows = `repeat(${BOARD_SIZE}, 100px)`;
-  for (let row = 0; row < BOARD_SIZE; row++) {
-    for (let col = 0; col < BOARD_SIZE; col++) {
-      const cell = document.createElement("div");
-      cell.classList.add("cell");
-      cell.dataset.row = row;
-      cell.dataset.col = col;
-      cell.addEventListener("click", () => handleCellClick(row, col));
-      gameBoard.appendChild(cell);
-    }
-  }
-};
-
-export function resetGame() {
-  board = Array.from(Array(BOARD_SIZE), () => Array(BOARD_SIZE).fill(""));
-  currentPlayer = "X";
-  gameWon = false;
-  initializeBoard();
-  //document.getElementById("win-line").style.display = "none"; // Verberg de lijn
-  //feedback.hidden = true;
-  //currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-  displayMessage(`Speler ${currentPlayer}'s beurt`);
 };
 
 function handleCellClick(row, col) {

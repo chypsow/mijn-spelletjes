@@ -52,6 +52,7 @@ body {
     margin: 100px 100px 0;
     display: flex;
     /*justify-content: center;*/
+    gap: 100px;
 }
 #foutePogingen {
     width: 350px;

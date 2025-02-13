@@ -1,8 +1,8 @@
 "use strict";
-import { initializeRiddle, makeTopicRiddle, makeKeyboard, makeHints } from "./raadsel.js";
-import { initializeRaket, resetRaket, makeDifficultyLevel, makeDoors } from "./raket.js";
-import { initializeBoard, makeDropMenu, displayMessage, currentPlayer, makeGameboard, resetGame } from "./tictactoe.js";
-import { makeTimer } from "./timer.js";
+import { initializeRiddle, resetRiddle, resetToetsenbord } from "./raadsel.js";
+import { initializeRaket, resetRaket, resetDeuren } from "./raket.js";
+import { initializeGame, resetGame } from "./tictactoe.js";
+
 
 export const DOM = {
   sideBar : document.getElementById('side-bar'),
@@ -26,50 +26,30 @@ export let spel = JSON.parse(localStorage.getItem('activeGame')) || 0;
 const builtSelectedGame = {
   0: () => {
     setBackgroundImage('images/auto.jpg');
-    //DOM.modal.style.setProperty("--translate-value", "-70%");
     DOM.middenSectie.style.marginTop = '100px';
     DOM.middenSectie.style.justifyContent = 'space-between';
-    emptyContainers();
-    makeTopicRiddle();
-    makeTimer();
-    makeKeyboard();
     makeGalgjeContainer();
     initializeRiddle();
   },
   1: () => {
     setBackgroundImage('images/landenKaart.jpg');
-    //DOM.modal.style.setProperty("--translate-value", "-70%");
     DOM.middenSectie.style.marginTop = '100px';
     DOM.middenSectie.style.justifyContent = 'space-between';
-    emptyContainers();
-    makeTopicRiddle();
-    makeTimer();
-    makeKeyboard();
-    makeHints();
     makeGalgjeContainer();
     initializeRiddle();
   },
   2: () => {
     setBackgroundImage('images/blue-background.jpg');
-    //DOM.modal.style.setProperty("--translate-value", "-75%");
     DOM.middenSectie.style.marginTop = '100px';
-    DOM.middenSectie.style.justifyContent = 'space-between';
-    emptyContainers();
-    makeDifficultyLevel();
-    makeDoors();
+    DOM.middenSectie.style.justifyContent = '';
     makeGalgjeContainer();
     initializeRaket();
   },
   3: () => {
     setBackgroundImage('images/tictactoe.jpg');
-    //DOM.modal.style.setProperty("--translate-value", "-25%");
     DOM.middenSectie.style.marginTop = '20px';
     DOM.middenSectie.style.justifyContent = 'center';
-    emptyContainers();
-    makeDropMenu();
-    makeGameboard();
-    initializeBoard();
-    displayMessage(`Speler ${currentPlayer}'s beurt`);
+    initializeGame();
   }
 };
 
@@ -110,6 +90,7 @@ function makeSidebar() {
           hyperlink.classList.add("active");
           spel = index;
           saveGameToLocalStorage('activeGame', spel);
+          emptyContainers();
           builtSelectedGame[spel]();
       });
       DOM.sideBar.appendChild(hyperlink);
@@ -140,7 +121,12 @@ function makeGalgjeContainer() {
   DOM.middenSectie.appendChild(rightSide);
 };
 
-function positioneerOverlay(triggerElement, overlayElement) {
+function resetGalgje() {
+  const galgje = document.getElementById('foutePogingen');
+  galgje.src = `images/galgjeSvg/00.svg`;
+};
+
+function positioneerOverlay(triggerElement) {
   const rect = triggerElement.getBoundingClientRect();
   const top = `${rect.bottom}px`; // Plaats de overlay direct onder het element
   const left = `${rect.left + rect.width / 2}px`; // Centreer
@@ -151,19 +137,17 @@ function positioneerOverlay(triggerElement, overlayElement) {
   return [top, left]; // Zorg dat het als array wordt teruggegeven
 };
 
-export function toggleModal(show, kleur = "", message = "", triggerElement, overlayElement) {
+export function toggleModal(show, kleur = "", message = "", triggerElement) {
   let top = '', left = '';
   if(show) {
-    [top, left] = positioneerOverlay(triggerElement, overlayElement);
+    [top, left] = positioneerOverlay(triggerElement);
     DOM.modal.style.top = top;
     DOM.modal.style.left = left;
-    //console.log(`left: ${left}px`);
     DOM.overlay.style.backgroundColor = kleur;
     DOM.overlay.innerHTML = message;
   }
   DOM.modalOverlay.style.display = show ? "block" : "none";
   DOM.modal.style.display = show ? "block" : "none";
-  
 };
 
 function closeModal() {
@@ -176,9 +160,21 @@ function toggleGeluid() {
 };
 
 const herstartSpel = {
-  0: () => initializeRiddle(),
-  1: () => initializeRiddle(),
-  2: () => resetRaket(),
+  0: () => {
+    resetRiddle();
+    resetToetsenbord();
+    resetGalgje();
+  },
+  1:() => {
+    resetRiddle();
+    resetToetsenbord();
+    resetGalgje();
+  },
+  2: () => {
+    resetRaket();
+    resetDeuren();
+    resetGalgje();
+  },
   3: () => resetGame()
 };
 

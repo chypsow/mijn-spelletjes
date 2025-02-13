@@ -1,6 +1,6 @@
 "use strict";
 import { DOM, spel, toggleModal } from './main.js';
-import { stopTimer, pauzeerTimer, timerInterval } from './timer.js';
+import { stopTimer, pauzeerTimer, timerInterval, makeTimer } from './timer.js';
 import { landen, autoLijst } from './data.js';
 
 export let spelAfgelopen = false;
@@ -9,7 +9,7 @@ let randomRaadsel = 0;
 let asc = 65;
 let toBeFound ='';
 let emptyArray = [];
-
+let lijst = [];
 
 
 const landLijst = () => retrieveCountries();
@@ -34,20 +34,27 @@ function retrieveCountries() {
 ];*/
 
 export function initializeRiddle() {
-    if(spelAfgelopen) spelAfgelopen = false;
-    if(timerInterval !== null) stopTimer();
-    if(raadselTeller !== 0) raadselTeller = 0;
-
     const lijsten = {
         0: autoLijst,
         1: landLijst()
     };
+    lijst = lijsten[spel];
+    makeTopicRiddle();
+    makeTimer();
+    makeKeyboard();
+    makeHints();
+    document.querySelector('.hint-container').style.visibility = spel === 1 ? 'visible' : 'hidden';
+    resetRiddle();
+};
+
+export function resetRiddle() {
+    if(spelAfgelopen) spelAfgelopen = false;
+    if(timerInterval !== null) stopTimer();
+    if(raadselTeller !== 0) raadselTeller = 0;
     const kleineLetter = document.getElementById('kleine-letter');
     const hoofdLetter = !kleineLetter.checked;
-    const lijst = lijsten[spel];
     randomRaadsel = Math.floor((Math.random() * lijst.length));
     console.log(`Raadsel Index: ${randomRaadsel}, To be found: ${lijst[randomRaadsel]}`);
-    //randomRaadsel = 25;
     toBeFound = hoofdLetter ? lijst[randomRaadsel].toUpperCase() : lijst[randomRaadsel].toLowerCase();
     emptyArray = [];
     const teRadenObject = document.getElementById('teRadenObject');
@@ -57,8 +64,9 @@ export function initializeRiddle() {
         letter.classList.add('blok');
         teRadenObject.appendChild(letter);
     }
-    const galgje = document.getElementById('foutePogingen');
-    galgje.src = `images/galgjeSvg/00.svg`;
+};
+
+export function resetToetsenbord() {
     const letters = document.querySelectorAll('.letter');
     Array.from(letters).forEach(letter => {
         letter.classList.remove("letter-used");
@@ -132,7 +140,7 @@ function eindeSpel() {
     pauzeerTimer();
 };
 
-export function makeTopicRiddle() {
+function makeTopicRiddle() {
     DOM.topic.classList.add('topic');
     const topicTxt = document.createElement('p');
     topicTxt.classList.add('topic-text');
@@ -145,7 +153,7 @@ export function makeTopicRiddle() {
     DOM.topic.appendChild(toBeFound);
 };
 
-export function makeKeyboard() {
+function makeKeyboard() {
     const leftSide = document.createElement('div');
     leftSide.id = 'left-side';
     const kleineLetters = document.createElement('div');
@@ -170,7 +178,7 @@ export function makeKeyboard() {
     DOM.middenSectie.appendChild(leftSide);
 };
 
-export function makeHints() {
+function makeHints() {
     const hintContainer = document.createElement('div');
     hintContainer.classList.add('hint-container');
     const topicTxt = document.createElement('p');
@@ -210,7 +218,7 @@ function toonHint(hint) {
     const msg = `${hintText[hint]} ${[cont, opp, taal][hint - 1]}`;
     const toetsenbord = document.getElementById('toetsenbord');
     toggleModal(true, '#007c80', msg, toetsenbord, DOM.modal);
-}
+};
 
 
 

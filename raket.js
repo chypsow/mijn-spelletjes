@@ -5,24 +5,27 @@ let raketTeller = 0;
 let randomRaket = 0;
 
 export function initializeRaket() {
-    raketTeller = 0;
-    randomRaket = Math.floor((Math.random() * 24));
-    console.log(`raket index: ${randomRaket}`);
-    const galgje = document.getElementById('foutePogingen');
-    galgje.src = "images/galgjeSvg/00.svg";
+    resetRaket();
+    makeDifficultyLevel();
+    makeDoors();
 };
 
 export function resetRaket() {
+  raketTeller = 0;
+  randomRaket = Math.floor((Math.random() * 24));
+  console.log(`raket index: ${randomRaket}`);
+};
+
+export function resetDeuren() {
     const deuren = document.querySelectorAll('#deuren img');
     deuren.forEach(deur => {
         deur.src = "images/deurtoe.svg";
         deur.alt = "deur toe";
         deur.style.pointerEvents = 'auto';
     });
-    initializeRaket();
 };
 
-export function makeDifficultyLevel() {
+function makeDifficultyLevel() {
     const graad = document.createElement('div');
     graad.classList.add('graad');
     graad.innerHTML = `
@@ -32,7 +35,7 @@ export function makeDifficultyLevel() {
     document.querySelector('.media').appendChild(graad);
 };
 
-export function makeDoors() {
+function makeDoors() {
     const leftSide = document.createElement('div');
     leftSide.id = 'left-side';
     const deuren = document.createElement('div');
