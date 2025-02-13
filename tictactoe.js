@@ -46,8 +46,9 @@ function resetBoard() {
 function makeDropMenu() {
   const boardSize = document.createElement('select');
   let dropMenuHTML ='';
-  for(let i = 0; i < 5; i++) {
-    dropMenuHTML += `<option value='${i+3}'>${i+3} op een rij Tic Tac Toe</option>`;
+  dropMenuHTML += `<option value='3'>3/3 op een rij Tic Tac Toe</option>`;
+  for(let i = 1; i < 5; i++) {
+    dropMenuHTML += `<option value='${i+3}'>${i+2}/${i+3} op een rij Tic Tac Toe</option>`;
   }
   boardSize.innerHTML = dropMenuHTML;
   boardSize.addEventListener('change', () => {
