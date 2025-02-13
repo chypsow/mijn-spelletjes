@@ -30,10 +30,9 @@
   background: radial-gradient(circle, #252785 10% ,#030520 90%);
   transition: background-color 0.3s;
 }
-.cell.winning {
-  background: #9c9c9c;
-  /*text-decoration: line-through;*/
-}
+/*.cell.winning {
+  color: #9c9c9c;
+}*/
   
 #feedback {
   /*position: absolute;*/

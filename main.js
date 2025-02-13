@@ -21,7 +21,7 @@ export const DOM = {
   sluiten : document.getElementById('sluiten')
 };
 
-export let spel = 0;
+export let spel = JSON.parse(localStorage.getItem('activeGame')) || 0;
 
 const builtSelectedGame = {
   0: () => {
@@ -100,7 +100,7 @@ function makeSidebar() {
       hyperlink.textContent = tab;
       hyperlink.setAttribute('role', 'tab');
       hyperlink.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
-      if(index === 0) hyperlink.classList.add('active');
+      if(index === spel) hyperlink.classList.add('active');
       hyperlink.addEventListener('click', () => {
           const activeLink = DOM.sideBar.querySelector('.active');
           if(activeLink === hyperlink) return;
@@ -109,10 +109,15 @@ function makeSidebar() {
           hyperlink.setAttribute('aria-selected', 'true');
           hyperlink.classList.add("active");
           spel = index;
+          saveGameToLocalStorage('activeGame', spel);
           builtSelectedGame[spel]();
       });
       DOM.sideBar.appendChild(hyperlink);
   });
+};
+
+function saveGameToLocalStorage(Key, value) {
+  localStorage.setItem(Key, JSON.stringify(value));
 };
 
 function emptyContainers() {
@@ -190,6 +195,12 @@ DOM.reset.addEventListener('click', () => {
   //let schaal = window.innerWidth / screen.width; // Berekent de zoomfactor
   //element.style.left = `${schaal}px`; // Past grootte aan
 });*/
+
+document.addEventListener('click', (event) => {
+  if(DOM.modalOverlay.contains(event.target) && !DOM.modal.contains(event.target)) {
+    toggleModal(false);
+  }
+});
 
 document.addEventListener('DOMContentLoaded', () => {
   makeSidebar();
