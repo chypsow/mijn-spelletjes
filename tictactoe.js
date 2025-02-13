@@ -100,7 +100,7 @@ function handleCellClick(row, col) {
       displayMessage('');
       const msg = `${currentPlayer} heeft gewonnen!`;
       const gameBoard = document.getElementById("game-board"); 
-      toggleModal(true, '#007c80', msg, gameBoard);
+      toggleModal(true, true,'#007c80', msg, gameBoard);
       gameWon = true;
     } else if (isDraw()) {
       displayMessage("Gelijkspel!");

@@ -113,7 +113,7 @@ function spelerGewonnen() {
     eindeSpel();
     const msg = `Jij hebt gewonnen. ${spel === 0 ? "De automerk was " : "Het land was "} ${toBeFound}`;
     const toetsenbord = document.getElementById('toetsenbord');
-    toggleModal(true, 'green', msg, toetsenbord);
+    toggleModal(true, true, 'green', msg, toetsenbord);
     if (!DOM.geluidStaatAan.hidden) DOM.soundWin.play();
 };
   
@@ -121,7 +121,7 @@ export function spelerVerloren() {
     eindeSpel();
     const msg = `Jij hebt verloren. ${spel === 0 ? "De automerk was " : "Het land was "} ${toBeFound}`;
     const toetsenbord = document.getElementById('toetsenbord');
-    toggleModal(true, 'red', msg, toetsenbord);
+    toggleModal(true, false, 'red', msg, toetsenbord);
     if (!DOM.geluidStaatAan.hidden) DOM.soundFailure.play();
 };
 
@@ -175,7 +175,7 @@ function makeHints() {
     topicTxt.classList.add('topic-text');
     topicTxt.textContent = 'Hints:';
     hintContainer.appendChild(topicTxt);
-    const array = [1,2,3];
+    const array = [1,2,3,4,5];
     array.forEach(hint => {
         const hintDiv = document.createElement('div');
         hintDiv.classList.add('hint');
@@ -207,7 +207,7 @@ function toonHint(hint) {
     const [cont, opp, taal] = getLandInfo();
     const msg = `${hintText[hint]} ${[cont, opp, taal][hint - 1]}`;
     const toetsenbord = document.getElementById('toetsenbord');
-    toggleModal(true, '#007c80', msg, toetsenbord);
+    toggleModal(true, false, '#2b2b2b', msg, toetsenbord);
 };
 
 

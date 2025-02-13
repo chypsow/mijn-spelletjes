@@ -137,7 +137,7 @@ function positioneerOverlay(triggerElement) {
   return [top, left];
 };
 
-export function toggleModal(show, kleur = "", message = "", triggerElement) {
+export function toggleModal(show, star, kleur = "", message = "", triggerElement) {
   let top = '', left = '';
   if(show) {
     [top, left] = positioneerOverlay(triggerElement);
@@ -146,8 +146,11 @@ export function toggleModal(show, kleur = "", message = "", triggerElement) {
     DOM.overlay.style.backgroundColor = kleur;
     DOM.overlay.innerHTML = message;
   }
+  const stars = document.querySelector('.stars');
   DOM.modalOverlay.style.display = show ? "block" : "none";
   DOM.modal.style.display = show ? "block" : "none";
+  stars.style.visibility = star ? 'visible': 'hidden';
+
 };
 
 function closeModal() {
@@ -179,7 +182,7 @@ const herstartSpel = {
 };
 
 DOM.geluidStaat.forEach(geluid => geluid.addEventListener('click', toggleGeluid));
-DOM.sluiten.addEventListener('click', closeModal);
+//DOM.sluiten.addEventListener('click', closeModal);
 DOM.reset.addEventListener('click', () => {
   herstartSpel[spel]();
 });
