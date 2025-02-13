@@ -57,8 +57,7 @@ function makeDropMenu() {
     board = Array.from(Array(BOARD_SIZE), () => Array(BOARD_SIZE).fill(""));
     resetGame();
   });
-  const topic = document.getElementById('topic');
-  topic.appendChild(boardSize);
+  DOM.topic.appendChild(boardSize);
   BOARD_SIZE = 3;
   winningNum = 3;
   board = Array.from(Array(3), () => Array(3).fill(""));
@@ -119,7 +118,7 @@ function updateBoard(row, col) {
   currentPlayer === 'X' ? cell.style.color = '#7f2f9e' : cell.style.color ='#221fe4';
 };
  
-export function displayMessage(msg) {
+function displayMessage(msg) {
   document.getElementById("message").textContent = msg;
 };
 
