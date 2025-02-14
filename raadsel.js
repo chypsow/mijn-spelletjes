@@ -10,7 +10,7 @@ let asc = 65;
 let toBeFound ='';
 let emptyArray = [];
 let lijst = [];
-
+let assignedHints  = {};
 
 const landLijst = () => retrieveCountries();
 function retrieveCountries() {
@@ -41,6 +41,8 @@ export function resetRiddle() {
     if(spelAfgelopen) spelAfgelopen = false;
     if(timerInterval !== null) stopTimer();
     if(raadselTeller !== 0) raadselTeller = 0;
+    assignHints();
+    console.log(assignedHints);
     const kleineLetter = document.getElementById('kleine-letter');
     const hoofdLetter = !kleineLetter.checked;
     randomRaadsel = Math.floor((Math.random() * lijst.length));
@@ -192,7 +194,7 @@ function makeHints() {
     hintContainer.classList.add('hint-container');
     const topicTxt = document.createElement('p');
     topicTxt.classList.add('topic-text');
-    topicTxt.textContent = 'Hints:';
+    topicTxt.textContent = 'Tips:';
     hintContainer.appendChild(topicTxt);
     const array = [1,2,3];
     array.forEach(hint => {
@@ -206,6 +208,15 @@ function makeHints() {
         hintContainer.appendChild(hintDiv);
     });
     DOM.middenSectie.appendChild(hintContainer);
+};
+
+function assignHints() {
+    let numbers = [1, 2, 3];
+    numbers = numbers.sort(() => Math.random() - 0.5); // Schudt de nummers willekeurig
+  
+    assignedHints.hint1 = numbers[0];
+    assignedHints.hint2 = numbers[1];
+    assignedHints.hint3 = numbers[2];
 };
 
 const getLandInfo = () => {
@@ -227,7 +238,8 @@ function toonHint(e) {
     const hintId = e.target;
     if(!hintId.classList.contains('hint-used')) hintId.classList.add('hint-used');
     const [cont, opp, taal] = getLandInfo();
-    const hintNum = parseInt(hintId.textContent);
+    const hintNum = assignedHints[`hint${parseInt(hintId.textContent)}`];
+    //console.log(hintNum);
     const msg = `${hintText[hintNum]} ${[cont, opp, taal][hintNum - 1]}`;
     const toetsenbord = document.getElementById('toetsenbord');
     toggleModal(true, false, '#2b2b2b', msg, toetsenbord);

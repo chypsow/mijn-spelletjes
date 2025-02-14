@@ -3,7 +3,6 @@ import { initializeRiddle, resetRiddle, resetToetsenbord, resetStarsAndHints } f
 import { initializeRaket, resetRaket, resetDeuren } from "./raket.js";
 import { initializeGame, resetGame } from "./tictactoe.js";
 
-
 export const DOM = {
   sideBar : document.getElementById('side-bar'),
   topic : document.getElementById('topic'),
@@ -18,7 +17,8 @@ export const DOM = {
   stars : document.getElementById('stars'),
   modal : document.getElementById("modal"),
   modalOverlay : document.getElementById('modal-overlay'),
-  overlay : document.getElementById("overlay")
+  overlay : document.getElementById("overlay"),
+  sluiten : document.getElementById('sluiten')
 };
 
 export let spel = JSON.parse(localStorage.getItem('activeGame')) || 0;
@@ -132,7 +132,7 @@ function resetGalgje() {
 
 function positioneerOverlay(triggerElement) {
   const rect = triggerElement.getBoundingClientRect();
-  const top = `${rect.bottom}px`;
+  const top = `${rect.bottom + 20}px`;
   const left = `${rect.left + rect.width / 2}px`;
   return [top, left];
 };
@@ -183,7 +183,7 @@ const herstartSpel = {
 };
 
 DOM.geluidStaat.forEach(geluid => geluid.addEventListener('click', toggleGeluid));
-//DOM.sluiten.addEventListener('click', closeModal);
+DOM.sluiten.addEventListener('click', closeModal);
 DOM.reset.addEventListener('click', () => {
   herstartSpel[spel]();
 });
