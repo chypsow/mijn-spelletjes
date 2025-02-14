@@ -1,5 +1,5 @@
 "use strict";
-import { initializeRiddle, resetRiddle, resetToetsenbord } from "./raadsel.js";
+import { initializeRiddle, resetRiddle, resetToetsenbord, resetStarsAndHints } from "./raadsel.js";
 import { initializeRaket, resetRaket, resetDeuren } from "./raket.js";
 import { initializeGame, resetGame } from "./tictactoe.js";
 
@@ -15,10 +15,10 @@ export const DOM = {
   soundFailure : document.getElementById("soundFailure"),
   timerContainer : document.getElementById('timer-container'),
   middenSectie : document.getElementById('midden-sectie'),
+  stars : document.getElementById('stars'),
   modal : document.getElementById("modal"),
   modalOverlay : document.getElementById('modal-overlay'),
-  overlay : document.getElementById("overlay"),
-  sluiten : document.getElementById('sluiten')
+  overlay : document.getElementById("overlay")
 };
 
 export let spel = JSON.parse(localStorage.getItem('activeGame')) || 0;
@@ -171,6 +171,7 @@ const herstartSpel = {
   1:() => {
     resetRiddle();
     resetToetsenbord();
+    resetStarsAndHints();
     resetGalgje();
   },
   2: () => {

@@ -84,7 +84,10 @@ body {
 .fa-star {
     font-size: 60px;
     padding: 20px 0;
-    color: rgb(196, 172, 93);
+    color: rgb(202, 185, 130);
+}
+.star-trans {
+    color: #2424245b;
 }
 .modal-overlay {
     display: none;

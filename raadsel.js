@@ -63,6 +63,16 @@ export function resetToetsenbord() {
     });
 };
 
+export function resetStarsAndHints() {
+    Array.from(DOM.stars.children).forEach(star => {
+        star.classList.remove('star-trans');
+    });
+
+    document.querySelectorAll('.hint').forEach(hint => {
+        hint.classList.remove('hint-used');
+    });
+};
+
 function handelLetter(event) {
   if(spelAfgelopen || event.target.classList.contains('letter-used')) return;
   const myLetter = event.target.textContent;
@@ -113,6 +123,7 @@ function spelerGewonnen() {
     eindeSpel();
     const msg = `Jij hebt gewonnen. ${spel === 0 ? "De automerk was " : "Het land was "} ${toBeFound}`;
     const toetsenbord = document.getElementById('toetsenbord');
+    updateStars();
     toggleModal(true, true, 'green', msg, toetsenbord);
     if (!DOM.geluidStaatAan.hidden) DOM.soundWin.play();
 };
@@ -128,6 +139,14 @@ export function spelerVerloren() {
 function eindeSpel() {
     spelAfgelopen = true;
     pauzeerTimer();
+};
+
+function updateStars() {
+    const usedHints = document.querySelectorAll('.hint-used');
+    if(!usedHints) return;
+    Array.from({ length : usedHints.length}).forEach((_,index) => {
+        DOM.stars.children[2-index].classList.toggle('star-trans', true);
+    });
 };
 
 function makeTopicRiddle() {
@@ -175,13 +194,14 @@ function makeHints() {
     topicTxt.classList.add('topic-text');
     topicTxt.textContent = 'Hints:';
     hintContainer.appendChild(topicTxt);
-    const array = [1,2,3,4,5];
+    const array = [1,2,3];
     array.forEach(hint => {
         const hintDiv = document.createElement('div');
+        hintDiv.id = `hint-${hint}`;
         hintDiv.classList.add('hint');
         hintDiv.textContent = hint;
-        hintDiv.addEventListener('click', () => {
-            toonHint(hint);
+        hintDiv.addEventListener('click', (e) => {
+            toonHint(e);
         });
         hintContainer.appendChild(hintDiv);
     });
@@ -198,16 +218,20 @@ const getLandInfo = () => {
     return [land.continent, `${land.oppervlakte} km²`, land.taal];
 };
 
-function toonHint(hint) {
+function toonHint(e) {
     const hintText = {
         1: 'Het continent van het land is:',
         2: 'De oppervlakte van het land is:',
         3: 'De officiële taal(en) van het land is(zijn):'
     };
+    const hintId = e.target;
+    if(!hintId.classList.contains('hint-used')) hintId.classList.add('hint-used');
     const [cont, opp, taal] = getLandInfo();
-    const msg = `${hintText[hint]} ${[cont, opp, taal][hint - 1]}`;
+    const hintNum = parseInt(hintId.textContent);
+    const msg = `${hintText[hintNum]} ${[cont, opp, taal][hintNum - 1]}`;
     const toetsenbord = document.getElementById('toetsenbord');
     toggleModal(true, false, '#2b2b2b', msg, toetsenbord);
+
 };
 
 
