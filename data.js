@@ -42,7 +42,24 @@ export const landen = [
   {"naam": "Cuba", "continent": "Noord-Amerika", "oppervlakte": 109884, "taal": "Spaans"},
   {"naam": "Australie", "continent": "Oceanië", "oppervlakte": 7692024, "taal": "Engels"},
   {"naam": "NieuwZeeland", "continent": "Oceanië", "oppervlakte": 268838, "taal": "Engels, Maori"},
-  {"naam": "NieuwGuinea", "continent": "Oceanië", "oppervlakte": 462840, "taal": "Engels, Tok Pisin, Hiri Motu"}
+  {"naam": "NieuwGuinea", "continent": "Oceanië", "oppervlakte": 462840, "taal": "Engels, Tok Pisin, Hiri Motu"},
+  {"naam": "Algerije", "continent": "Afrika", "oppervlakte": 2381741, "taal": "Arabisch"},
+  {"naam": "Tunesië", "continent": "Afrika", "oppervlakte": 163610, "taal": "Arabisch"},
+  {"naam": "Ethiopië", "continent": "Afrika", "oppervlakte": 1104300, "taal": "Amhaars"},
+  {"naam": "Ghana", "continent": "Afrika", "oppervlakte": 238533, "taal": "Engels"},
+  {"naam": "Senegal", "continent": "Afrika", "oppervlakte": 196722, "taal": "Frans"},
+  {"naam": "Oekraïne", "continent": "Europa", "oppervlakte": 603500, "taal": "Oekraïens"},
+  {"naam": "Polen", "continent": "Europa", "oppervlakte": 312696, "taal": "Pools"},
+  {"naam": "Hongarije", "continent": "Europa", "oppervlakte": 93028, "taal": "Hongaars"},
+  {"naam": "Kazachstan", "continent": "Azië", "oppervlakte": 2724900, "taal": "Kazachs, Russisch"},
+  {"naam": "Iran", "continent": "Azië", "oppervlakte": 1648195, "taal": "Perzisch"},
+  {"naam": "Pakistan", "continent": "Azië", "oppervlakte": 881913, "taal": "Urdu, Engels"},
+  {"naam": "Filipijnen", "continent": "Azië", "oppervlakte": 300000, "taal": "Filipijns, Engels"},
+  {"naam": "Bangladesh", "continent": "Azië", "oppervlakte": 147570, "taal": "Bengaals"},
+  {"naam": "Venezuela", "continent": "Zuid-Amerika", "oppervlakte": 916445, "taal": "Spaans"},
+  {"naam": "Paraguay", "continent": "Zuid-Amerika", "oppervlakte": 406752, "taal": "Spaans, Guaraní"},
+  {"naam": "Ecuador", "continent": "Zuid-Amerika", "oppervlakte": 276841, "taal": "Spaans"},
+  {"naam": "Bolivia", "continent": "Zuid-Amerika", "oppervlakte": 1098581, "taal": "Spaans"}
 ];
 
 //console.log(landLijst);

@@ -1,5 +1,5 @@
 "use strict";
-import { initializeRiddle, resetRiddle, resetToetsenbord, resetStarsAndHints } from "./raadsel.js";
+import { initializeRiddle, resetRiddle, resetToetsenbord, resetHints } from "./raadsel.js";
 import { initializeRaket, resetRaket, resetDeuren } from "./raket.js";
 import { initializeGame, resetGame } from "./tictactoe.js";
 
@@ -130,6 +130,16 @@ function resetGalgje() {
   galgje.src = `images/galgjeSvg/00.svg`;
 };
 
+function resetStars() {
+  Array.from(DOM.stars.children).forEach(star => {
+      star.classList.remove('star-goud');
+  });
+};
+
+export function goudeSterToevoegen(index) {
+  DOM.stars.children[index].classList.add('star-goud');
+};
+
 function positioneerOverlay(triggerElement) {
   const rect = triggerElement.getBoundingClientRect();
   const top = `${rect.bottom + 20}px`;
@@ -171,12 +181,14 @@ const herstartSpel = {
   1:() => {
     resetRiddle();
     resetToetsenbord();
-    resetStarsAndHints();
+    resetStars();
+    resetHints();
     resetGalgje();
   },
   2: () => {
     resetRaket();
     resetDeuren();
+    resetStars();
     resetGalgje();
   },
   3: () => resetGame()

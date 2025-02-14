@@ -1,5 +1,5 @@
 "use strict";
-import { DOM, toggleModal } from "./main.js";
+import { DOM, toggleModal, goudeSterToevoegen } from "./main.js";
 
 let raketTeller = 0;
 let randomRaket = 0;
@@ -83,10 +83,21 @@ function playerWon(openedDoor) {
   openedDoor.alt = "gevonden";
   const msg = `U had ${raketTeller} beurt(en) nodig.`;
   const doors = document.getElementById('deuren');
+  updateStarsRaket();
   toggleModal(true, true, 'green', msg, doors);
   if (!DOM.geluidStaatAan.hidden) DOM.soundWin.play();
   const deuren = document.querySelectorAll('#deuren img');
   deuren.forEach(deur => deur.style.pointerEvents = 'none');
+};
+
+function updateStarsRaket() {
+  let sterren = Math.max(1, 3 - Math.floor(raketTeller / 4));
+
+  Array.from({ length: sterren }, (_, index) => {
+    setTimeout(() => {
+        goudeSterToevoegen(index);
+    }, (index + 1) * 300 + 300);
+  });
 };
 
 function playerLost() {
@@ -100,3 +111,5 @@ function playerLost() {
   if (!DOM.geluidStaatAan.hidden) DOM.soundFailure.play();
   deuren.forEach(deur => deur.style.pointerEvents = 'none');
 };
+
+

@@ -1,5 +1,5 @@
 "use strict";
-import { DOM, spel, toggleModal } from './main.js';
+import { DOM, spel, toggleModal, goudeSterToevoegen } from './main.js';
 import { stopTimer, pauzeerTimer, timerInterval, makeTimer } from './timer.js';
 import { landen, autoLijst } from './data.js';
 
@@ -65,11 +65,7 @@ export function resetToetsenbord() {
     });
 };
 
-export function resetStarsAndHints() {
-    Array.from(DOM.stars.children).forEach(star => {
-        star.classList.remove('star-trans');
-    });
-
+export function resetHints() {
     document.querySelectorAll('.hint').forEach(hint => {
         hint.classList.remove('hint-used');
     });
@@ -129,7 +125,18 @@ function spelerGewonnen() {
     toggleModal(true, true, 'green', msg, toetsenbord);
     if (!DOM.geluidStaatAan.hidden) DOM.soundWin.play();
 };
+
+function updateStars() {
+    const usedHints = document.querySelectorAll('.hint-used');
+    if (usedHints.length === 3) return; 
   
+    Array.from({ length: 3 - usedHints.length }).forEach((_, index) => {
+        setTimeout(() => {
+            goudeSterToevoegen(index);
+        }, (index + 1) * 300 + 300);
+    });
+};
+
 export function spelerVerloren() {
     eindeSpel();
     const msg = `Jij hebt verloren. ${spel === 0 ? "De automerk was " : "Het land was "} ${toBeFound}`;
@@ -141,14 +148,6 @@ export function spelerVerloren() {
 function eindeSpel() {
     spelAfgelopen = true;
     pauzeerTimer();
-};
-
-function updateStars() {
-    const usedHints = document.querySelectorAll('.hint-used');
-    if(!usedHints) return;
-    Array.from({ length : usedHints.length}).forEach((_,index) => {
-        DOM.stars.children[2-index].classList.toggle('star-trans', true);
-    });
 };
 
 function makeTopicRiddle() {

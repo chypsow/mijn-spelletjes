@@ -81,14 +81,21 @@ body {
 .fa-close:hover {
     color: #da0000;
 }
+
 .fa-star {
     font-size: 60px;
     padding: 20px 0;
-    color: rgb(202, 185, 130);
+    font-weight: bold;
+    color: #2424249d;  
 }
-.star-trans {
-    color: #2424249d;
-}
+.star-goud {
+    color: #ffd700;
+    /*#ffcc00, 
+      #ffb700, 
+      #daa520,  Donker goud 
+      #ffd700*/
+}   
+
 .modal-overlay {
     display: none;
     position: fixed;
