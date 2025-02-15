@@ -95,6 +95,7 @@ function makeSidebar() {
           spel = index;
           saveGameToLocalStorage('activeGame', spel);
           emptyContainers();
+          resetStars();
           builtSelectedGame[spel]();
       });
       DOM.sideBar.appendChild(hyperlink);
@@ -156,9 +157,15 @@ function goudeSterToevoegen(index) {
 };
 
 function resetStars() {
-  Array.from(DOM.stars.children).forEach(star => {
-      star.classList.remove('star-goud');
-  });
+  if(spel === 3) {
+    Array.from(DOM.stars.children).forEach(star => {
+      star.classList.add('star-goud');
+    });
+  } else {
+    Array.from(DOM.stars.children).forEach(star => {
+        star.classList.remove('star-goud');
+    });
+  }
 };
 
 function positioneerOverlay(triggerElement) {
@@ -230,6 +237,7 @@ document.addEventListener('click', (event) => {
 
 document.addEventListener('DOMContentLoaded', () => {
   makeSidebar();
+  resetStars();
   builtSelectedGame[spel]();
 });
 
