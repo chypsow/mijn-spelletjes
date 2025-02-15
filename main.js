@@ -130,14 +130,35 @@ function resetGalgje() {
   galgje.src = `images/galgjeSvg/00.svg`;
 };
 
+export function updateStarsVsCounter(teller) {
+  let sterren = Math.max(1, 3 - Math.floor(teller / 4));
+
+  Array.from({ length: sterren }, (_, index) => {
+    setTimeout(() => {
+        goudeSterToevoegen(index);
+    }, (index + 1) * 300 + 300);
+  });
+};
+
+export function updateStarsVsHints() {
+    const usedHints = document.querySelectorAll('.hint-used');
+    if (usedHints.length === 3) return; 
+  
+    Array.from({ length: 3 - usedHints.length }).forEach((_, index) => {
+        setTimeout(() => {
+            goudeSterToevoegen(index);
+        }, (index + 1) * 300 + 300);
+    });
+};
+
+function goudeSterToevoegen(index) {
+  DOM.stars.children[index].classList.add('star-goud');
+};
+
 function resetStars() {
   Array.from(DOM.stars.children).forEach(star => {
       star.classList.remove('star-goud');
   });
-};
-
-export function goudeSterToevoegen(index) {
-  DOM.stars.children[index].classList.add('star-goud');
 };
 
 function positioneerOverlay(triggerElement) {
@@ -176,6 +197,7 @@ const herstartSpel = {
   0: () => {
     resetRiddle();
     resetToetsenbord();
+    resetStars();
     resetGalgje();
   },
   1:() => {

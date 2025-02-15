@@ -1,5 +1,5 @@
 "use strict";
-import { DOM, spel, toggleModal, goudeSterToevoegen } from './main.js';
+import { DOM, spel, toggleModal, updateStarsVsCounter, updateStarsVsHints } from './main.js';
 import { stopTimer, pauzeerTimer, timerInterval, makeTimer } from './timer.js';
 import { landen, autoLijst } from './data.js';
 
@@ -42,7 +42,7 @@ export function resetRiddle() {
     if(timerInterval !== null) stopTimer();
     if(raadselTeller !== 0) raadselTeller = 0;
     assignHints();
-    console.log(assignedHints);
+    //console.log(assignedHints);
     const kleineLetter = document.getElementById('kleine-letter');
     const hoofdLetter = !kleineLetter.checked;
     randomRaadsel = Math.floor((Math.random() * lijst.length));
@@ -119,22 +119,15 @@ function toonFoutePoging() {
 
 function spelerGewonnen() {
     eindeSpel();
-    const msg = `Jij hebt gewonnen. ${spel === 0 ? "De automerk was " : "Het land was "} ${toBeFound}`;
+    const wonText = {
+        0: 'De automerk was',
+        1: 'Het land was'
+    };
+    const msg = `Jij hebt gewonnen. ${wonText[spel]} ${toBeFound}`;
     const toetsenbord = document.getElementById('toetsenbord');
-    updateStars();
+    spel === 0 ? updateStarsVsCounter(raadselTeller) : updateStarsVsHints();
     toggleModal(true, true, 'green', msg, toetsenbord);
     if (!DOM.geluidStaatAan.hidden) DOM.soundWin.play();
-};
-
-function updateStars() {
-    const usedHints = document.querySelectorAll('.hint-used');
-    if (usedHints.length === 3) return; 
-  
-    Array.from({ length: 3 - usedHints.length }).forEach((_, index) => {
-        setTimeout(() => {
-            goudeSterToevoegen(index);
-        }, (index + 1) * 300 + 300);
-    });
 };
 
 export function spelerVerloren() {

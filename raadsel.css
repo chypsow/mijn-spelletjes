@@ -92,8 +92,8 @@
     cursor: pointer;
     padding: 10px 20px;
     border-radius: 50%;
-    background: #007c80;
-    color: #ffffff;
+    background: #daa520  /*#007c80*/;
+    color: #222020;
 
 }
 .hint-used {
