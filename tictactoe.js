@@ -1,6 +1,7 @@
 "use strict";
 import { DOM, toggleModal, saveGameToLocalStorage } from "./main.js";
 
+//const bericht = document.getElementById('message');
 let BOARD_SIZE = 0;
 let winningNum = 0;
 
@@ -15,11 +16,14 @@ export function initializeGame() {
 };
 
 export function resetGame() {
+  const bericht = document.getElementById('message');
   gameWon = false;
   currentPlayer = "X";
   board = Array.from(Array(BOARD_SIZE), () => Array(BOARD_SIZE).fill(""));
   resetBoard();
-  displayMessage(`Speler ${currentPlayer}'s beurt`);
+  bericht.classList.remove('blue');
+  bericht.classList.add('red');
+  bericht.textContent = `Speler ${currentPlayer}'s beurt`;
 };
 
 function resetBoard() {
@@ -79,36 +83,44 @@ function makeGameboard() {
 };
 
 function handleCellClick(row, col) {
-  if (board[row][col] === "" && !gameWon) {
-    board[row][col] = currentPlayer;
-    updateBoard(row, col);
-    
-    if (checkWinner(row, col)) {
-      displayMessage('');
-      const msg = `${currentPlayer} heeft gewonnen!`;
-      const gameBoard = document.getElementById("game-board"); 
-      toggleModal(true, true,'#007c80', msg, gameBoard);
-      gameWon = true;
-    } else if (isDraw()) {
-      displayMessage("Gelijkspel!");
-      gameWon = true;
+  if (board[row][col] !== "" || gameWon) return;
+  const bericht = document.getElementById('message');
+  board[row][col] = currentPlayer;
+  updateBoard(row, col);
+  
+  if (checkWinner(row, col)) {
+    bericht.textContent = '';
+    const msg = `${currentPlayer} heeft gewonnen!`;
+    const gameBoard = document.getElementById("game-board"); 
+    setTimeout(() => {
+      toggleModal(true, true,'#007c80', msg, gameBoard)
+    }, 500);
+    gameWon = true;
+  } else if (isDraw()) {
+    bericht.textContent = "Gelijkspel!";
+    bericht.classList.remove('blue');
+    bericht.classList.remove('red');
+    gameWon = true;
+  } else {
+    if(currentPlayer === 'X') {
+      currentPlayer = 'O';
+      bericht.classList.remove('red');
+      bericht.classList.add('blue');
     } else {
-      currentPlayer = currentPlayer === "X" ? "O" : "X";
-      displayMessage(`Speler ${currentPlayer}'s beurt`);
+      currentPlayer = 'X';
+      bericht.classList.remove('blue');
+      bericht.classList.add('red');
     }
+    bericht.textContent = `Speler ${currentPlayer}'s beurt`;
   }
 };
 
 function updateBoard(row, col) {
   const cell = document.querySelector(`.cell[data-row='${row}'][data-col='${col}']`);
   cell.textContent = board[row][col];
-  currentPlayer === 'X' ? cell.style.color = '#7f2f9e' : cell.style.color ='#221fe4';
+  currentPlayer === 'X' ? cell.style.color = '#a320c5' : cell.style.color ='#221fe4';
 };
  
-function displayMessage(msg) {
-  document.getElementById("message").textContent = msg;
-};
-
 function checkWinner(row, col) {
   const directions = [
     [[0, 1], [0, -1]],    // Horizontaal
@@ -151,6 +163,9 @@ function highlightWinningCells(winningCells) {
   for (let [row, col] of winningCells) {
     const cell = document.querySelector(`.cell[data-row='${row}'][data-col='${col}']`);
     cell.classList.add("winning");
+    setTimeout(() => {
+      cell.classList.add('animate');
+    }, 200);
   }
 };
 

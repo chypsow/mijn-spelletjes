@@ -23,12 +23,12 @@
   align-items: center;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 5em;
-  color: #7f2f9e;
+  /*color: black;*/
   border: 1px solid #ccc;
   cursor: pointer;
   text-shadow: 0 0 10px rgba(250, 250, 250, 0.63);
   background: radial-gradient(circle, #252785 10% ,#030520 90%);
-  transition: background-color 0.3s;
+  /*transition: color 0.2s;*/
 }
 /*.cell.winning {
   color: #9c9c9c;
@@ -73,14 +73,21 @@
   padding: 0.4em 1.9em;
   border-radius: 5px;
   /*border: 2px solid #ffffff;*/
-  background: rgba(197, 197, 197, 0.74);
+  background: rgba(54, 54, 54, 0.74);
   /*text-shadow: 0 0 10px rgba(250, 250, 250, 0.63);*/
-  color: #1a1a1a;
+  color: #ffffff;
+}
+.bericht.red {
+  background: rgba(186, 64, 211, 0.486);
+}
+.bericht.blue {
+  background: #5f6ce081;
 }
 .bericht:empty{
-  /*border: none;*/
+  border: none;
   background: none;
 }
+
 #win-line {
   position: absolute;
   width: 4px;
@@ -89,5 +96,25 @@
   transform-origin: top left;
   display: none; /* Begin verborgen */
   z-index: 10;
+}
+.winning {
+  /*opacity: 0;*/
+  transform: scale(0);
+  transition: transform 0.2s ease-out/*, opacity 0.3s ease-out*/;
+}
+.winning.animate {
+  /*opacity: 1;*/
+  transform: scale(1);
+}
+@keyframes Win {
+  0% {
+    transform: scale(0);
+  }
+  80% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
   
