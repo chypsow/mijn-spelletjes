@@ -183,9 +183,18 @@ export function toggleModal(show, star, kleur = "", message = "", triggerElement
     DOM.modal.style.left = left;
     DOM.overlay.style.backgroundColor = kleur;
     DOM.overlay.innerHTML = message;
+    DOM.modalOverlay.style.display = 'block';
+    setTimeout(() => {
+        DOM.modalOverlay.classList.add('open');
+    }, 10)
+  } else {
+    DOM.modalOverlay.classList.remove('open');
+    setTimeout(() => {
+        DOM.modalOverlay.style.display = 'none';
+    }, 300);
   }
   const stars = document.querySelector('.stars');
-  DOM.modalOverlay.style.display = show ? "block" : "none";
+  //DOM.modalOverlay.style.display = show ? "block" : "none";
   DOM.modal.style.display = show ? "block" : "none";
   stars.style.visibility = star ? 'visible': 'hidden';
 
