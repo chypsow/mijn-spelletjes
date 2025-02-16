@@ -1,5 +1,5 @@
 "use strict";
-import { DOM, toggleModal } from "./main.js";
+import { DOM, toggleModal, saveGameToLocalStorage } from "./main.js";
 
 let BOARD_SIZE = 0;
 let winningNum = 0;
@@ -10,18 +10,14 @@ let currentPlayer = "X";
 let gameWon = false;
 
 export function initializeGame() {
-  makeDropMenu();
   makeGameboard();
-  currentPlayer = "X";
-  gameWon = false;
-  resetBoard();
-  displayMessage(`Speler ${currentPlayer}'s beurt`);
+  makeDropMenu();
 };
 
 export function resetGame() {
-  board = Array.from(Array(BOARD_SIZE), () => Array(BOARD_SIZE).fill(""));
-  currentPlayer = "X";
   gameWon = false;
+  currentPlayer = "X";
+  board = Array.from(Array(BOARD_SIZE), () => Array(BOARD_SIZE).fill(""));
   resetBoard();
   displayMessage(`Speler ${currentPlayer}'s beurt`);
 };
@@ -44,40 +40,25 @@ function resetBoard() {
 };
 
 function makeDropMenu() {
-  const boardSize = document.createElement('select');
-  let dropMenuHTML ='';
-  dropMenuHTML += `<option value='1'>3/3 op een rij Tic Tac Toe</option>`;
-  dropMenuHTML += `<option value='2'>3/4 op een rij Tic Tac Toe</option>`;
-  dropMenuHTML += `<option value='3'>4/5 op een rij Tic Tac Toe</option>`;
-  dropMenuHTML += `<option value='4'>4/6 op een rij Tic Tac Toe</option>`;
-  dropMenuHTML += `<option value='5'>5/6 op een rij Tic Tac Toe</option>`;
-  dropMenuHTML += `<option value='6'>5/7 op een rij Tic Tac Toe</option>`;
-  dropMenuHTML += `<option value='7'>6/7 op een rij Tic Tac Toe</option>`;
-  boardSize.innerHTML = dropMenuHTML;
-  boardSize.addEventListener('change', () => {
-    const selectedOpt = boardSize.options[boardSize.selectedIndex].text;
-    BOARD_SIZE = parseInt(selectedOpt.charAt(2));
-    winningNum = bepaalY(boardSize.value);
+  const dropMenu = document.createElement('select');
+  const winninNumArray = [[3,3],[3,4],[4,5],[4,6],[5,6],[5,7],[6,7]];
+  winninNumArray.forEach(([x,y], index) => {
+    dropMenu.innerHTML += `
+      <option value=${index}>${x}/${y} op een rij Tic Tac Toe</option>
+    `;
+  });
+
+  dropMenu.addEventListener('change', () => {
+    saveGameToLocalStorage('selectedOption', dropMenu.value);
+    BOARD_SIZE = winninNumArray[dropMenu.value][1];
+    winningNum = winninNumArray[dropMenu.value][0];
     board = Array.from(Array(BOARD_SIZE), () => Array(BOARD_SIZE).fill(""));
     resetGame();
   });
-  DOM.topic.appendChild(boardSize);
-  BOARD_SIZE = 3;
-  winningNum = 3;
-  board = Array.from(Array(3), () => Array(3).fill(""));
-};
 
-function bepaalY(x) {
-  const waarden = {
-      1: 3,
-      2: 3,
-      3: 4,
-      4: 4,
-      5: 5,
-      6: 5,
-      7: 6
-  };
-  return waarden[x];
+  DOM.topic.appendChild(dropMenu);
+  dropMenu.value = JSON.parse(localStorage.getItem('selectedOption')) || 0;
+  dropMenu.dispatchEvent(new Event('change'));
 };
 
 function makeGameboard() {

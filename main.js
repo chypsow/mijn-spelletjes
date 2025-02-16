@@ -102,7 +102,7 @@ function makeSidebar() {
   });
 };
 
-function saveGameToLocalStorage(Key, value) {
+export function saveGameToLocalStorage(Key, value) {
   localStorage.setItem(Key, JSON.stringify(value));
 };
 
