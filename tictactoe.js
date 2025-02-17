@@ -96,6 +96,7 @@ function handleCellClick(row, col) {
       toggleModal(true, true,'#007c80', msg, gameBoard)
     }, 500);
     gameWon = true;
+    if (!DOM.geluidStaatAan.hidden) DOM.soundWin.play();
   } else if (isDraw()) {
     bericht.textContent = "Gelijkspel!";
     bericht.classList.remove('blue');
