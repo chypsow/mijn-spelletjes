@@ -94,8 +94,8 @@ function handleCellClick(row, col) {
     const gameBoard = document.getElementById("game-board");
     const winningColor = `${currentPlayer === 'X' ? '#a320c555' : '#221fe4'}`;
     setTimeout(() => {
-      toggleModal(true, true,winningColor, msg, gameBoard)
-    }, 500);
+      toggleModal(true, true, winningColor, msg, gameBoard);
+    }, 1500);
     gameWon = true;
     if (!DOM.geluidStaatAan.hidden) DOM.soundWin.play();
   } else if (isDraw()) {
@@ -164,10 +164,11 @@ function countDirection(row, col, rowDir, colDir, winningCells) {
 function highlightWinningCells(winningCells) {
   for (let [row, col] of winningCells) {
     const cell = document.querySelector(`.cell[data-row='${row}'][data-col='${col}']`);
-    cell.classList.add("winning");
-    setTimeout(() => {
+    cell.classList.add("winning", "animate"); // Direct beide klassen toevoegen
+    //cell.classList.add("winning");
+    /*setTimeout(() => {
       cell.classList.add('animate');
-    }, 200);
+    }, 1000);*/
   }
 };
 
