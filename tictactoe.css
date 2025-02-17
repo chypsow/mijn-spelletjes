@@ -46,7 +46,7 @@
   border-radius: 5px;
   border: 2px solid #ffffff;
   background: rgba(209, 209, 209, 0.445);
-  text-shadow: 0 0 10px rgba(250, 250, 250, 0.63);
+  text-shadow: 0 0 10px #fafafaa1;
   color: #ffffff;
   
   letter-spacing: 0.1em;
