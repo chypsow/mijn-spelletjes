@@ -45,8 +45,8 @@ function resetBoard() {
 
 function makeDropMenu() {
   const dropMenu = document.createElement('select');
-  const winninNumArray = [[3,3],[3,4],[4,5],[4,6],[5,6],[5,7],[6,7]];
-  winninNumArray.forEach(([x,y], index) => {
+  const options = [[3,3],[3,4],[4,5],[4,6],[5,6],[5,7],[6,7]];
+  options.forEach(([x,y], index) => {
     dropMenu.innerHTML += `
       <option value=${index}>${x}/${y} op een rij Tic Tac Toe</option>
     `;
@@ -54,8 +54,8 @@ function makeDropMenu() {
 
   dropMenu.addEventListener('change', () => {
     saveGameToLocalStorage('selectedOption', dropMenu.value);
-    BOARD_SIZE = winninNumArray[dropMenu.value][1];
-    winningNum = winninNumArray[dropMenu.value][0];
+    BOARD_SIZE = options[dropMenu.value][1];
+    winningNum = options[dropMenu.value][0];
     board = Array.from(Array(BOARD_SIZE), () => Array(BOARD_SIZE).fill(""));
     resetGame();
   });
