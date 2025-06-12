@@ -175,7 +175,7 @@ function positioneerOverlay(triggerElement) {
   return [top, left];
 };
 
-export function toggleModal(show, star, kleur = "", message = "", triggerElement) {
+export function toggleModal(show, star, kleur = "", message = "", triggerElement, bg = 'rgba(0,0,0,0.5)') {
   let top = '', left = '';
   if(show) {
     [top, left] = positioneerOverlay(triggerElement);
@@ -184,6 +184,7 @@ export function toggleModal(show, star, kleur = "", message = "", triggerElement
     DOM.overlay.style.backgroundColor = kleur;
     DOM.overlay.innerHTML = message;
     DOM.modalOverlay.style.display = 'block';
+    DOM.modalOverlay.style.backgroundColor = bg;
     setTimeout(() => {
         DOM.modalOverlay.classList.add('open');
     }, 10)

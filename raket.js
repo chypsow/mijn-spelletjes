@@ -84,7 +84,7 @@ function playerWon(openedDoor) {
   const msg = `U had ${raketTeller} beurt(en) nodig.`;
   const doors = document.getElementById('deuren');
   updateStarsVsCounter(raketTeller);
-  toggleModal(true, true, 'green', msg, doors);
+  toggleModal(true, true, 'green', msg, doors, 'rgba(0,0,0,0.5)');
   if (!DOM.geluidStaatAan.hidden) DOM.soundWin.play();
   const deuren = document.querySelectorAll('#deuren img');
   deuren.forEach(deur => deur.style.pointerEvents = 'none');
@@ -97,7 +97,7 @@ function playerLost() {
   deurMetRaket.alt = "gevonden";
   const msg = 'Je hebt verloren.';
   const doors = document.getElementById('deuren');
-  toggleModal(true, false,'red', msg, doors);
+  toggleModal(true, false,'red', msg, doors, 'rgba(0,0,0,0.5)');
   if (!DOM.geluidStaatAan.hidden) DOM.soundFailure.play();
   deuren.forEach(deur => deur.style.pointerEvents = 'none');
 };

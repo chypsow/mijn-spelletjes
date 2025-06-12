@@ -94,7 +94,7 @@ function handleCellClick(row, col) {
     const gameBoard = document.getElementById("game-board");
     const winningColor = `${currentPlayer === 'X' ? '#a320c555' : '#221fe4'}`;
     setTimeout(() => {
-      toggleModal(true, true, winningColor, msg, gameBoard);
+      toggleModal(true, true, winningColor, msg, gameBoard, '');
     }, 1500);
     gameWon = true;
     if (!DOM.geluidStaatAan.hidden) DOM.soundWin.play();
