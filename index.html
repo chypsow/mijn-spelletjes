@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>mijn spelletjes</title>
-    <link rel="icon" href="/mijn-spelletjes/images/bal.ico">
+    <link rel="icon" href="images/bal.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="timer.css">
     <link rel="stylesheet" href="raadsel.css">
@@ -14,37 +14,34 @@
     <link rel="stylesheet" href="default.css">
 </head>
 <body>
-    <div id="side-bar" class="side-bar"></div>
+    <div id="nav-bar" class="nav-bar"></div>
     <div class="hoofd-container">
-
-        <div class="top-sectie">
+        <div id="top-sectie" class="top-sectie">
             <div class="media">
-                <div id="reset" class="reset"><img src="images/reset.svg" alt="reset" width="60" height="60"></div>
                 <div class="geluid">
-                    <img id="son" src="images/son.svg" alt="son" width="80" height="80" hidden>
-                    <img id="mute" src="images/mute.svg" alt="mute" width="80" height="80">
+                    <img id="son" src="images/son.svg" alt="son" width="100" height="100" hidden>
+                    <img id="mute" src="images/mute.svg" alt="mute" width="100" height="100">
                     <audio id="soundWin"><source src="audio/goodresult.mp3"/></audio>
                     <audio id="soundFailure"><source src="audio/failure.mp3"/></audio>
                 </div>
+                <div id="reset" class="reset"><img src="images/reset.svg" alt="reset" width="60" height="60"></div>
             </div>
-            <div id="topic"></div>
+            <div id="game-topic" class="game-topic"></div>
             <div id="timer-container" class="timer-container"></div>
         </div>
-
         <div id="midden-sectie" class="midden-sectie"></div>
-
-        <div id="modal-overlay" class="modal-overlay">
-            <div id="modal" class="modal">
-                <div id="stars"  class="stars">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                </div>
-                <i class="fa fa-close" id="sluiten"></i>
-                <div id="overlay"></div>
+    </div>
+    <div id="modal-overlay" class="modal-overlay">
+        <div id="modal" class="modal">
+            <div id="stars"  class="stars">
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
             </div>
+            <i class="fa fa-close" id="sluiten"></i>
+            <div id="overlay"></div>
         </div>
-        
+    </div>
     </div>
     <script type="module" src="main.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

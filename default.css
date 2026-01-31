@@ -1,58 +1,73 @@
+*{box-sizing:border-box}
+
 body {
     margin: 0;
     padding: 0;
-    /*padding-top: 1em;*/
-    /*font-family: Arial;*/
     font-size: 1.5em;
     color: rgb(255, 255, 255);
-    /*background: linear-gradient(150deg, #0b0a4b 20% ,#7f2f9e 40%, #048c96 90%);*/
-    /*background-image: url("images/auto.jpg");*/
     background-attachment: fixed;
     background-size: cover;
     /*transition: background 0.3s ease-in-out;*/
     display: flex;
-    font-family: monospace;
+    flex-direction: column;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-.side-bar {
-    width: 15%;
-    height: 100vh;
-    background-color: #242424;
-    color: rgb(194, 194, 194);
-    box-sizing: border-box;
+
+/* Layout voor navigatiebalk */
+.nav-bar {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background: #343d5c;
 }
-.side-bar a {
+.nav-bar a {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
     display: block;
-    padding: 15px 20px;
-    color: white;
-    font-size: 20px;
+    padding: .8rem 1rem;
+    color: #e2e2e2cc;
     text-decoration: none;
+    white-space: nowrap;
+    min-width: 250px;
+    text-align: center;
+    border-right: 1px solid #4a4a4a;
 }
-.side-bar a:hover {
-  background-color: #424242;
+.nav-bar a:hover {
+    color: #e2e2e2;
+    background-color: #202741;
 }
-.side-bar a.active {
-  background-color: #70066b;
+.nav-bar a.active {
+    color: var(--top-header-color);
+    background-color: #70066b;
 }
+
+/* Layout voor hoofdinhoud */
 .hoofd-container {
     /*position: relative;*/
-    width: 85%;
-    padding: 30px;
-    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /*padding: 2rem;*/
+    /*gap: 3rem;*/
 }
+
 .top-sectie {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 3rem;
+    padding: 1rem;
 }
 .reset {
     cursor: pointer;
     padding: 10px;
 }
 .midden-sectie {
-    margin: 100px 100px 0;
+    /*margin: 100px 100px 0;*/
     display: flex;
-    /*justify-content: center;*/
-    /*gap: 100px;*/
+    justify-content: center;
+    gap: 100px;
 }
 #foutePogingen {
     width: 350px;
@@ -63,7 +78,7 @@ body {
 }
 .media {
     display: flex;
-    gap: 20px;
+    gap: 2rem;
     align-items: center;
 }
 .geluid img { 

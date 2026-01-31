@@ -1,17 +1,15 @@
-.topic {
-    margin: 0 20px;
+.game-topic {
     display: flex;
-    gap: 20px;
+    flex-direction: row;
+    gap: 1.5rem;
     align-items: center;
 }
-.topic .topic-text {
-    display: inline;
-    margin: 0;
-    font-size: 25px;
-    padding: 10px;
-    border-radius: 3px;
+.game-topic .topic-text {
+    font-size: 1.5rem;
+    padding: .5rem 2rem;
+    border-radius: 4px;
     background-color: rgba(3, 3, 3, 0.61);
-    color: rgb(255, 255, 255);
+    letter-spacing: .15rem;
 }
 .raad-container {
     font-family: Arial;
@@ -82,7 +80,7 @@
     border-radius: 3px;
     padding: 0 20px;
 }
-/*.hint-container .topic-text {
+/*.hint-container .game-topic-text {
     padding: 10px;
     border-radius: 3px;
     background-color: rgba(3, 3, 3, 0.61);

@@ -60,7 +60,7 @@ function makeDropMenu() {
     resetGame();
   });
 
-  DOM.topic.appendChild(dropMenu);
+  DOM.gameTopic.appendChild(dropMenu);
   dropMenu.value = JSON.parse(localStorage.getItem('selectedOption')) || 0;
   dropMenu.dispatchEvent(new Event('change'));
 };
@@ -89,13 +89,14 @@ function handleCellClick(row, col) {
   updateBoard(row, col);
   
   if (checkWinner(row, col)) {
-    bericht.textContent = '';
+    //bericht.textContent = '';
     const msg = `${currentPlayer} heeft gewonnen!`;
-    const gameBoard = document.getElementById("game-board");
-    const winningColor = `${currentPlayer === 'X' ? '#a320c555' : '#221fe4'}`;
-    setTimeout(() => {
+    bericht.textContent = msg;
+    //const gameBoard = document.getElementById("game-board");
+    //const winningColor = `${currentPlayer === 'X' ? '#a320c555' : '#221fe4'}`;
+    /*setTimeout(() => {
       toggleModal(true, true, winningColor, msg, gameBoard, '');
-    }, 1500);
+    }, 1500);*/
     gameWon = true;
     if (!DOM.geluidStaatAan.hidden) DOM.soundWin.play();
   } else if (isDraw()) {

@@ -6,6 +6,12 @@ export let aftellen = false;
 export let timerInterval = null;
 
 export function makeTimer() {
+    
+
+    const timerGroup = document.createElement('div');
+    timerGroup.classList.add('timer-group');
+    DOM.timerContainer.appendChild(timerGroup);
+
     const btnContainer = document.createElement('div');
     btnContainer.classList.add('btn-container');
     const startBtn = document.createElement('button');
@@ -20,10 +26,16 @@ export function makeTimer() {
     stopBtn.textContent = 'Stop timer';
     stopBtn.addEventListener('click', stopTimer);
     btnContainer.appendChild(stopBtn);
-    DOM.timerContainer.appendChild(btnContainer);
+    timerGroup.appendChild(btnContainer);
+
+    const timerElt = document.createElement('div');
+    timerElt.setAttribute('id', 'timer');
+    timerElt.classList.add('timer-element');
+    timerElt.textContent = "00:30:00";
+    timerGroup.appendChild(timerElt);
 
     const afstellen = document.createElement('div');
-    afstellen.classList.add('afstellen');
+    afstellen.classList.add('timer-afstellen');
     const instellen = document.createElement('p');
     instellen.textContent = 'Timer instellen:';
     afstellen.appendChild(instellen);
@@ -35,21 +47,14 @@ export function makeTimer() {
         option.textContent = time;
         timerAfstellen.appendChild(option);
     });
-    afstellen.appendChild(timerAfstellen);
-    DOM.timerContainer.appendChild(afstellen);
-
-    const timerElt = document.createElement('div');
-    timerElt.setAttribute('id', 'timer');
-    timerElt.classList.add('timer-element');
-    timerElt.textContent = "00:30:00";
-    DOM.timerContainer.appendChild(timerElt);
-
     timerAfstellen.addEventListener('change', () => {
         if(!aftellen) {
             timerElt.textContent = timerAfstellen.value;
             startBtn.textContent = "Start timer";
         }
     });
+    afstellen.appendChild(timerAfstellen);
+    DOM.timerContainer.appendChild(afstellen);
 };
 
 

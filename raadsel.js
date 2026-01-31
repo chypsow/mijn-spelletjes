@@ -30,9 +30,9 @@ export function initializeRiddle() {
     };
     lijst = lijsten[spel];
     makeTopicRiddle();
-    makeTimer();
     makeKeyboard();
     makeHints();
+    makeTimer();
     document.querySelector('.hint-container').style.visibility = spel === 1 ? 'visible' : 'hidden';
     resetRiddle();
 };
@@ -144,16 +144,15 @@ function eindeSpel() {
 };
 
 function makeTopicRiddle() {
-    DOM.topic.classList.add('topic');
     const topicTxt = document.createElement('p');
     topicTxt.classList.add('topic-text');
     const raadsels = ['automerk', 'land'];
     topicTxt.textContent = `Te raden ${raadsels[spel]}:`;
-    topic.appendChild(topicTxt);
+    DOM.gameTopic.appendChild(topicTxt);
     const toBeFound = document.createElement('div');
     toBeFound.setAttribute('id', 'teRadenObject');
     toBeFound.classList.add('raad-container');
-    DOM.topic.appendChild(toBeFound);
+    DOM.gameTopic.appendChild(toBeFound);
 };
 
 function makeKeyboard() {

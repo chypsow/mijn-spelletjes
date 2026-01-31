@@ -3,9 +3,11 @@ import { initializeRiddle, resetRiddle, resetToetsenbord, resetHints } from "./r
 import { initializeRaket, resetRaket, resetDeuren } from "./raket.js";
 import { initializeGame, resetGame } from "./tictactoe.js";
 
+const tabArray = ['Auto raadsel', 'Land raadsel', 'Raket vinden', 'Tic tac toe'];
+
 export const DOM = {
-  sideBar : document.getElementById('side-bar'),
-  topic : document.getElementById('topic'),
+  navBar : document.getElementById('nav-bar'),
+  gameTopic : document.getElementById('game-topic'),
   reset : document.getElementById("reset"),
   geluidStaat : document.querySelectorAll(".geluid img"),
   geluidStaatAan : document.getElementById("son"),
@@ -13,6 +15,7 @@ export const DOM = {
   soundWin : document.getElementById("soundWin"),
   soundFailure : document.getElementById("soundFailure"),
   timerContainer : document.getElementById('timer-container'),
+  topSectie : document.getElementById('top-sectie'),
   middenSectie : document.getElementById('midden-sectie'),
   stars : document.getElementById('stars'),
   modal : document.getElementById("modal"),
@@ -23,61 +26,103 @@ export const DOM = {
 
 export let spel = JSON.parse(localStorage.getItem('activeGame')) || 0;
 
-const builtSelectedGame = {
+const createSelectedGame = {
   0: () => {
     setBackgroundImage('images/auto.jpg');
-    DOM.middenSectie.style.marginTop = '100px';
-    DOM.middenSectie.style.justifyContent = 'space-between';
-    DOM.middenSectie.style.gap = '50px';
-    makeGalgjeContainer();
+    setGameSettings({
+      backgroundUrl: 'images/auto.jpg',
+      galg: true,
+      //topSectieBg: '#20232bde'
+    });
     initializeRiddle();
   },
   1: () => {
     setBackgroundImage('images/landenKaart.jpg');
-    DOM.middenSectie.style.marginTop = '100px';
-    DOM.middenSectie.style.justifyContent = 'space-between';
-    DOM.middenSectie.style.gap = '20px';
-    makeGalgjeContainer();
+    setGameSettings({
+      backgroundUrl: 'images/landenKaart.jpg',
+      galg: true,
+      //topSectieBg: '#20232bde'
+    });
     initializeRiddle();
   },
   2: () => {
     setBackgroundImage('images/blue-background.jpg');
-    DOM.middenSectie.style.marginTop = '100px';
-    DOM.middenSectie.style.justifyContent = '';
-    DOM.middenSectie.style.gap = '100px';
-    makeGalgjeContainer();
+    setGameSettings({
+      backgroundUrl: 'images/blue-background.jpg',
+      //marginTop: '100px',
+      justifyContent: '',
+      gap: '100px',
+      galg: true
+    });
     initializeRaket();
   },
   3: () => {
     setBackgroundImage('images/tictactoe.jpg');
-    DOM.middenSectie.style.marginTop = '20px';
-    DOM.middenSectie.style.justifyContent = 'center';
-    DOM.middenSectie.style.gap = '20px';
+    setGameSettings({
+      backgroundUrl: 'images/tictactoe.jpg',
+      //marginTop: '20px',
+      justifyContent: 'center',
+      gap: '20px'
+    });
     initializeGame();
   }
 };
 
-async function setBackgroundImage(url) {
-  try {
-      const img = new Image();
-      img.src = url;
+function setGameSettings({backgroundUrl, marginTop = 0, justifyContent = 'center', gap = 0, galg = false, topSectieBg = 'transparent'}) {
+  setBackgroundImage(backgroundUrl);
+  if( marginTop !== 0) DOM.middenSectie.style.marginTop = marginTop;
+  DOM.middenSectie.style.justifyContent = justifyContent;
+  if( gap !== 0) DOM.middenSectie.style.gap = gap;
+  if (galg) makeGalgjeContainer();
+  DOM.topSectie.style.backgroundColor = topSectieBg;
+}
 
-      // Wacht tot de afbeelding volledig geladen is
-      await new Promise((resolve, reject) => {
-          img.onload = resolve;
-          img.onerror = reject;
-      });
+function setBackgroundImage(url) {
+  const img = new Image();
+  img.src = url;
 
-      // Pas de achtergrond toe zonder "crash" effect
-      document.body.style.backgroundImage = `url(${url})`;
-  } catch (error) {
-      console.error("Fout bij laden van de achtergrondafbeelding:", error);
-  }
-};
+  img.onload = () => {
+      // Maak overlay element voor smooth transition
+      let overlay = document.getElementById('bg-transition-overlay');
+      if (!overlay) {
+          overlay = document.createElement('div');
+          overlay.id = 'bg-transition-overlay';
+          overlay.style.cssText = `
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background-color: black;
+              opacity: 0;
+              pointer-events: none;
+              z-index: 9999;
+              transition: opacity 0.25s ease-out;
+          `;
+          document.body.appendChild(overlay);
+      }
 
-function makeSidebar() {
-  const tabArray = ['Auto raadsel', 'Land raadsel', 'Raket vinden', 'Tic tac toe'];
-  DOM.sideBar.setAttribute('role', 'tablist');
+      // Fade in overlay
+      overlay.style.opacity = '1';
+      
+      // Zet nieuwe achtergrond na 300ms
+      setTimeout(() => {
+          document.body.style.backgroundImage = `url(${url})`;
+          
+          // Fade out overlay
+          setTimeout(() => {
+              overlay.style.opacity = '0';
+          }, 50);
+      }, 300);
+  };
+
+  img.onerror = () => {
+      console.error("Fout bij laden van de achtergrondafbeelding:", url);
+  };
+}
+
+function makeNavBar() {
+  DOM.navBar.setAttribute('role', 'tablist');
   tabArray.forEach((tab, index) => {
       const hyperlink = document.createElement('a');
       hyperlink.href = '#';
@@ -86,7 +131,7 @@ function makeSidebar() {
       hyperlink.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
       if(index === spel) hyperlink.classList.add('active');
       hyperlink.addEventListener('click', () => {
-          const activeLink = DOM.sideBar.querySelector('.active');
+          const activeLink = DOM.navBar.querySelector('.active');
           if(activeLink === hyperlink) return;
           activeLink.classList.remove("active");
           activeLink.setAttribute('aria-selected', 'false');
@@ -96,9 +141,9 @@ function makeSidebar() {
           saveGameToLocalStorage('activeGame', spel);
           emptyContainers();
           resetStars();
-          builtSelectedGame[spel]();
+          createSelectedGame[spel]();
       });
-      DOM.sideBar.appendChild(hyperlink);
+      DOM.navBar.appendChild(hyperlink);
   });
 };
 
@@ -110,7 +155,7 @@ function emptyContainers() {
   const media = document.querySelector('.media');
   const graad = document.querySelector('.graad');
   if (graad !== null) media.removeChild(graad);
-  DOM.topic.innerHTML = '';
+  DOM.gameTopic.innerHTML = '';
   DOM.timerContainer.innerHTML = '';
   DOM.middenSectie.innerHTML = '';
 };
@@ -246,9 +291,9 @@ document.addEventListener('click', (event) => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  makeSidebar();
+  makeNavBar();
   resetStars();
-  builtSelectedGame[spel]();
+  createSelectedGame[spel]();
 });
 
 
