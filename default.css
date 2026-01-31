@@ -155,6 +155,46 @@ body {
 #overlay {
     padding: 0.6em 0.4em;
 }
+
+/* Play/Pause button styling in modal */
+.modal-play-btn {
+    background: linear-gradient(135deg, #70066b, #a000cc);
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    padding: 0;
+}
+
+.modal-play-btn:hover {
+    background: linear-gradient(135deg, #a000cc, #d000ff);
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(160, 0, 204, 0.5);
+}
+
+.modal-play-btn:active {
+    transform: scale(0.95);
+}
+
+.modal-play-btn.playing {
+    background: linear-gradient(135deg, #cc6600, #ff9900);
+}
+
+.modal-play-btn.playing:hover {
+    background: linear-gradient(135deg, #ff9900, #ffaa33);
+}
+
+.modal-message {
+    text-align: center;
+    word-wrap: break-word;
+}
 @keyframes zoom {
     0% {
         transform: translateX(-50%) scale(0);

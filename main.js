@@ -220,6 +220,80 @@ function positioneerOverlay(triggerElement) {
   return [top, left];
 };
 
+// Text-to-speech helper — spreekt tekst als geluid aanstaat
+function speakText(text, onPlayCallback = null) {
+  if (!('speechSynthesis' in window)) return;
+  // Spraak onafhankelijk van het geluid-icoon; play-knop in modal activeert spraak
+
+  const plain = typeof text === 'string' ? text.replace(/<[^>]+>/g, '') : String(text);
+
+  // stop lopende spraak
+  window.speechSynthesis.cancel();
+
+  const speakNow = () => {
+    const voices = window.speechSynthesis.getVoices() || [];
+    //console.log('Alle stemmen beschikbaar:', voices.map(v => ({ name: v.name, lang: v.lang })));
+
+    // Filter STRIKT op Nederlandse taal (nl-NL of nl-*)
+    const dutchVoices = voices.filter(v => 
+      v.lang && (v.lang.toLowerCase().startsWith('nl-') || v.lang.toLowerCase() === 'nl')
+    );
+    //console.log('Nederlandse stemmen:', dutchVoices.map(v => ({ name: v.name, lang: v.lang })));
+
+    // zoek naar mannelijke stem in Nederlandse stemmen
+    const maleKeywords = ['microsoft bart', 'bart', 'male', 'man', 'hallo', 'boy'];
+    const pickMaleVoice = (list) => {
+      if (!list || list.length === 0) return null;
+      for (const v of list) {
+        const n = (v.name || '').toLowerCase();
+        if (maleKeywords.some(k => n.includes(k))) return v;
+      }
+      // fallback: eerste stem uit lijst
+      return list[0];
+    };
+
+    // Kies eerst Nederlandse mannelijke stem, dan fallback naar eerste Nederlandse stem
+    let chosen = pickMaleVoice(dutchVoices) || dutchVoices[0] || voices[0];
+    //console.log('Gekozen stem:', chosen ? { name: chosen.name, lang: chosen.lang } : 'geen');
+
+    const utter = new SpeechSynthesisUtterance(plain);
+    if (chosen) {
+      utter.voice = chosen;
+      // Override lang naar Nederlands als de stem Nederlands is
+      if (dutchVoices.includes(chosen)) {
+        utter.lang = 'nl-NL';
+      }
+    }
+    // diepe, mannelijke indruk
+    utter.pitch = 1;
+    utter.rate = 0.8;
+    utter.volume = 1;
+    // forceer taal Nederlands voor de uitspraak
+    utter.lang = 'nl-NL';
+
+    // callbacks voor play/stop state
+    utter.onstart = () => {
+      if (onPlayCallback) onPlayCallback('playing');
+    };
+    utter.onend = () => {
+      if (onPlayCallback) onPlayCallback('stopped');
+    };
+
+    window.speechSynthesis.speak(utter);
+  };
+
+  const avail = window.speechSynthesis.getVoices();
+  if (!avail || avail.length === 0) {
+    const handler = () => {
+      window.speechSynthesis.removeEventListener('voiceschanged', handler);
+      speakNow();
+    };
+    window.speechSynthesis.addEventListener('voiceschanged', handler);
+  } else {
+    speakNow();
+  }
+}
+
 export function toggleModal(show, star, kleur = "", message = "", triggerElement, bg = 'rgba(0,0,0,0.5)') {
   let top = '', left = '';
   if(show) {
@@ -227,13 +301,46 @@ export function toggleModal(show, star, kleur = "", message = "", triggerElement
     DOM.modal.style.top = top;
     DOM.modal.style.left = left;
     DOM.overlay.style.backgroundColor = kleur;
-    DOM.overlay.innerHTML = message;
+    
+    // SVG icons voor play en pause
+    const playSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M8 5v14l11-7z"/></svg>';
+    const pauseSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>';
+    
+    DOM.overlay.innerHTML = `<div style="display: flex; align-items: center; gap: 12px;">
+      <div class="modal-message" style="flex: 1;">${message}</div>
+      <button id="modal-play-btn" aria-label="Speel bericht" class="modal-play-btn" title="Klik om bericht voor te lezen">${playSvg}</button>
+    </div>`;
+    
     DOM.modalOverlay.style.display = 'block';
     DOM.modalOverlay.style.backgroundColor = bg;
     setTimeout(() => {
         DOM.modalOverlay.classList.add('open');
+        // voeg play-knop listener toe met callback voor state wisseling
+        const btn = document.getElementById('modal-play-btn');
+        if (btn) {
+            const onStateChange = (state) => {
+              if (state === 'playing') {
+                btn.innerHTML = pauseSvg;
+                btn.classList.add('playing');
+              } else if (state === 'stopped') {
+                btn.innerHTML = playSvg;
+                btn.classList.remove('playing');
+              }
+            };
+            btn.addEventListener('click', () => {
+							if (btn.classList.contains('playing')) {
+								btn.innerHTML = playSvg;
+								btn.classList.remove('playing');
+								window.speechSynthesis.cancel();
+								return;
+							}
+							speakText(message, onStateChange);
+						});
+        }
     }, 10)
   } else {
+    // stop lopende spraak en sluit overlay
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
     DOM.modalOverlay.classList.remove('open');
     setTimeout(() => {
         DOM.modalOverlay.style.display = 'none';
