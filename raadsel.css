@@ -13,10 +13,12 @@
 }
 .raad-container {
     font-family: Arial;
-    display: inline-flex;
+    display: flex;
+    flex-direction: row;
     gap: 5px;
     background: rgba(29, 29, 29, 0);
     border-radius: 3px;
+    flex-wrap: wrap;
 }
 .blok {
     font-size: 33px;

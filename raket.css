@@ -11,9 +11,9 @@ input[type="radio"] {
     margin-right: 16px; /* optioneel, om ruimte te maken voor tekst of andere elementen */
 }
 .doors-container {
-    margin-top: 50px;
+    /*margin-top: 50px;*/
     display: grid;
-    grid-template-columns: repeat(8, 90px);
+    grid-template-columns: repeat(8, 82px);
     grid-template-rows: repeat(3, 125px);
     gap: 10px;
 }

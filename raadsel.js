@@ -45,9 +45,9 @@ export function resetRiddle() {
     //console.log(assignedHints);
     const kleineLetter = document.getElementById('kleine-letter');
     const hoofdLetter = !kleineLetter.checked;
-    //randomRaadsel = Math.floor((Math.random() * lijst.length));
-    randomRaadsel = 5;
-    //console.log(`Raadsel Index: ${randomRaadsel}, To be found: ${lijst[randomRaadsel]}`);
+    randomRaadsel = Math.floor((Math.random() * lijst.length));
+    //randomRaadsel = 5;
+    console.log(`Raadsel Index: ${randomRaadsel}, To be found: ${lijst[randomRaadsel]}`);
     toBeFound = hoofdLetter ? lijst[randomRaadsel].toUpperCase() : lijst[randomRaadsel].toLowerCase();
     emptyArray = [];
     const teRadenObject = document.getElementById('teRadenObject');

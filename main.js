@@ -63,25 +63,8 @@ function setBackgroundImage(url) {
 
   img.onload = () => {
       // Maak overlay element voor smooth transition
-      let overlay = document.getElementById('bg-transition-overlay');
-      if (!overlay) {
-          overlay = document.createElement('div');
-          overlay.id = 'bg-transition-overlay';
-          overlay.style.cssText = `
-              position: fixed;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-              background-color: black;
-              opacity: 0;
-              pointer-events: none;
-              z-index: 2;
-              transition: opacity 0.2s ease-out;
-          `;
-          document.body.appendChild(overlay);
-      }
-
+      const overlay = document.getElementById('bg-transition-overlay');
+      
       // Fade in overlay
       overlay.style.opacity = '1';
       
@@ -145,6 +128,7 @@ function makeGalgjeContainer() {
   rightSide.id = 'right-side';
   const galgje = document.createElement('img');
   galgje.setAttribute('id', 'foutePogingen');
+  galgje.classList.add('foute-pogingen', 'on-small');
   galgje.src = "images/galgjeSvg/00.svg";
   galgje.alt = "beuren";
   rightSide.appendChild(galgje);

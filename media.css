@@ -1,7 +1,7 @@
 /* Responsive voor tablets en kleinere schermen */
-@media (max-width: 1500px) {
+@media (max-width: 1600px) {
     .hint-container.on-small {
-        display: none;
+        flex-direction: row;
     }
     .top-sectie.on-small {
         flex-direction: column;
@@ -11,7 +11,11 @@
     }
     .midden-sectie.on-small {
         align-items: center;
-        flex-direction: column-reverse;
+        flex-direction: column;
+    }
+    .foute-pogingen.on-small {
+        background: transparent;
+        width: 180px;
     }
     .timer-container.on-small {
         display: none;
@@ -34,11 +38,11 @@
     }
 }
 
-@media (max-width: 500px) {
+/*@media (max-width: 500px) {
     .toetsenbord {
         grid-template-columns: repeat(6, 35px);
         grid-template-rows: repeat(5, 35px);
         gap: 5px;
         padding: 0.6rem;
     }
-}
+}*/

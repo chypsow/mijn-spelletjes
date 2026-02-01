@@ -13,7 +13,7 @@ export function initializeRaket() {
 export function resetRaket() {
   raketTeller = 0;
   randomRaket = Math.floor((Math.random() * 24));
-  //console.log(`raket index: ${randomRaket}`);
+  console.log(`raket index: ${randomRaket+1}`);
 };
 
 export function resetDeuren() {
