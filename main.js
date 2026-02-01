@@ -28,53 +28,33 @@ export let spel = JSON.parse(localStorage.getItem('activeGame')) || 0;
 
 const createSelectedGame = {
   0: () => {
-    setBackgroundImage('images/auto.jpg');
-    setGameSettings({
-      backgroundUrl: 'images/auto.jpg',
-      galg: true,
-      //topSectieBg: '#20232bde'
-    });
+    setGameSettings({ backgroundUrl: 'images/auto.jpg' });
     initializeRiddle();
   },
   1: () => {
-    setBackgroundImage('images/landenKaart.jpg');
-    setGameSettings({
-      backgroundUrl: 'images/landenKaart.jpg',
-      galg: true,
-      //topSectieBg: '#20232bde'
-    });
+    setGameSettings({ backgroundUrl: 'images/landenKaart.jpg' });
     initializeRiddle();
   },
   2: () => {
-    setBackgroundImage('images/blue-background.jpg');
-    setGameSettings({
-      backgroundUrl: 'images/blue-background.jpg',
-      //marginTop: '100px',
-      justifyContent: '',
-      gap: '100px',
-      galg: true
-    });
+    setGameSettings({ backgroundUrl: 'images/blue-background.jpg' });
     initializeRaket();
   },
   3: () => {
-    setBackgroundImage('images/tictactoe.jpg');
     setGameSettings({
       backgroundUrl: 'images/tictactoe.jpg',
-      //marginTop: '20px',
-      justifyContent: 'center',
-      gap: '20px'
+      gap: '1rem',
+      maxHeight: '80px',
+      galg: false
     });
     initializeGame();
   }
 };
 
-function setGameSettings({backgroundUrl, marginTop = 0, justifyContent = 'center', gap = 0, galg = false, topSectieBg = 'transparent'}) {
+function setGameSettings({backgroundUrl, gap = '6rem', maxHeight = 'fit-content', galg = true}) {
   setBackgroundImage(backgroundUrl);
-  if( marginTop !== 0) DOM.middenSectie.style.marginTop = marginTop;
-  DOM.middenSectie.style.justifyContent = justifyContent;
-  if( gap !== 0) DOM.middenSectie.style.gap = gap;
+  DOM.middenSectie.style.gap = gap;
+  DOM.topSectie.style.maxHeight = maxHeight;
   if (galg) makeGalgjeContainer();
-  DOM.topSectie.style.backgroundColor = topSectieBg;
 }
 
 function setBackgroundImage(url) {
@@ -96,8 +76,8 @@ function setBackgroundImage(url) {
               background-color: black;
               opacity: 0;
               pointer-events: none;
-              z-index: 9999;
-              transition: opacity 0.25s ease-out;
+              z-index: 2;
+              transition: opacity 0.2s ease-out;
           `;
           document.body.appendChild(overlay);
       }

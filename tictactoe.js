@@ -12,7 +12,7 @@ let gameWon = false;
 
 export function initializeGame() {
   makeGameboard();
-  makeDropMenu();
+  //makeDropMenu();
 };
 
 export function resetGame() {
@@ -43,8 +43,9 @@ function resetBoard() {
   }
 };
 
-function makeDropMenu() {
+function createDropMenu() {
   const dropMenu = document.createElement('select');
+  dropMenu.setAttribute('id', 'drop-menu');
   const options = [[3,3],[3,4],[4,5],[4,6],[5,6],[5,7],[6,7]];
   options.forEach(([x,y], index) => {
     dropMenu.innerHTML += `
@@ -60,14 +61,20 @@ function makeDropMenu() {
     resetGame();
   });
 
-  DOM.gameTopic.appendChild(dropMenu);
-  dropMenu.value = JSON.parse(localStorage.getItem('selectedOption')) || 0;
-  dropMenu.dispatchEvent(new Event('change'));
+  //DOM.gameTopic.appendChild(dropMenu);
+  //dropMenu.value = JSON.parse(localStorage.getItem('selectedOption')) || 0;
+  //dropMenu.dispatchEvent(new Event('change'));
+  //console.log('booard-size: ', BOARD_SIZE, 'winnin number: ', winningNum);
+  return dropMenu;
 };
 
 function makeGameboard() {
   const gameContainer = document.createElement('div');
   gameContainer.classList.add('game-container');
+
+  const dropMenu = createDropMenu();
+  dropMenu.value = JSON.parse(localStorage.getItem('selectedOption')) || 0;
+  gameContainer.appendChild(dropMenu);
 
   const gameBoard = document.createElement('div');
   gameBoard.setAttribute('id', 'game-board');
@@ -78,8 +85,10 @@ function makeGameboard() {
   message.setAttribute('id', 'message');
   message.classList.add('bericht');
   gameContainer.appendChild(message);
-
+  
   DOM.middenSectie.appendChild(gameContainer);
+  
+  dropMenu.dispatchEvent(new Event('change'));
 };
 
 function handleCellClick(row, col) {

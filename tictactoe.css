@@ -1,11 +1,10 @@
-.game-topic select {
-  font-size: 0.9em;
+.game-container select {
+  font-size: 1.1rem;
   font-weight: bold;
   padding: 0.3em 0.8em;
   background: rgb(241, 241, 241);
   color: rgb(143, 9, 170);
   border-radius: 5px;
-  transform: translateX(-97px);
 }
 .game-container {
   display: flex;
