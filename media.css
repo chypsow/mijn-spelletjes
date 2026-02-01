@@ -1,0 +1,41 @@
+/* Responsive voor tablets en kleinere schermen */
+@media (max-width: 1500px) {
+    .hint-container.on-small {
+        display: none;
+    }
+    .top-sectie.on-small {
+        justify-content: start;
+    }
+    .midden-sectie.on-small {
+        align-items: center;
+        flex-direction: column-reverse;
+    }
+    .timer-container.on-small {
+        display: none;
+    }
+}
+@media (max-width: 1000px) {
+    .toetsenbord {
+        grid-template-columns: repeat(10, 45px);
+        grid-template-rows: repeat(3, 45px);
+        gap: 8px;
+    }
+}
+
+@media (max-width: 700px) {
+    .toetsenbord {
+        grid-template-columns: repeat(7, 40px);
+        grid-template-rows: repeat(4, 40px);
+        gap: 6px;
+        padding: 0.8rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .toetsenbord {
+        grid-template-columns: repeat(6, 35px);
+        grid-template-rows: repeat(5, 35px);
+        gap: 5px;
+        padding: 0.6rem;
+    }
+}

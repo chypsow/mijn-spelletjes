@@ -2,6 +2,7 @@
     font-size: 16px;
     --font-sans: Verdana, Geneva, Tahoma, sans-serif;
     --top-header-color: #ffffff;
+    --border-color: #69708a;
 }
 
 *{box-sizing:border-box}
@@ -35,10 +36,10 @@ body {
     padding: .8rem 1rem;
     color: #e2e2e2cc;
     text-decoration: none;
-    white-space: nowrap;
-    width: clamp(14rem, 1vw, 20rem);
+    /*white-space: nowrap;*/
+    width: clamp(12rem, 20vw, 20rem);
     text-align: center;
-    border-right: 1px solid #4a4a4a;
+    border-right: 1px solid var(--border-color);
 }
 .nav-bar a:hover {
     color: #e2e2e2;
@@ -74,6 +75,7 @@ body {
 .midden-sectie {
     display: flex;
     justify-content: center;
+    align-items: start;
     z-index: 10;
 }
 #foutePogingen {

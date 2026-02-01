@@ -182,7 +182,7 @@ function makeKeyboard() {
 
 function makeHints() {
     const hintContainer = document.createElement('div');
-    hintContainer.classList.add('hint-container');
+    hintContainer.classList.add('hint-container', 'on-small');
     const topicTxt = document.createElement('p');
     topicTxt.classList.add('topic-text');
     topicTxt.textContent = 'Tips:';
