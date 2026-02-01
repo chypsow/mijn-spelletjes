@@ -4,7 +4,10 @@
         display: none;
     }
     .top-sectie.on-small {
+        flex-direction: column;
         justify-content: start;
+        align-items: start;
+        gap: 0;
     }
     .midden-sectie.on-small {
         align-items: center;
