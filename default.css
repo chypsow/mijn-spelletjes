@@ -39,7 +39,7 @@ body {
     /*white-space: nowrap;*/
     width: clamp(12rem, 20vw, 20rem);
     text-align: center;
-    border-right: 1px solid var(--border-color);
+    border-right: 3px solid var(--border-color);
 }
 .nav-bar a:hover {
     color: #e2e2e2;
@@ -77,6 +77,7 @@ body {
     justify-content: center;
     align-items: start;
     z-index: 10;
+    gap: 6rem;
 }
 .foute-pogingen {
     width: 350px;
@@ -159,7 +160,7 @@ body {
     min-width: 600px;
     /*margin-top: 30px;*/
     /*padding-top: 20px;*/
-    background-color: rgba(216, 216, 216, 0.199);
+    background-color: rgb(48 48 48);
     color: rgb(255, 255, 255);
     box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
     /*border-radius: 5px;*/

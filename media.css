@@ -12,6 +12,7 @@
     .midden-sectie.on-small {
         align-items: center;
         flex-direction: column;
+        gap: 2rem;
     }
     .foute-pogingen.on-small {
         background: transparent;

@@ -55,6 +55,7 @@ export function makeTimer() {
     });
     afstellen.appendChild(timerAfstellen);
     DOM.timerContainer.appendChild(afstellen);
+    DOM.timerContainer.classList.remove('hidden');
 };
 
 

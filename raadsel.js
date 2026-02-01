@@ -124,7 +124,7 @@ function spelerGewonnen() {
         0: 'De automerk was',
         1: 'Het land was'
     };
-    const msg = `Jij hebt gewonnen. ${wonText[spel]} ${toBeFound}`;
+    const msg = `Jij hebt gewonnen. ${wonText[spel]} ${toBeFound.toLowerCase()}`;
     const toetsenbord = document.getElementById('toetsenbord');
     spel === 0 ? updateStarsVsCounter(raadselTeller) : updateStarsVsHints();
     toggleModal(true, true, 'green', msg, toetsenbord, 'rgba(0,0,0,0.5)');
@@ -154,6 +154,7 @@ function makeTopicRiddle() {
     toBeFound.setAttribute('id', 'teRadenObject');
     toBeFound.classList.add('raad-container');
     DOM.gameTopic.appendChild(toBeFound);
+    DOM.gameTopic.style.display = 'flex';
 };
 
 function makeKeyboard() {

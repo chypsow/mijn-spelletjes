@@ -5,6 +5,9 @@
     /*justify-items: flex-start;*/
     gap: 20px;
 }
+.timer-container.hidden {
+    display: none;
+}
 .timer-afstellen {
     display: flex;
     align-items: center;

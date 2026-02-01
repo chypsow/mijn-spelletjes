@@ -28,21 +28,21 @@ export let spel = JSON.parse(localStorage.getItem('activeGame')) || 0;
 
 const createSelectedGame = {
   0: () => {
-    setGameSettings({ backgroundUrl: 'images/auto.jpg' });
+    setGameSettings({ backgroundUrl: 'images/auto.jpg', marginTop: '2rem' });
     initializeRiddle();
   },
   1: () => {
-    setGameSettings({ backgroundUrl: 'images/landenKaart.jpg' });
+    setGameSettings({ backgroundUrl: 'images/landenKaart.jpg', marginTop: '2rem' });
     initializeRiddle();
   },
   2: () => {
-    setGameSettings({ backgroundUrl: 'images/blue-background.jpg' });
+    setGameSettings({ backgroundUrl: 'images/blue-background.jpg', marginTop: '4rem' });
     initializeRaket();
   },
   3: () => {
     setGameSettings({
       backgroundUrl: 'images/tictactoe.jpg',
-      gap: '1rem',
+      //gap: '1rem',
       maxHeight: '80px',
       galg: false
     });
@@ -50,9 +50,9 @@ const createSelectedGame = {
   }
 };
 
-function setGameSettings({backgroundUrl, gap = '6rem', maxHeight = 'fit-content', galg = true}) {
+function setGameSettings({backgroundUrl, maxHeight = 'fit-content', marginTop = '0px', galg = true}) {
   setBackgroundImage(backgroundUrl);
-  DOM.middenSectie.style.gap = gap;
+  DOM.middenSectie.style.marginTop = marginTop;
   DOM.topSectie.style.maxHeight = maxHeight;
   if (galg) makeGalgjeContainer();
 }
@@ -262,6 +262,11 @@ export function toggleModal(show, star, kleur = "", message = "", triggerElement
   let top = '', left = '';
   if(show) {
     [top, left] = positioneerOverlay(triggerElement);
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+    console.log('width: ', screenWidth, 'height: ', screenHeight);
+    if (screenWidth <= 1600) top = `${screenHeight / 3}px`;
+    console.log('top: ', top);
     DOM.modal.style.top = top;
     DOM.modal.style.left = left;
     DOM.overlay.style.backgroundColor = kleur;
@@ -278,29 +283,29 @@ export function toggleModal(show, star, kleur = "", message = "", triggerElement
     DOM.modalOverlay.style.display = 'block';
     DOM.modalOverlay.style.backgroundColor = bg;
     setTimeout(() => {
-        DOM.modalOverlay.classList.add('open');
-        // voeg play-knop listener toe met callback voor state wisseling
-        const btn = document.getElementById('modal-play-btn');
-        if (btn) {
-            const onStateChange = (state) => {
-              if (state === 'playing') {
-                btn.innerHTML = pauseSvg;
-                btn.classList.add('playing');
-              } else if (state === 'stopped') {
-                btn.innerHTML = playSvg;
-                btn.classList.remove('playing');
-              }
-            };
-            btn.addEventListener('click', () => {
-							if (btn.classList.contains('playing')) {
-								btn.innerHTML = playSvg;
-								btn.classList.remove('playing');
-								window.speechSynthesis.cancel();
-								return;
-							}
-							speakText(message, onStateChange);
-						});
-        }
+      DOM.modalOverlay.classList.add('open');
+      // voeg play-knop listener toe met callback voor state wisseling
+      const btn = document.getElementById('modal-play-btn');
+      if (btn) {
+        const onStateChange = (state) => {
+          if (state === 'playing') {
+            btn.innerHTML = pauseSvg;
+            btn.classList.add('playing');
+          } else if (state === 'stopped') {
+            btn.innerHTML = playSvg;
+            btn.classList.remove('playing');
+          }
+        };
+        btn.addEventListener('click', () => {
+          if (btn.classList.contains('playing')) {
+            btn.innerHTML = playSvg;
+            btn.classList.remove('playing');
+            window.speechSynthesis.cancel();
+            return;
+          }
+          speakText(message, onStateChange);
+        });
+      }
     }, 10)
   } else {
     // stop lopende spraak en sluit overlay
