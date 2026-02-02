@@ -49,7 +49,7 @@ function createDropMenu() {
   const options = [[3,3],[3,4],[4,5],[4,6],[5,6],[5,7],[6,7]];
   options.forEach(([x,y], index) => {
     dropMenu.innerHTML += `
-      <option value=${index}>${x}/${y} op een rij Tic Tac Toe</option>
+      <option value=${index}>${x} op een rij [${y}x${y}]</option>
     `;
   });
 
