@@ -28,15 +28,15 @@ export let spel = JSON.parse(localStorage.getItem('activeGame')) || 0;
 
 const createSelectedGame = {
   0: () => {
-    setGameSettings({ backgroundUrl: 'images/auto.jpg', marginTop: '2rem' });
+    setGameSettings({ backgroundUrl: 'images/auto.jpg', marginTop: '3.5rem' });
     initializeRiddle();
   },
   1: () => {
-    setGameSettings({ backgroundUrl: 'images/landenKaart.jpg', marginTop: '2rem' });
+    setGameSettings({ backgroundUrl: 'images/landenKaart.jpg', marginTop: '3.5rem' });
     initializeRiddle();
   },
   2: () => {
-    setGameSettings({ backgroundUrl: 'images/blue-background.jpg', marginTop: '4rem' });
+    setGameSettings({ backgroundUrl: 'images/blue-background.jpg', marginTop: '5.5rem' });
     initializeRaket();
   },
   3: () => {

@@ -4,7 +4,7 @@
     gap: 1.5rem;
     align-items: center;
 }
-.game-topic .topic-text {
+.topic-text {
     font-size: 1.4rem; /*clamp(0.8rem, 2vw, 1.4rem);*/
     padding: .5rem 2rem;
     border-radius: 4px;
@@ -74,15 +74,15 @@
     scale: 1;
 }
 .hint-container {
-    margin-top: 2.5rem;
+    /*margin-top: 2.5rem;*/
     display: flex;
     font-size: 2rem;
     flex-direction: column;
     align-items: center;
     gap: 1.3rem;
-    background-color: rgba(3, 3, 3, 0.61);
+    /*background-color: rgba(3, 3, 3, 0.61);*/
     border-radius: 3px;
-    padding: 0 1.3rem;
+    /*padding: 1.3rem;*/
 }
 /*.hint-container .game-topic-text {
     padding: 10px;
@@ -90,6 +90,11 @@
     background-color: rgba(3, 3, 3, 0.61);
     color: rgb(255, 255, 255);
 }*/
+.hints-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
 .hint {
     cursor: pointer;
     padding: .6rem 1.3rem;

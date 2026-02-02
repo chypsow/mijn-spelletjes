@@ -5,7 +5,10 @@
     --border-color: #69708a;
 }
 
-*{box-sizing:border-box}
+* {
+    box-sizing:border-box;
+    margin:0;
+}
 
 body {
     margin: 0;
@@ -223,7 +226,10 @@ body {
 .modal-play-btn.playing:hover {
     background: linear-gradient(135deg, #ff9900, #ffaa33);
 }
-
+.modal-play-btn svg {
+    width: 82%;
+    height: 82%;
+}
 .modal-message {
     text-align: center;
     word-wrap: break-word;

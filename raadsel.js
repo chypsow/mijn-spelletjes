@@ -189,6 +189,8 @@ function makeHints() {
     topicTxt.classList.add('topic-text');
     topicTxt.textContent = 'Tips:';
     hintContainer.appendChild(topicTxt);
+    const hintGroup = document.createElement('div');
+    hintGroup.classList.add('hints-group', 'on-small');
     const array = [1,2,3];
     array.forEach(hint => {
         const hintDiv = document.createElement('div');
@@ -198,8 +200,9 @@ function makeHints() {
         hintDiv.addEventListener('click', (e) => {
             toonHint(e);
         });
-        hintContainer.appendChild(hintDiv);
+        hintGroup.appendChild(hintDiv);
     });
+    hintContainer.appendChild(hintGroup);
     DOM.middenSectie.appendChild(hintContainer);
 };
 
