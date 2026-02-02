@@ -133,7 +133,7 @@ function spelerGewonnen() {
 
 export function spelerVerloren() {
     eindeSpel();
-    const msg = `Jij hebt verloren. ${spel === 0 ? "De automerk was " : "Het land was "} ${toBeFound}`;
+    const msg = `Jij hebt verloren. ${spel === 0 ? "De automerk was " : "Het land was "} ${toBeFound.charAt(0) + toBeFound.slice(1).toLowerCase()}`;
     const toetsenbord = document.getElementById('toetsenbord');
     toggleModal(true, false, 'red', msg, toetsenbord, 'rgba(0,0,0,0.5)');
     if (!DOM.geluidStaatAan.hidden) DOM.soundFailure.play();

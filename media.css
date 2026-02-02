@@ -1,4 +1,9 @@
 /* Responsive voor tablets en kleinere schermen */
+@media (max-width: 1700px) {
+    .top-sectie.on-small {
+        gap: 1.5rem;
+    }
+}
 @media (max-width: 1600px) {
     .hint-container.on-small {
         flex-direction: row;
@@ -8,6 +13,9 @@
         justify-content: start;
         align-items: start;
         gap: 0;
+    }
+    .game-topic .topic-text {
+        padding-left: 0;
     }
     .midden-sectie.on-small {
         align-items: center;
@@ -22,22 +30,24 @@
         display: none;
     }
 }
-@media (max-width: 1000px) {
-    .toetsenbord {
-        grid-template-columns: repeat(10, 45px);
-        grid-template-rows: repeat(3, 45px);
-        gap: 8px;
+@media (max-width: 980px) {
+    .game-topic {
+        flex-direction: column;
+        align-items: start;
+        gap: .4rem;
     }
+    /*.toetsenbord {
+        grid-template-columns: repeat(10, 3rem);
+        grid-template-rows: repeat(3, 3rem);
+    }*/
 }
 
-@media (max-width: 700px) {
+/*@media (max-width: 700px) {
     .toetsenbord {
-        grid-template-columns: repeat(7, 40px);
-        grid-template-rows: repeat(4, 40px);
-        gap: 6px;
-        padding: 0.8rem;
+        grid-template-columns: repeat(10, 3rem);
+        grid-template-rows: repeat(3, 3rem);
     }
-}
+}*/
 
 /*@media (max-width: 500px) {
     .toetsenbord {

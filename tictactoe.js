@@ -29,8 +29,8 @@ export function resetGame() {
 function resetBoard() {
   const gameBoard = document.getElementById("game-board");
   gameBoard.innerHTML = "";
-  gameBoard.style.gridTemplateColumns = `repeat(${BOARD_SIZE}, 100px)`;
-  gameBoard.style.gridTemplateRows = `repeat(${BOARD_SIZE}, 100px)`;
+  gameBoard.style.gridTemplateColumns = `repeat(${BOARD_SIZE}, 6rem)`;
+  gameBoard.style.gridTemplateRows = `repeat(${BOARD_SIZE}, 6rem)`;
   for (let row = 0; row < BOARD_SIZE; row++) {
     for (let col = 0; col < BOARD_SIZE; col++) {
       const cell = document.createElement("div");

@@ -1,24 +1,27 @@
 .graad {
     display: flex;
-    gap: 30px;
+    gap: 2rem;
     color: white;
     font-weight: bold;
-    font-size: 1em;
-    margin-left: 160px;
+    font-size: 1rem;
+    margin-left: 10rem;
 }
 input[type="radio"] {
-    transform: scale(2); /* 1.5 is 150% van de originele grootte */
-    margin-right: 16px; /* optioneel, om ruimte te maken voor tekst of andere elementen */
+    transform: scale(1.5); /* 1.5 is 150% van de originele grootte */
+    margin-right: 1rem; /* optioneel, om ruimte te maken voor tekst of andere elementen */
 }
 .doors-container {
     /*margin-top: 50px;*/
     display: grid;
-    grid-template-columns: repeat(8, 82px);
-    grid-template-rows: repeat(3, 125px);
+    grid-template-columns: repeat(8, 5rem);
+    /*grid-template-rows: repeat(3, 8rem);*/
     gap: 10px;
 }
 .doors-container img {
     cursor: pointer;
+    width: 100%;
+    height: 100%;
+    /*object-fit: cover;*/
 }
 
 /*
