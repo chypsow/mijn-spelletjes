@@ -35,18 +35,15 @@
     }
 }
 
-/*@media (max-width: 700px) {
+@media (max-width: 500px) {
     .toetsenbord {
         grid-template-columns: repeat(10, 3rem);
         grid-template-rows: repeat(3, 3rem);
     }
-}*/
-
-/*@media (max-width: 500px) {
-    .toetsenbord {
-        grid-template-columns: repeat(6, 35px);
-        grid-template-rows: repeat(5, 35px);
-        gap: 5px;
-        padding: 0.6rem;
+    .doors-container {
+        grid-template-columns: repeat(6, 5rem);
     }
-}*/
+    .graad {
+        margin-left: 2rem;
+    }
+}
