@@ -264,9 +264,9 @@ export function toggleModal(show, star, kleur = "", message = "", triggerElement
     [top, left] = positioneerOverlay(triggerElement);
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
-    console.log('width: ', screenWidth, 'height: ', screenHeight);
+    //console.log('width: ', screenWidth, 'height: ', screenHeight);
     if (screenWidth <= 1600) top = `${screenHeight / 3}px`;
-    console.log('top: ', top);
+    //console.log('top: ', top);
     DOM.modal.style.top = top;
     DOM.modal.style.left = left;
     DOM.overlay.style.backgroundColor = kleur;

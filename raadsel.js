@@ -12,14 +12,14 @@ let emptyArray = [];
 let lijst = [];
 let assignedHints  = {};
 
-const landLijst = () => retrieveCountries();
-function retrieveCountries() {
+const landLijst = () => {
     let countries = [];
-    let lengte = [];
-    landen.forEach(land =>{
+    //let lengte = [];
+    landen.forEach(land => {
         countries.push(land.naam);
-        lengte.push(land.naam.length);
+        //lengte.push(land.naam.length);
     });
+    //console.log(`Aantal landen: ${countries.length}`);
     return countries;   
 };
 
@@ -236,12 +236,16 @@ function toonHint(e) {
     const [cont, opp, taal] = getLandInfo();
     const hintNum = assignedHints[`hint${parseInt(hintId.textContent)}`];
     //console.log(hintNum);
-    const msg = `${hintText[hintNum]} ${[cont, opp, taal][hintNum - 1]}`;
     const toetsenbord = document.getElementById('toetsenbord');
+    let msg = '';
+    if (hintNum === 3) {
+        const languages = taal.split(',').map(lang => lang.trim());
+        msg = `De officiële taal${languages.length > 1 ? 'en' : ''} van het land ${languages.length > 1 ? ' zijn' : 'is'}: ${languages.join(', ')}`;
+        //toggleModal(true, false, '#2b2b2b', taalInfo, toetsenbord, 'rgba(0,0,0,0.5)');
+    }
+        else {
+        msg = `${hintText[hintNum]} ${hintNum === 1 ? cont : opp}`;
+    }
     toggleModal(true, false, '#2b2b2b', msg, toetsenbord, 'rgba(0,0,0,0.5)');
-
 };
-
-
-
 
