@@ -1,5 +1,5 @@
 "use strict";
-import { DOM, toggleModal, saveGameToLocalStorage } from "./main.js";
+import { DOM, saveGameToLocalStorage } from "./main.js";
 
 //const bericht = document.getElementById('message');
 let BOARD_SIZE = 0;

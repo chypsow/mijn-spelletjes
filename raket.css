@@ -5,6 +5,7 @@
     font-weight: bold;
     font-size: 1rem;
     margin-left: 10rem;
+    margin-right: 10rem;
 }
 input[type="radio"] {
     transform: scale(1.5); /* 1.5 is 150% van de originele grootte */
@@ -15,7 +16,7 @@ input[type="radio"] {
     display: grid;
     grid-template-columns: repeat(8, 5rem);
     /*grid-template-rows: repeat(3, 8rem);*/
-    gap: 10px;
+    gap: .8rem;
 }
 .doors-container img {
     cursor: pointer;

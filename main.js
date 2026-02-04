@@ -124,15 +124,15 @@ function emptyContainers() {
 };
 
 function makeGalgjeContainer() {
-  const rightSide = document.createElement('div');
-  rightSide.id = 'right-side';
+  const galgContainer = document.createElement('div');
+  galgContainer.id = 'galg-container';
   const galgje = document.createElement('img');
   galgje.setAttribute('id', 'foutePogingen');
   galgje.classList.add('foute-pogingen', 'on-small');
   galgje.src = "images/galgjeSvg/00.svg";
   galgje.alt = "beuren";
-  rightSide.appendChild(galgje);
-  DOM.middenSectie.appendChild(rightSide);
+  galgContainer.appendChild(galgje);
+  DOM.middenSectie.appendChild(galgContainer);
 };
 
 function resetGalgje() {

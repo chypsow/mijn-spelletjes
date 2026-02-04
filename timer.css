@@ -40,11 +40,11 @@
     background: #343d5c;
     color: rgb(192, 192, 192);
     border-radius: 3px;
-    transition: background 0.3s ease;
+    /*transition: background 0.3s ease;*/
     white-space: nowrap;
 }
 .btn:hover {
-    background: #4d5472;
+    background: #202741;
 }
 .timer-group {
     display: flex;

@@ -88,11 +88,13 @@ body {
     gap: 6rem;
 }
 .foute-pogingen {
-    width: 350px;
+    width: 18rem;
+    max-height: 21rem;
+    overflow-y: auto;
     /*margin-top: 40px;*/
     /*margin-left: 100px;*/
     background: linear-gradient(to bottom, rgba(8, 29, 37, 0.699) , rgba(114, 114, 114, 0.486));
-    border-radius: 7px;
+    border-radius: .4rem;
 }
 .media {
     display: flex;

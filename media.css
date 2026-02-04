@@ -5,6 +5,10 @@
     }
 }
 @media (max-width: 1600px) {
+    .media {
+        width: 90%;
+        justify-content: space-between;
+    }
     .hints-group.on-small {
         flex-direction: row;
         gap: 1rem;
@@ -19,10 +23,6 @@
         align-items: center;
         flex-direction: column;
         gap: 2rem;
-    }
-    .foute-pogingen.on-small {
-        background: transparent;
-        width: 180px;
     }
     .timer-container.on-small {
         display: none;
