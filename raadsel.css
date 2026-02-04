@@ -74,7 +74,7 @@
     scale: 1;
 }
 .hint-container {
-    /*margin-top: 2.5rem;*/
+    margin-top: 2.3rem;
     display: flex;
     font-size: 2rem;
     flex-direction: column;
