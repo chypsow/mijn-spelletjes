@@ -43,7 +43,4 @@
     .doors-container {
         grid-template-columns: repeat(6, 5rem);
     }
-    .graad {
-        margin-left: 2rem;
-    }
 }
