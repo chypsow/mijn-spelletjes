@@ -36,7 +36,7 @@ const createSelectedGame = {
     initializeRiddle();
   },
   2: () => {
-    setGameSettings({ backgroundUrl: 'images/blue-background.jpg', marginTop: '4rem', justifyContent: 'center' });
+    setGameSettings({ backgroundUrl: 'images/blue-background.jpg', marginTop: '4rem' });
     initializeRaket();
   },
   3: () => {
@@ -50,11 +50,10 @@ const createSelectedGame = {
   }
 };
 
-function setGameSettings({backgroundUrl, maxHeight = 'fit-content', marginTop = '0px', justifyContent = 'space-between', galg = true}) {
+function setGameSettings({backgroundUrl, maxHeight = 'fit-content', marginTop = '0px', galg = true}) {
   setBackgroundImage(backgroundUrl);
   DOM.middenSectie.style.marginTop = marginTop;
   DOM.topSectie.style.maxHeight = maxHeight;
-  DOM.topSectie.style.justifyContent = justifyContent;
   if (galg) makeGalgjeContainer();
 }
 
