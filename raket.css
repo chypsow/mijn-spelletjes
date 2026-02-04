@@ -4,8 +4,8 @@
     color: white;
     font-weight: bold;
     font-size: 1rem;
-    margin-left: 16rem;
-    margin-right: 16rem;
+    margin-left: 19rem;
+    margin-right: 2rem;
 }
 input[type="radio"] {
     transform: scale(1.5); /* 1.5 is 150% van de originele grootte */
