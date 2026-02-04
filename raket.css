@@ -4,15 +4,14 @@
     color: white;
     font-weight: bold;
     font-size: 1rem;
-    margin-left: 10rem;
-    margin-right: 10rem;
+    margin-left: 16rem;
+    margin-right: 16rem;
 }
 input[type="radio"] {
     transform: scale(1.5); /* 1.5 is 150% van de originele grootte */
     margin-right: 1rem; /* optioneel, om ruimte te maken voor tekst of andere elementen */
 }
 .doors-container {
-    /*margin-top: 50px;*/
     display: grid;
     grid-template-columns: repeat(8, 5rem);
     /*grid-template-rows: repeat(3, 8rem);*/
@@ -24,37 +23,3 @@ input[type="radio"] {
     height: 100%;
     /*object-fit: cover;*/
 }
-
-/*
-.feedback, .fout {
-    color: rgb(255, 255, 255);
-    border-radius: 5px;
-    font-size: 1.2em;
-    font-weight: bold;
-    margin-top: 2em;
-    width: 20em;
-    text-align: center;
-    padding: 0.5em;
-    animation: zoom 0.4s forwards;
-}
-@keyframes zoom {
-    0% {
-        transform: scale(0);
-    }
-    80% {
-        transform: scale(1.1);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-.feedback {
-    background-color: rgb(46, 161, 61);
-}
-.fout {
-    background-color: red;
-}
-.feedback:empty, .fout:empty {
-    display: none;
-}
-*/
