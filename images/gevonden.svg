@@ -2,7 +2,7 @@
     <rect width="100%" height="100%" fill="rgba(255,255,255,0)" />
     <path d="M 0 40 A 40 40 0 0 1 80 40" fill="#ffb834" />
     <circle cx="40" cy="30" fill="yellow" r="6" stroke="brown" stroke-width="2" />
-    <rect fill="#000000" height="75" width="80" x="0" y="40" />
+    <rect fill="#b66b0a" height="75" width="80" x="0" y="40" />
     <g stroke="yellow" stroke-width="1" fill='brown'>
         <path d="M 0 40 A 10 50 1 0 0 10 40" />
         <path d="M 10 40 A 10 50 1 0 0 20 40" />

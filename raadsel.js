@@ -124,7 +124,7 @@ function spelerGewonnen() {
         0: 'De automerk was',
         1: 'Het land was'
     };
-    const msg = `Jij hebt gewonnen. ${wonText[spel]} ${toBeFound.charAt(0) + toBeFound.slice(1).toLowerCase()}`;
+    const msg = `Jij hebt gewonnen. ${wonText[spel]} ${toBeFound.length <= 3 ? toBeFound : toBeFound.charAt(0) + toBeFound.slice(1).toLowerCase()}`;
     const toetsenbord = document.getElementById('toetsenbord');
     spel === 0 ? updateStarsVsCounter(raadselTeller) : updateStarsVsHints();
     toggleModal(true, true, 'green', msg, toetsenbord, 'rgba(0,0,0,0.5)');
@@ -133,7 +133,7 @@ function spelerGewonnen() {
 
 export function spelerVerloren() {
     eindeSpel();
-    const msg = `Jij hebt verloren. ${spel === 0 ? "De automerk was " : "Het land was "} ${toBeFound.charAt(0) + toBeFound.slice(1).toLowerCase()}`;
+    const msg = `Jij hebt verloren. ${spel === 0 ? "De automerk was " : "Het land was "} ${toBeFound.length <= 3 ? toBeFound : toBeFound.charAt(0) + toBeFound.slice(1).toLowerCase()}`;
     const toetsenbord = document.getElementById('toetsenbord');
     toggleModal(true, false, 'red', msg, toetsenbord, 'rgba(0,0,0,0.5)');
     if (!DOM.geluidStaatAan.hidden) DOM.soundFailure.play();
